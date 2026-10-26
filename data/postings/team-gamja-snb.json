@@ -1,0 +1,234 @@
+{
+ "id": "team-gamja-snb",
+ "sample": true,
+ "field": "sales",
+ "job": "service-biz",
+ "company": "팀감자",
+ "position": "Service & Business 신입",
+ "intro": "서비스와 돈이 만나는 지점을 설계하는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "기업문화 적합도 검사",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "프로덕트 디벨롭 인터뷰",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "챌린지 전형",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "종합 역량 인터뷰",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  }
+ ],
+ "words": [
+  {
+   "text": "주간 광고 성과 리포트",
+   "judge": "O",
+   "pct": 85.5,
+   "source": "Prepare operational progress or status reports.",
+   "match": "근사",
+   "from": "데이터 분석을 통해 효율 개선"
+  },
+  {
+   "text": "쇼핑 검색 트렌드 확인",
+   "judge": "O",
+   "pct": 93.1,
+   "source": "Monitor market conditions or trends.",
+   "match": "높음",
+   "from": "트렌드 파악"
+  },
+  {
+   "text": "유관부서 회의 내용 공유",
+   "judge": "O",
+   "pct": 79.1,
+   "source": "Report information to managers or other personnel.",
+   "match": "근사",
+   "from": "다양한 이해관계자와 협업"
+  },
+  {
+   "text": "CTR·ROAS 지표 분석",
+   "judge": "△",
+   "pct": 67.1,
+   "source": "Analyze website or related online data to track trends or usage.",
+   "match": "높음",
+   "from": "데이터 분석을 통해 효율 개선"
+  },
+  {
+   "text": "A/B 테스트 결과 해석",
+   "judge": "△",
+   "pct": 44.2,
+   "source": "Analyze data to identify trends or relationships among variables.",
+   "match": "높음",
+   "from": "기능 개선"
+  },
+  {
+   "text": "판매자 문의 응대",
+   "judge": "△",
+   "pct": 63.4,
+   "source": "Respond to customer inquiries.",
+   "match": "높음",
+   "from": "사용자와 사업자 간의 연결"
+  },
+  {
+   "text": "신규 기능 기획서 작성",
+   "judge": "△",
+   "pct": 59.7,
+   "source": "Implement design or process improvements.",
+   "match": "근사",
+   "from": "신규 프로젝트와 기능 개선"
+  },
+  {
+   "text": "신규 제휴처 발굴",
+   "judge": "△",
+   "pct": 55.6,
+   "source": "Develop professional relationships or networks.",
+   "match": "근사",
+   "from": "국내외 파트너사와의 협력"
+  },
+  {
+   "text": "광고주 맞춤 제안서 작성",
+   "judge": "X",
+   "pct": 35.1,
+   "source": "Develop proposals for current or prospective customers.",
+   "match": "높음",
+   "from": "최적화된 마케팅·광고 전략 제안"
+  },
+  {
+   "text": "광고주 예산·키워드 컨설팅",
+   "judge": "X",
+   "pct": 36.1,
+   "source": "Advise others on business or operational matters.",
+   "match": "높음",
+   "from": "세일즈 컨설팅"
+  },
+  {
+   "text": "제휴 계약 조건 협상",
+   "judge": "X",
+   "pct": 31.4,
+   "source": "Negotiate contracts with clients or service providers.",
+   "match": "높음",
+   "from": "상생 관계 만들기"
+  },
+  {
+   "text": "신규 사업 방향 토론",
+   "judge": "□",
+   "pct": null,
+   "source": "Discuss business strategies, practices, or policies with managers.",
+   "match": "근사",
+   "from": "새로운 성장을 이끌 사업 아이템 발굴"
+  }
+ ],
+ "traps": [
+  {
+   "text": "서버 장애 대응",
+   "owner": "개발자",
+   "why": "S&B가 요구사항을 쓰면 개발자가 만들고 운영해요."
+  },
+  {
+   "text": "앱 화면 디자인",
+   "owner": "디자이너",
+   "why": "S&B는 무엇이 필요한지 정하고, 어떻게 보일지는 디자이너가 정해요."
+  },
+  {
+   "text": "광고 영상 촬영",
+   "owner": "광고 제작사",
+   "why": "S&B는 광고 상품을 팔고 제안해요. 광고물은 광고주 쪽이 만들어요."
+  },
+  {
+   "text": "세금계산서 발행",
+   "owner": "재무팀",
+   "why": "S&B가 매출을 만들면 정산은 재무팀이 해요."
+  }
+ ],
+ "specs": [
+  "2026년 2월 졸업 예정",
+  "경력 1년 이하",
+  "전공 무관"
+ ],
+ "skills": [
+  "광고주와 파트너의 문제를 듣고 제안하는 힘",
+  "데이터를 보고 개선점을 고르는 판단",
+  "여러 팀 사이에서 결정을 이끄는 소통"
+ ],
+ "questions": [
+  "AI가 광고 리포트를 다 쓰면 S&B는 뭐 해요?",
+  "광고주가 ROAS가 낮다고 화를 내요. 어떻게 할래요?",
+  "제휴사가 수수료를 깎아 달래요. 어디까지 들어줄래요?"
+ ],
+ "terms": [
+  {
+   "term": "Service & Business",
+   "desc": "서비스 기획, 사업 개발, 광고 영업을 함께 묶은 직군이에요."
+  },
+  {
+   "term": "광고주",
+   "desc": "광고비를 내고 광고를 싣는 회사나 가게예요."
+  },
+  {
+   "term": "CTR",
+   "desc": "클릭률. 광고를 본 사람 중 실제로 누른 사람의 비율이에요."
+  },
+  {
+   "term": "ROAS",
+   "desc": "광고비 대비 매출이에요. 300%면 1만 원을 써서 3만 원을 벌었다는 뜻이에요."
+  },
+  {
+   "term": "키워드 광고",
+   "desc": "검색어에 맞춰 뜨는 광고예요. 광고주가 단어마다 가격을 걸고 경쟁해요."
+  },
+  {
+   "term": "A/B 테스트",
+   "desc": "두 가지 화면을 사용자 절반씩에게 보여 주고 어느 쪽이 나은지 비교하는 실험이에요."
+  },
+  {
+   "term": "기획서",
+   "desc": "무엇을, 왜, 어떻게 만들지 적은 문서예요. 개발자와 디자이너가 이걸 보고 만들어요."
+  },
+  {
+   "term": "판매자(셀러)",
+   "desc": "쇼핑 플랫폼에 입점해서 물건을 파는 사업자예요."
+  },
+  {
+   "term": "제휴",
+   "desc": "다른 회사와 손잡고 서비스나 매출을 함께 만드는 거예요."
+  },
+  {
+   "term": "유관부서",
+   "desc": "같은 일에 엮여 있는 다른 팀이에요."
+  },
+  {
+   "term": "프로덕트 디벨롭 인터뷰",
+   "desc": "주어진 주제를 하나의 서비스 아이디어로 풀어서 발표하는 면접이에요."
+  },
+  {
+   "term": "챌린지 전형",
+   "desc": "현직 멘토와 12일 동안 실제 프로젝트처럼 진행하는 전형이에요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-10-27"
+ }
+}

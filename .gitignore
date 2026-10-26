@@ -1,0 +1,7 @@
+# 공고 원문과 원문이 담긴 확인표, 실제 회사명 대응표는 저장소에 올리지 않는다 (저작권 · 실명 노출)
+pipeline/raw/
+pipeline/review/*
+!pipeline/review/sample.csv
+pipeline/aliases.csv
+pipeline/sources.json
+__pycache__/

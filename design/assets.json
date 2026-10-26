@@ -1,0 +1,76 @@
+{
+ "bg/street.jpg": {
+  "canva_media": "MAHZC9fhBak",
+  "status": "original"
+ },
+ "bg/lobby.jpg": {
+  "canva_media": "MAHZChE52Rw",
+  "status": "original"
+ },
+ "bg/hall.jpg": {
+  "canva_media": "MAHZC4o65Vk",
+  "status": "original"
+ },
+ "bg/lift_day.jpg": {
+  "canva_media": "MAHZCr3ov_g",
+  "status": "original"
+ },
+ "bg/lift_sunset.jpg": {
+  "canva_media": "MAHZCyO-hkA",
+  "status": "original"
+ },
+ "bg/lift_clouds.jpg": {
+  "canva_media": "MAHZCxsdkiQ",
+  "status": "original"
+ },
+ "bg/roof.jpg": {
+  "canva_media": "MAHZC-_ZzVo",
+  "status": "original"
+ },
+ "bg/exit.jpg": {
+  "canva_media": "MAHZC4DHtDk",
+  "status": "original"
+ },
+ "intro/1_born.jpg": {
+  "canva_media": "MAHZCx_uQ3o",
+  "status": "original"
+ },
+ "intro/2_child.jpg": {
+  "canva_media": "MAHZC699Zb8",
+  "status": "original"
+ },
+ "intro/3_college.jpg": {
+  "canva_media": "MAHZC9eDQMU",
+  "status": "original"
+ },
+ "intro/4_senior.jpg": {
+  "canva_media": "MAHZC158g3I",
+  "status": "original"
+ },
+ "intro/5_dream.jpg": {
+  "canva_media": "MAHZC77S-hs",
+  "status": "original"
+ },
+ "intro/6_rival.jpg": {
+  "canva_media": "MAHZC1fJemE",
+  "status": "original"
+ },
+ "intro/7_rain.jpg": {
+  "canva_media": "MAHZC9t55rM",
+  "status": "original"
+ },
+ "potato_cut.png": {
+  "canva_media": "MAHZCRf1SMU",
+  "status": "original"
+ },
+ "ai_cut.png": {
+  "canva_media": "MAHZCYLwa3s",
+  "status": "original"
+ },
+ "_export": {
+  "canva_design": "DAHZIjPXMXw",
+  "title": "감자 게임 에셋 원본 (내보내기용)",
+  "note": "페이지마다 그림 하나. 원본 1080x1920·1264x1264를 900x1600 JPG, 600x600 PNG로 줄여 씀",
+  "exportedAt": "2026-10-27"
+ }
+}

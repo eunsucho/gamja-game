@@ -1,0 +1,232 @@
+{
+ "id": "gamja-bio-ir",
+ "sample": true,
+ "field": "biz",
+ "job": "ir",
+ "company": "감자바이오",
+ "position": "IR 신입",
+ "intro": "회사의 숫자를 투자자의 언어로 번역하는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "필기 (감CT)",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "면접",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "처우협의",
+   "type": "bonus"
+  }
+ ],
+ "words": [
+  {
+   "text": "주가·외국인 수급 확인",
+   "judge": "O",
+   "pct": 98.9,
+   "source": "Monitor financial information.",
+   "match": "근사",
+   "from": "투자자 동향 모니터링"
+  },
+  {
+   "text": "애널리스트 리포트 요약 보고",
+   "judge": "O",
+   "pct": 79.1,
+   "source": "Report information to managers or other personnel.",
+   "match": "근사",
+   "from": "시장·투자자 동향 분석"
+  },
+  {
+   "text": "IR Book 숫자 업데이트",
+   "judge": "O",
+   "pct": 86.6,
+   "source": "Update computer database information.",
+   "match": "근사",
+   "from": "IR 자료 작성 지원"
+  },
+  {
+   "text": "기관투자자 NDR 일정 잡기",
+   "judge": "O",
+   "pct": 80.8,
+   "source": "Schedule appointments.",
+   "match": "높음",
+   "from": "투자자 미팅 지원"
+  },
+  {
+   "text": "경쟁사 실적 비교표 만들기",
+   "judge": "△",
+   "pct": 68.3,
+   "source": "Compile data or documentation.",
+   "match": "높음",
+   "from": "경쟁사 분석"
+  },
+  {
+   "text": "컨센서스 대비 실적 정리",
+   "judge": "△",
+   "pct": 56.6,
+   "source": "Analyze financial records or reports to determine state of operations.",
+   "match": "높음",
+   "from": "분기 실적 발표 자료 작성"
+  },
+  {
+   "text": "해외 투자자 영문 메일 회신",
+   "judge": "△",
+   "pct": 47.2,
+   "source": "Prepare business correspondence.",
+   "match": "높음",
+   "from": "국내외 투자자 커뮤니케이션"
+  },
+  {
+   "text": "주주총회 소집공고 공시",
+   "judge": "△",
+   "pct": 51.9,
+   "source": "Prepare contracts, disclosures, or applications.",
+   "match": "근사",
+   "from": "주주총회 · 공시 업무"
+  },
+  {
+   "text": "어닝콜 예상 질문 뽑기",
+   "judge": "X",
+   "pct": 34.2,
+   "source": "Determine presentation subjects or content.",
+   "match": "근사",
+   "from": "분기 실적 발표"
+  },
+  {
+   "text": "어닝콜 답변 스크립트 작성",
+   "judge": "X",
+   "pct": 31.5,
+   "source": "Develop content for sales presentations or other materials.",
+   "match": "근사",
+   "from": "분기 실적 발표"
+  },
+  {
+   "text": "투자자 미팅 Q&A 대응",
+   "judge": "X",
+   "pct": 20.2,
+   "source": "Explain financial information to customers.",
+   "match": "높음",
+   "from": "투자자 미팅"
+  },
+  {
+   "text": "기업집단현황 공시",
+   "judge": "□",
+   "pct": null,
+   "source": "Coordinate regulatory documentation activities.",
+   "match": "근사",
+   "from": "공정거래위원회 공시"
+  }
+ ],
+ "traps": [
+  {
+   "text": "보도자료 배포",
+   "owner": "홍보팀",
+   "why": "IR은 투자자를, 홍보는 언론을 상대해요."
+  },
+  {
+   "text": "목표주가 산정",
+   "owner": "증권사 애널리스트",
+   "why": "목표주가는 IR이 상대하는 애널리스트가 정해요."
+  },
+  {
+   "text": "결산 전표 입력",
+   "owner": "회계팀",
+   "why": "IR은 확정된 숫자를 설명하는 쪽이에요."
+  },
+  {
+   "text": "임상 시험 설계",
+   "owner": "연구소",
+   "why": "IR은 연구 파이프라인을 설명하지만 직접 하지는 않아요."
+  }
+ ],
+ "specs": [
+  "Valuation 이해",
+  "재무·회계 지식",
+  "MS Office",
+  "영어 능통",
+  "바이오 인턴",
+  "영어권 학업"
+ ],
+ "skills": [
+  "회사 숫자를 투자자 눈높이로 설명하는 힘",
+  "공시 규정과 일정을 챙기는 꼼꼼함",
+  "재무제표 읽기"
+ ],
+ "questions": [
+  "AI가 IR Book을 다 만들면 IR은 뭐 해요?",
+  "실적이 컨센서스보다 낮아요. 뭐라고 할 거예요?",
+  "공시를 하루 늦게 내면 어떻게 되는지 알아요?"
+ ],
+ "terms": [
+  {
+   "term": "IR",
+   "desc": "투자자에게 회사의 실적과 계획을 설명하고 관계를 관리하는 일이에요."
+  },
+  {
+   "term": "애널리스트",
+   "desc": "증권사에서 회사를 분석해 '사라·팔아라' 리포트를 쓰는 사람이에요. IR이 가장 자주 만나는 상대예요."
+  },
+  {
+   "term": "컨센서스",
+   "desc": "애널리스트들이 예상한 실적의 평균이에요. 실제 실적이 이보다 높으면 '어닝 서프라이즈'라고 해요."
+  },
+  {
+   "term": "IR Book",
+   "desc": "회사 소개·실적·전략을 담은 투자자용 발표 자료예요. 분기마다 숫자를 새로 넣어요."
+  },
+  {
+   "term": "어닝콜",
+   "desc": "분기 실적을 발표한 뒤 투자자·애널리스트와 하는 온라인 설명회예요. 질의응답이 핵심이에요."
+  },
+  {
+   "term": "NDR",
+   "desc": "Non-Deal Roadshow. 돈을 모으려는 게 아니라, 기관투자자를 찾아다니며 회사를 설명하는 일정이에요."
+  },
+  {
+   "term": "기관투자자",
+   "desc": "연기금, 자산운용사처럼 큰돈을 굴리는 투자자예요."
+  },
+  {
+   "term": "외국인 수급",
+   "desc": "외국인 투자자가 우리 회사 주식을 얼마나 사고팔았는지예요."
+  },
+  {
+   "term": "공시",
+   "desc": "투자자가 알아야 할 회사 정보를 법에 따라 공개하는 거예요. 분기마다 하는 정기공시와 큰일이 생길 때 하는 수시공시가 있어요."
+  },
+  {
+   "term": "주주총회 소집공고",
+   "desc": "주주총회 날짜와 안건을 미리 알리는 공시예요."
+  },
+  {
+   "term": "기업집단현황 공시",
+   "desc": "공정거래위원회가 지정한 큰 그룹의 계열사가 지배구조, 계열사 간 거래 등을 공개하는 제도예요."
+  },
+  {
+   "term": "Valuation",
+   "desc": "회사의 가치를 숫자로 계산하는 방법이에요. PER, DCF 같은 방식이 있어요."
+  },
+  {
+   "term": "DART",
+   "desc": "금융감독원의 전자공시시스템이에요. 상장사 공시를 누구나 볼 수 있어요. 지원 전에 직접 들어가 보면 좋아요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-10-27"
+ }
+}

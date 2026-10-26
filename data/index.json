@@ -1,0 +1,66 @@
+{
+ "version": 2,
+ "season": "2026 하반기 감자그룹 공채 (샘플)",
+ "builtAt": "2026-10-27",
+ "fields": [
+  {
+   "id": "biz",
+   "name": "경영·회계·사무",
+   "short": "경영·사무",
+   "icon": "briefcase",
+   "ncs": "02",
+   "wing": "본관",
+   "jobs": [
+    {
+     "id": "ir",
+     "name": "IR",
+     "ncs": "0203",
+     "soc": "",
+     "postings": [
+      {
+       "id": "gamja-bio-ir",
+       "company": "감자바이오",
+       "position": "IR 신입",
+       "stages": 4,
+       "sample": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sales",
+   "name": "영업판매",
+   "short": "영업판매",
+   "icon": "speakerphone",
+   "ncs": "10",
+   "wing": "동관",
+   "jobs": [
+    {
+     "id": "service-biz",
+     "name": "서비스·사업 기획",
+     "ncs": "1001",
+     "soc": "",
+     "postings": [
+      {
+       "id": "team-gamja-snb",
+       "company": "팀감자",
+       "position": "Service & Business 신입",
+       "stages": 5,
+       "sample": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "it",
+   "name": "정보통신",
+   "short": "정보통신",
+   "icon": "device-desktop",
+   "ncs": "20",
+   "wing": "서관",
+   "jobs": []
+  }
+ ]
+}

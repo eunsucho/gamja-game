@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI 샘플</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root { --ink: #3E2F27; --ink-2: #6B5A4E; --butter-1: #FFD978; --butter-2: #F5B53A; --butter-lip: #C98A1E; }
+* { box-sizing: border-box; }
+body { word-break: keep-all; overflow-wrap: break-word; margin: 0; padding: 28px; background: #EFEAE3; font-family: "Pretendard Variable", Pretendard, sans-serif; color: var(--ink); display: flex; gap: 28px; align-items: flex-start; }
+.phone { position: relative; width: 390px; height: 780px; border-radius: 40px; overflow: hidden; box-shadow: 0 20px 50px rgba(60, 40, 20, .25); flex: none; }
+.bg { position: absolute; inset: -8px; background-size: cover; background-position: center; filter: blur(1.2px); }
+.ui { position: relative; height: 100%; padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; }
+/* 유리 패널: 배경색을 비춰서 장면에 녹아든다 */
+.glass { background: rgba(255, 255, 255, .66); backdrop-filter: blur(16px) saturate(1.25); -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, .75); box-shadow: 0 10px 28px rgba(90, 64, 40, .16), inset 0 1px 0 rgba(255, 255, 255, .9); }
+.title { font-family: "Black Han Sans"; font-size: 30px; text-align: center; color: var(--ink); text-shadow: 0 2px 0 rgba(255, 255, 255, .9); margin: 6px 0 0; }
+.tabs { display: flex; padding: 5px; border-radius: 999px; gap: 4px; }
+.tabs button { flex: 1; border: 0; background: transparent; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); padding: 10px 0; border-radius: 999px; }
+.tabs button.on { background: #fff; color: var(--ink); box-shadow: 0 3px 10px rgba(90, 64, 40, .15); }
+.card { display: flex; align-items: center; gap: 14px; background: #fff; border-radius: 24px; padding: 16px 16px 16px 20px; box-shadow: 0 8px 20px rgba(90, 64, 40, .12); }
+.card .co { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.card .pos { font-family: "Black Han Sans"; font-size: 23px; line-height: 1.2; }
+.card .go { margin-left: auto; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 22px; color: #8A5A12;
+  background: linear-gradient(var(--butter-1), var(--butter-2)); box-shadow: inset 0 -3px 0 rgba(170, 100, 20, .3), inset 0 2px 0 rgba(255, 255, 255, .7); }
+.card.soon { background: rgba(255, 255, 255, .5); box-shadow: none; border: 2px dashed rgba(255, 255, 255, .9); }
+.card.soon .pos { color: var(--ink-2); font-size: 19px; }
+.btn { border: 0; height: 58px; border-radius: 999px; font-family: "Black Han Sans"; font-size: 21px; color: #6A4410; width: 100%;
+  background: linear-gradient(var(--butter-1), var(--butter-2)); box-shadow: inset 0 -5px 0 rgba(170, 100, 20, .32), inset 0 2px 0 rgba(255, 255, 255, .75), 0 8px 18px rgba(200, 140, 40, .35); }
+.btn.sub { color: var(--ink); background: rgba(255, 255, 255, .72); box-shadow: inset 0 -4px 0 rgba(90, 64, 40, .1), inset 0 1px 0 #fff, 0 6px 14px rgba(90, 64, 40, .14); font-size: 18px; height: 50px; }
+.bubble { text-wrap: pretty; position: relative; background: #fff; border-radius: 20px; padding: 10px 14px; font-family: "Gamja Flower"; font-size: 22px; line-height: 1.25; box-shadow: 0 6px 16px rgba(90, 64, 40, .14); }
+.bubble::after { content: ""; position: absolute; left: -7px; bottom: 14px; border: 8px solid transparent; border-right-color: #fff; border-left: 0; }
+.row { display: flex; align-items: flex-end; gap: 10px; }
+.grow { flex: 1; }
+/* 플레이 */
+.hud { display: flex; align-items: center; gap: 8px; }
+.pill { height: 40px; border-radius: 999px; padding: 0 14px; display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 15px; }
+.pill b { font-family: "Black Han Sans"; font-weight: 400; font-size: 18px; }
+.score { margin: 0 auto; font-family: "Black Han Sans"; font-size: 36px; color: #fff; text-shadow: 0 2px 0 rgba(40, 70, 110, .35), 0 6px 16px rgba(40, 70, 110, .3); }
+.letters { gap: 4px; padding: 0 10px; }
+.letters i { font-size: 20px; color: var(--ink-2); }
+.letters i.on { color: #E2506C; }
+.steps { display: flex; gap: 5px; justify-content: center; margin-top: -4px; }
+.steps i { width: 22px; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, .55); }
+.steps i.on { background: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, .9); }
+.drop { position: absolute; white-space: nowrap; background: rgba(255, 255, 255, .95); border-radius: 999px; padding: 8px 16px; font-weight: 700; font-size: 16px; box-shadow: 0 6px 16px rgba(40, 70, 110, .18); }
+.drop.trap { background: rgba(255, 255, 255, .6); border: 2px dashed rgba(62, 47, 39, .35); color: var(--ink-2); box-shadow: none; }
+.float { position: absolute; font-family: "Black Han Sans"; font-size: 24px; color: #fff; text-shadow: 0 2px 0 rgba(200, 120, 20, .6), 0 4px 12px rgba(200, 120, 20, .4); }
+.stage { position: absolute; left: 0; right: 0; bottom: 0; height: 270px; background: linear-gradient(rgba(255, 252, 245, 0), rgba(255, 252, 245, .78) 34%, rgba(255, 250, 240, .95)); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  -webkit-mask-image: linear-gradient(transparent, #000 30%); mask-image: linear-gradient(transparent, #000 30%); }
+.chars { position: absolute; left: 0; right: 0; bottom: 100px; display: flex; align-items: flex-end; padding: 0 12px; gap: 4px; }
+.who { position: relative; flex: none; }
+.who::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -4px; height: 14px; border-radius: 50%; background: rgba(62, 47, 39, .22); filter: blur(3px); z-index: -1; }
+.who img { display: block; filter: drop-shadow(0 4px 6px rgba(62, 47, 39, .25)); }
+.who.me img { width: 156px; margin: 0 -14px 0 -18px; }
+.who.ai { margin-left: auto; }
+.who.ai img { width: 124px; margin-right: -14px; }
+.chars .bubble { flex: 0 1 auto; max-width: 170px; align-self: center; margin-bottom: 40px; }
+.dock { position: absolute; left: 12px; right: 12px; bottom: 16px; border-radius: 30px; padding: 10px; display: flex; gap: 8px; align-items: center; }
+.dock input { flex: 1; min-width: 0; height: 54px; border: 0; border-radius: 999px; padding: 0 18px; font: inherit; font-size: 17px; font-weight: 600; background: #fff; box-shadow: inset 0 2px 4px rgba(90, 64, 40, .1); }
+.ibtn { flex: none; width: 54px; height: 54px; border-radius: 50%; border: 0; display: grid; place-items: center; font-size: 24px; color: #6A4410;
+  background: linear-gradient(var(--butter-1), var(--butter-2)); box-shadow: inset 0 -4px 0 rgba(170, 100, 20, .32), inset 0 2px 0 rgba(255, 255, 255, .75), 0 6px 14px rgba(200, 140, 40, .3); }
+.ibtn.sub { width: 44px; height: 44px; font-size: 20px; color: var(--ink); background: rgba(255, 255, 255, .8); box-shadow: inset 0 -3px 0 rgba(90, 64, 40, .1), 0 4px 10px rgba(90, 64, 40, .12); }
+/* 실제 휴대폰 문자 알림처럼: 메시지 앱 배너 + [Web발신] 문구 */
+.noti { position: absolute; left: 10px; right: 10px; top: 104px; border-radius: 22px; padding: 10px 14px 12px; font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard Variable", sans-serif;
+  background: rgba(246, 246, 246, .86); backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6); box-shadow: 0 8px 24px rgba(20, 30, 50, .18); color: #1C1C1E; }
+.noti-top { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6E6E73; margin-bottom: 4px; }
+.noti-top .ico { width: 20px; height: 20px; border-radius: 5px; background: #34C759; color: #fff; display: grid; place-items: center; font-size: 13px; }
+.noti-top .t { margin-left: auto; }
+.noti-from { margin: 0; font-size: 15px; font-weight: 700; }
+.noti-body { margin: 1px 0 0; font-size: 14px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* 로비 머리: 천장에 매달린 유리 안내판 + 아이콘 탭 */
+.hang { position: relative; margin: 34px 8px 4px; border-radius: 26px; padding: 18px 18px 16px; text-align: center; transform-origin: 50% -34px; animation: swing 5s ease-in-out infinite; }
+.hang::before, .hang::after { content: ""; position: absolute; top: -56px; width: 2px; height: 56px; background: linear-gradient(rgba(62, 47, 39, .15), rgba(62, 47, 39, .45)); }
+.hang::before { left: 22%; } .hang::after { right: 22%; }
+.hang .pin { position: absolute; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: rgba(62, 47, 39, .35); }
+.hang .pin.l { left: calc(22% - 3px); } .hang .pin.r { right: calc(22% - 3px); }
+.eyebrow { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #6A4410;
+  background: linear-gradient(var(--butter-1), var(--butter-2)); box-shadow: inset 0 -2px 0 rgba(170, 100, 20, .28), inset 0 1px 0 rgba(255, 255, 255, .7); }
+.hang h1 { margin: 10px 0 2px; font-family: "Black Han Sans"; font-weight: 400; font-size: 32px; line-height: 1.15; }
+.hang p { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.chips { display: flex; gap: 8px; }
+.chip { flex: 1; display: grid; justify-items: center; gap: 4px; padding: 12px 6px 10px; border-radius: 22px; border: 0; font: inherit; color: var(--ink-2); position: relative; }
+.chip i { font-size: 26px; }
+.chip span { font-size: 14px; font-weight: 800; }
+.chip em { position: absolute; top: 6px; right: 8px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; font-style: normal; font-size: 12px; font-weight: 800; display: grid; place-items: center; background: rgba(62, 47, 39, .1); color: var(--ink-2); }
+.chip.on { background: #fff; color: var(--ink); box-shadow: 0 8px 18px rgba(90, 64, 40, .16); }
+.chip.on i { color: #E39A1C; }
+.chip.on em { background: #FC7088; color: #fff; }
+@keyframes swing { 0%, 100% { rotate: -.8deg; } 50% { rotate: .8deg; } }
+</style>
+</head>
+<body>
+
+<!-- 로비 -->
+<div class="phone">
+  <div class="bg" style="background-image:url(samples/bg_lobby_preview.png)"></div>
+  <div class="ui">
+    <div class="hang glass"><i class="pin l"></i><i class="pin r"></i>
+      <span class="eyebrow"><i class="ti ti-building"></i>1F 로비 · 채용 안내</span>
+      <h1>어느 부서로 갈까?</h1>
+      <p>2026 하반기 감자그룹 공채</p>
+    </div>
+    <div class="chips">
+      <button class="chip glass on"><i class="ti ti-briefcase"></i><span>경영·사무</span><em>2</em></button>
+      <button class="chip glass"><i class="ti ti-speakerphone"></i><span>영업판매</span><em>1</em></button>
+      <button class="chip glass"><i class="ti ti-device-desktop"></i><span>정보통신</span><em>0</em></button>
+    </div>
+    <div class="card"><div><p style="margin:0" class="co">감자바이오</p><p style="margin:0" class="pos">IR 신입</p></div><span class="go"><i class="ti ti-chevron-right"></i></span></div>
+    <div class="card"><div><p style="margin:0" class="co">감자전자</p><p style="margin:0" class="pos">재무 신입</p></div><span class="go"><i class="ti ti-chevron-right"></i></span></div>
+    <div class="card soon"><div><p style="margin:0" class="pos">공고 준비 중</p></div></div>
+    <div class="grow"></div>
+    <div class="row"><img src="../assets/potato_cut.png" style="width:128px; margin:0 -14px -10px -16px" alt=""><p class="bubble" style="margin:0 0 30px">다 가고 싶고 다 무섭다…</p></div>
+    <button class="btn sub">밖으로 나가기</button>
+  </div>
+</div>
+
+<!-- 플레이 -->
+<div class="phone">
+  <div class="bg" style="background-image:url(samples/bg_lift_preview.png)"></div>
+  <div class="ui">
+    <div class="hud">
+      <span class="pill glass"><b>8F</b>시험장</span>
+      <span class="score">1,540</span>
+      <span class="pill glass letters"><i class="ti ti-mail on"></i><i class="ti ti-mail"></i><i class="ti ti-mail"></i></span>
+    </div>
+    <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="noti"><div class="noti-top"><span class="ico"><i class="ti ti-message-circle"></i></span>메시지<span class="t">지금</span></div>
+    <p class="noti-from">감자그룹 채용팀</p>
+    <p class="noti-body">[Web발신] [감자그룹] 감자님, 2026 하반기 신입사원 공채 필기전형 결과가 발표되었습니다. 채용 홈페이지에서 확인 바랍니다.</p></div>
+  <span class="drop" style="left:40px; top:220px">투자자에게 실적 설명</span>
+  <span class="drop" style="left:180px; top:300px">시장 동향 모니터링</span>
+  <span class="drop trap" style="left:70px; top:390px">글로벌 마인드</span>
+  <span class="float" style="left:236px; top:252px">+120</span>
+  <div class="stage"></div>
+  <div class="chars"><span class="who me"><img src="../assets/potato_cut.png" alt=""></span><p class="bubble" style="margin:0 0 40px; font-size:21px">이건 내 몫!<br>내가 챙겼다.</p><span class="who ai"><img src="../assets/ai_cut.png" alt=""></span></div>
+  <div class="dock glass"><button class="ibtn sub" aria-label="멈춤"><i class="ti ti-player-pause"></i></button><input value="" placeholder="단어 입력 후 Enter"><button class="ibtn" aria-label="받아치기"><i class="ti ti-corner-down-left"></i></button></div>
+</div>
+
+</body>
+</html>

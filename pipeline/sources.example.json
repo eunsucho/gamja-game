@@ -1,0 +1,10 @@
+{
+  "work24": {
+    "note": "고용24 오픈API(채용정보). 호출 주소와 파라미터 이름은 활용 신청 후 받은 명세대로 채운다. 인증키는 환경변수 WORK24_KEY 로만 넘긴다.",
+    "url": "",
+    "key_env": "WORK24_KEY",
+    "key_param": "authKey",
+    "format": "xml",
+    "params": { "callTp": "L", "returnType": "XML", "startPage": 1, "display": "{limit}", "keyword": "{keyword}" }
+  }
+}

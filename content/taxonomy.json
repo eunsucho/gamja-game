@@ -1,0 +1,47 @@
+{
+  "note": "분야 = 로비 안내판의 동(棟). NCS 직무분류 대분류 코드를 따른다. 직무 = 그 동 안의 한 줄. soc는 O*NET 직업 코드(확인된 것만 적고 모르면 비워 둠). icon은 Tabler 아이콘 이름(https://tabler.io/icons), short는 로비 탭에 보일 짧은 이름.",
+  "season": "2026 하반기 감자그룹 공채 (샘플)",
+  "fields": [
+    {
+      "id": "biz",
+      "name": "경영·회계·사무",
+      "ncs": "02",
+      "wing": "본관",
+      "jobs": [
+        {
+          "id": "ir",
+          "name": "IR",
+          "ncs": "0203",
+          "soc": ""
+        }
+      ],
+      "icon": "briefcase",
+      "short": "경영·사무"
+    },
+    {
+      "id": "sales",
+      "name": "영업판매",
+      "ncs": "10",
+      "wing": "동관",
+      "jobs": [
+        {
+          "id": "service-biz",
+          "name": "서비스·사업 기획",
+          "ncs": "1001",
+          "soc": ""
+        }
+      ],
+      "icon": "speakerphone",
+      "short": "영업판매"
+    },
+    {
+      "id": "it",
+      "name": "정보통신",
+      "ncs": "20",
+      "wing": "서관",
+      "jobs": [],
+      "icon": "device-desktop",
+      "short": "정보통신"
+    }
+  ]
+}
