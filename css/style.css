@@ -361,3 +361,29 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .pot, .hang, .kenburns, .mood-idle img, .mood-spark img, .mood-fire img, .mood-hired img, .mood-teary img, .fx { animation: none !important; }
 }
+
+/* ---------- 데스크탑: 세로 그림을 잘라 늘리지 않고, 가운데 9:16 무대에 담는다 ----------
+   무대 밖은 지금 장면의 배경을 흐리게 깔아서 화면이 비어 보이지 않게 한다. fit()이 body.desk를 켠다. */
+.backdrop, .keyhint { display: none; }
+body.desk { background: #2B211B; }
+/* 흐림은 화면 크기만큼 그리면 무거워서, 1/8 크기로 흐리게 그린 뒤 8배로 키운다 (보기엔 같고 훨씬 가볍다) */
+body.desk .backdrop { display: block; position: fixed; z-index: 0; left: -2vw; top: -2vh; width: 15vw; height: 15vh; transform: scale(8); transform-origin: 0 0;
+  background-size: cover; background-position: center; filter: blur(4px) saturate(1.15) brightness(.62); pointer-events: none; }
+body.desk .app { left: calc(50% - var(--stage-w) / 2); right: auto; width: var(--stage-w); border-radius: 28px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), 0 30px 90px rgba(0, 0, 0, .5); isolation: isolate; }
+body.desk .keyhint { position: fixed; z-index: 1; bottom: 28px; left: calc(50% + var(--stage-w) / 2 + 28px); display: grid; gap: 8px;
+  color: rgba(255, 255, 255, .86); font-size: 14px; font-weight: 600; }
+body.desk .keyhint:empty, body.desk.narrow .keyhint { display: none; }
+.keyhint p { display: flex; align-items: center; gap: 8px; }
+.keyhint kbd { min-width: 30px; height: 28px; padding: 0 8px; border-radius: 8px; display: inline-grid; place-items: center; font: 700 13px var(--ui);
+  color: #fff; background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .28); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .2); }
+
+/* 마우스가 있는 화면: 누를 수 있는 것은 올렸을 때 살짝 떠오른다 */
+@media (hover: hover) and (pointer: fine) {
+  .btn, .ibtn, .btn-sm { transition: transform .12s, box-shadow .12s, filter .12s; }
+  .btn:hover, .ibtn:hover, .btn-sm:hover { transform: translateY(-2px); filter: brightness(1.04); }
+  .btn:active, .ibtn:active, .btn-sm:active { transform: translateY(1px); }
+  .card, .chip { transition: transform .12s, background .12s; }
+  .card:not(.soon):hover { transform: translateX(3px); box-shadow: 0 12px 26px rgba(90, 64, 40, .2); }
+  .chip:not([aria-selected="true"]):hover { background: rgba(255, 255, 255, .8); color: var(--ink); }
+}

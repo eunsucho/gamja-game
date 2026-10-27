@@ -10,7 +10,16 @@ import * as T from "./copy.js";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
-function show(v) { VIEWS.forEach(x => $(x).hidden = x !== v); document.body.dataset.view = v; }
+// 화면마다 처음 누를 버튼. 키보드만으로도 Enter로 이어 갈 수 있게 미리 맞춰 둔다
+const FIRST = { "v-title": "toStart", "v-intro": "introNext", "v-brief": "startGame", "v-result": "retry" };
+function show(v) {
+  VIEWS.forEach(x => $(x).hidden = x !== v);
+  document.body.dataset.view = v;
+  syncBackdrop();
+  keyhint(v);
+  const first = v === "v-select" ? $("postingList").querySelector("[data-id]") : $(FIRST[v]);
+  if (first && v !== "v-play" && document.body.classList.contains("desk")) first.focus({ preventScroll: true });
+}
 
 let INDEX = null, current = null, game = null, FLOORS = [], wingId = null;
 let alt = 0, altTarget = 0;
@@ -18,18 +27,45 @@ const mood = { now: "", oopsUntil: 0 };
 let seen = new Set(), shownTerms = new Set();   // 이번 층에 나온 단어, 이미 풀이를 보여 준 용어
 
 // ---------- 전체 화면: 폰 키보드가 올라오면 실제로 보이는 높이에 맞춘다 ----------
+// 가로로 넓은 화면(데스크탑·가로 태블릿)에서는 세로 그림이 잘리지 않게 가운데 9:16 무대에 담는다.
+const GAP = 16;
 function fit() {
   const vv = window.visualViewport;
-  const h = vv ? vv.height : window.innerHeight;
+  const W = window.innerWidth, H = window.innerHeight;
+  const desk = W >= 700 && W / H > 0.75;
+  let h = vv ? vv.height : H, top = vv ? vv.offsetTop : 0;
+  if (desk) { h = H - GAP * 2; top = GAP; }
+  const w = Math.min(W, Math.round(h * 9 / 16));
   const app = $("app");
+  document.body.classList.toggle("desk", desk);
+  document.body.classList.toggle("narrow", desk && (W - w) / 2 < 240);   // 무대 옆에 키 안내를 둘 자리가 없을 때
+  document.body.style.setProperty("--stage-w", `${w}px`);
   app.style.setProperty("--app-h", `${Math.round(h)}px`);
-  app.style.setProperty("--app-top", `${Math.round(vv ? vv.offsetTop : 0)}px`);
+  app.style.setProperty("--app-top", `${Math.round(top)}px`);
   app.classList.toggle("compact", h < 640);
 }
 window.addEventListener("resize", fit);
 window.visualViewport?.addEventListener("resize", fit);
 window.visualViewport?.addEventListener("scroll", fit);
 fit();
+
+// ---------- 무대 밖 배경과 키 안내 (데스크탑) ----------
+function syncBackdrop(img) {
+  const v = document.body.dataset.view;
+  const src = img ? `url(${img})` : $(v)?.querySelector(".bg")?.style.backgroundImage;
+  if (src) $("backdrop").style.backgroundImage = src;
+}
+const KEYS = {
+  "v-title": [["Enter", "시작"]],
+  "v-intro": [["→", "다음"], ["Esc", "건너뛰기"]],
+  "v-select": [["Tab", "고르기"], ["Enter", "선택"]],
+  "v-brief": [["Enter", "출근"]],
+  "v-play": [["Enter", "입력"], ["Esc", "일시정지"]],
+  "v-result": [["← →", "회고록 넘기기"], ["Enter", "다시 도전"]],
+};
+function keyhint(v) {
+  $("keyhint").innerHTML = (KEYS[v] || []).map(([k, t]) => `<p><kbd>${k}</kbd>${t}</p>`).join("");
+}
 
 // ---------- 창밖: 높이에 따라 낮 → 노을 → 구름 위 배경으로 바뀐다 ----------
 const clamp01 = x => Math.max(0, Math.min(1, x));
@@ -154,6 +190,7 @@ function renderIntro() {
   const bg = $("docuBg");
   bg.style.backgroundImage = `url(${c.img})`;
   retrigger(bg, "kenburns");
+  syncBackdrop(c.img);
   $("docuSays").innerHTML = (c.say ? `<p class="bubble hand">${esc(c.say).replace(/\n/g, "<br>")}</p>` : "") +
     (c.ai ? `<p class="bubble hand ai">${esc(c.ai)}</p>` : "");
   const sub = $("docuSub");
@@ -383,6 +420,31 @@ $("quitBtn").onclick = () => {
 };
 document.addEventListener("visibilitychange", () => { if (document.hidden && game?.running && !game.paused) setPaused(true); });
 
+// ---------- 키보드 ----------
+const typing = e => e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+document.addEventListener("keydown", e => {
+  if (e.isComposing || $("credits").open) return;
+  const v = document.body.dataset.view;
+  const onButton = document.activeElement?.closest("button, input, a");
+  if (v === "v-intro") {
+    if (e.key === "Escape") { e.preventDefault(); introDone(); }
+    else if (e.key === "ArrowRight" || (!onButton && (e.key === "Enter" || e.key === " "))) { e.preventDefault(); introNext(); }
+    else if (e.key === "ArrowLeft" && introI > 0) { e.preventDefault(); introI--; renderIntro(); }
+  } else if (v === "v-play") {
+    const doorsShut = !$("doors").classList.contains("open");
+    if (e.key === "Escape" && game?.running && !doorsShut) { e.preventDefault(); setPaused(!game.paused); if (game.paused) $("resumeBtn").focus(); }
+    // 다른 곳을 눌러 입력창 포커스가 빠져도, 글자를 치면 바로 입력창으로 돌아간다
+    else if (typing(e) && !onButton && !doorsShut && !game?.paused) $("typeInput").focus();
+  } else if (v === "v-result") {
+    if (e.key === "ArrowLeft") { e.preventDefault(); $("memoPrev").click(); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); $("memoNext").click(); }
+  }
+});
+// 게임 화면 빈 곳을 클릭해도 입력창이 포커스를 잃지 않게
+$("v-play").addEventListener("pointerdown", e => {
+  if (!e.target.closest("button, input") && game?.running && !game.paused) { e.preventDefault(); $("typeInput").focus(); }
+});
+
 // ---------- 결과: 옥상 또는 1층 출구 + 감자 회고록 ----------
 function end(r) {
   if (r.passed) {
@@ -512,7 +574,7 @@ $("startGame").onclick = callElevator;
 $("retry").onclick = () => { game?.stop(); startGame(); };
 $("toSelect2").onclick = openLobby;
 
-document.body.dataset.view = "v-title";
+show("v-title");
 init().catch(e => {
   $("problems").hidden = false;
   $("problems").textContent = `공고를 불러오지 못했어요 (${e.message}). 로컬에서는 파일을 직접 열지 말고 간단한 서버로 열어 주세요.`;
