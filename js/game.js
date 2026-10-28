@@ -56,14 +56,19 @@ export class Game {
     this.spawnIn = this.script ? 0.8 : 0.4;
     this.tutI = 0;
     this.slowUntil = 0;
-    const cs = getComputedStyle(this.sky);
-    this.floorH = parseFloat(cs.getPropertyValue("--floor-h")) || 0;
-    this.padLeft = parseFloat(cs.getPropertyValue("--pad-left")) || 8;
-    this.dropTop = parseFloat(cs.getPropertyValue("--drop-top")) || 10;   // 단어가 출발하는 높이 (위 계기판 아래)
+    this.measure();
     this.running = true;
     this.paused = false;
     this.last = performance.now();
     requestAnimationFrame(this._loop);
+  }
+
+  // 화면 치수. 폰 키보드가 열리고 닫히면 보이는 높이가 바뀌므로 main.js의 fit()이 다시 부른다
+  measure() {
+    const cs = getComputedStyle(this.sky);
+    this.floorH = parseFloat(cs.getPropertyValue("--floor-h")) || 0;
+    this.padLeft = parseFloat(cs.getPropertyValue("--pad-left")) || 8;
+    this.dropTop = parseFloat(cs.getPropertyValue("--drop-top")) || 10;   // 단어가 출발하는 높이 (위 계기판 아래)
   }
 
   pause() { this.paused = true; }
@@ -84,7 +89,7 @@ export class Game {
 
     const slow = now < this.slowUntil ? CONFIG.specSlowFactor : 1;
     const step = dt / this.fallSec * slow;
-    const fallPx = this.sky.clientHeight - this.floorH - this.dropTop - 34;
+    const fallPx = Math.max(60, this.sky.clientHeight - this.floorH - this.dropTop - 34);
     for (const d of this.drops.slice()) {
       d.y += step * d.speed;
       d.el.style.transform = `translateY(${d.y * fallPx}px)`;

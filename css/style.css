@@ -86,7 +86,14 @@ button { cursor: pointer; }
 /* ---------- 인트로: 감자극장 ---------- */
 .docu { background: #1A1410; }
 .kenburns { animation: kenburns 9s ease-out forwards; }
-.docu-shade { position: absolute; inset: 0; background: linear-gradient(rgba(20, 14, 10, .55), rgba(20, 14, 10, 0) 20%, rgba(20, 14, 10, 0) 48%, rgba(20, 14, 10, .82) 82%); }
+/* 영화 자막처럼: 그림은 위쪽에, 자막과 버튼은 아래 검은 띠에. 주인공(감자)이 그림 아래쪽에 있어서 자막이 그 위를 덮지 않게 한다 */
+.docu { --band: 214px; }
+.docu #docuBg { bottom: var(--band); background-position: center 72%; }
+.docu-shade { position: absolute; inset: 0; background:
+  linear-gradient(rgba(20, 14, 10, .55), rgba(20, 14, 10, 0) 18%),
+  linear-gradient(to top, #1A1410 var(--band), rgba(26, 20, 16, 0) calc(var(--band) + 70px)); }
+.app.compact .docu { --band: 192px; }
+.app.compact .docu-sub { font-size: 17px; min-height: 82px; }
 .docu::before, .docu::after { content: ""; position: absolute; left: 0; right: 0; height: 3.5%; background: #000; z-index: 2; }
 .docu::before { top: 0; } .docu::after { bottom: 0; }
 .docu .col { padding-top: max(34px, env(safe-area-inset-top, 0px)); padding-bottom: max(34px, env(safe-area-inset-bottom, 0px)); }
@@ -282,6 +289,33 @@ button { cursor: pointer; }
 .app.compact .ibtn { width: 46px; height: 46px; }
 .app.compact .notifs { top: 104px; }
 .app.compact .tut-tip { top: 140px; font-size: 21px; }
+
+/* ---------- 폰 키보드가 올라온 게임 화면 (fit()이 .kb를 켠다) ----------
+   보이는 높이가 절반 가까이 줄어서, 계기판은 한 줄로 얇게, 감자·AI 동기는 입력창 바로 위 양쪽 구석으로 작게 내려
+   가운데를 단어가 떨어지는 길로 비워 둔다. 단어는 말풍선·캐릭터보다 위에 그려진다. */
+.app.kb .play { --floor-h: 76px; --drop-top: 66px; }
+.app.kb .stage { height: 120px; }
+.app.kb .hud-wrap { padding-top: 8px; gap: 5px; }
+.app.kb .pill { height: 32px; padding: 0 11px; font-size: 13px; }
+.app.kb .pill b { font-size: 15px; }
+.app.kb .letters i { font-size: 16px; }
+.app.kb .score b { font-size: 26px; }
+.app.kb .steps i { width: 18px; height: 5px; }
+.app.kb .timebar { height: 4px; }
+.app.kb .drop { font-size: 15px; padding: 6px 13px; }
+.app.kb .chars { bottom: 66px; padding: 0 6px; }
+.app.kb .who.me { width: 64px; margin: 0; }
+.app.kb .who.ai { width: 54px; margin: 0 0 0 auto; }
+.app.kb .who::after { height: 8px; }
+.app.kb .chars .bubble { left: 66px; bottom: 30px; font-size: 15px; padding: 6px 11px; max-width: calc(100% - 140px); }
+.app.kb .buddy-say { font-size: 14px; right: 4px; }
+.app.kb .dock { padding: 6px; bottom: 6px; }
+.app.kb .dock input { height: 44px; font-size: 16px; }
+.app.kb .ibtn { width: 44px; height: 44px; font-size: 20px; }
+.app.kb .notifs { top: 58px; }
+.app.kb .noti { padding: 7px 12px 8px; border-radius: 16px; }
+.app.kb .noti-body { -webkit-line-clamp: 1; }
+.app.kb .tut-tip { top: 70px; font-size: 17px; padding: 10px 14px; border-radius: 18px; }
 
 /* ---------- 결과 ---------- */
 .result-hero { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 4px; }

@@ -29,6 +29,7 @@ let seen = new Set(), shownTerms = new Set();   // 이번 층에 나온 단어, 
 // ---------- 전체 화면: 폰 키보드가 올라오면 실제로 보이는 높이에 맞춘다 ----------
 // 가로로 넓은 화면(데스크탑·가로 태블릿)에서는 세로 그림이 잘리지 않게 가운데 9:16 무대에 담는다.
 const GAP = 16;
+const TOUCH = matchMedia("(hover: none) and (pointer: coarse)");
 function fit() {
   const vv = window.visualViewport;
   const W = window.innerWidth, H = window.innerHeight;
@@ -43,6 +44,9 @@ function fit() {
   app.style.setProperty("--app-h", `${Math.round(h)}px`);
   app.style.setProperty("--app-top", `${Math.round(top)}px`);
   app.classList.toggle("compact", h < 640);
+  // 터치 폰에서 보이는 높이가 600 아래 = 대개 키보드가 올라온 상태. 게임 화면을 키보드용으로 바꾼다
+  app.classList.toggle("kb", !desk && TOUCH.matches && h < 600);
+  game?.measure();
 }
 window.addEventListener("resize", fit);
 window.visualViewport?.addEventListener("resize", fit);
@@ -50,7 +54,7 @@ window.visualViewport?.addEventListener("scroll", fit);
 fit();
 
 // ---------- 폰이면 모바일 평균 타자 속도에 맞춘다 (마우스 없이 터치만 되는 기기) ----------
-const pace = () => matchMedia("(hover: none) and (pointer: coarse)").matches ? CONFIG.mobilePace : 1;
+const pace = () => TOUCH.matches ? CONFIG.mobilePace : 1;
 
 // ---------- 무대 밖 배경과 키 안내 (데스크탑) ----------
 function syncBackdrop(img) {
