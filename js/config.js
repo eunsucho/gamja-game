@@ -9,6 +9,9 @@ export const CONFIG = {
   fallSpeedUp: 0.88,          // 단계가 오를 때마다 떨어지는 시간에 곱하는 값
   spawnSeconds: 2.6,          // 1단계 단어 생성 간격(초)
   spawnSpeedUp: 0.9,         // 단계가 오를 때마다 생성 간격에 곱하는 값
+  // 폰 화면 키보드는 실제 키보드보다 느리다. 대규모 측정에서 평균이 데스크탑 51.6 WPM(Dhakal 외, CHI 2018),
+  // 모바일 36.2 WPM(Palin 외, MobileHCI 2019)이라 약 1.4배 걸린다. 폰에서는 낙하·생성 간격·마감을 이만큼 늘린다
+  mobilePace: 1.4,
   maxOnScreen: 7,             // 화면에 동시에 떠 있는 최대 단어 수
   trapRate: 0.12,             // 함정 단어 비율 (trap 기능이 켜진 전형)
   specRate: 0.08,             // 스펙 아이템 비율 (spec 기능이 켜진 전형)

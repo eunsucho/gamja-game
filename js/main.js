@@ -49,6 +49,9 @@ window.visualViewport?.addEventListener("resize", fit);
 window.visualViewport?.addEventListener("scroll", fit);
 fit();
 
+// ---------- 폰이면 모바일 평균 타자 속도에 맞춘다 (마우스 없이 터치만 되는 기기) ----------
+const pace = () => matchMedia("(hover: none) and (pointer: coarse)").matches ? CONFIG.mobilePace : 1;
+
 // ---------- 무대 밖 배경과 키 안내 (데스크탑) ----------
 function syncBackdrop(img) {
   const v = document.body.dataset.view;
@@ -261,7 +264,7 @@ function startTutorial() {
   const trap = t0 ? (typeof t0 === "string" ? t0 : t0.text) : "보도자료 배포";
   const script = [{ kind: "job", w: o, text: o.text }, { kind: "job", w: mine, text: mine.text }, { kind: "trap", text: trap }];
   const pseudo = { stages: [{ name: "연습" }], words: [o, mine] };
-  game = new Game(pseudo, $("sky"), { hud, event: onEvent, stageClear() {}, end() {}, tutorialDone }, { tutorial: script });
+  game = new Game(pseudo, $("sky"), { hud, event: onEvent, stageClear() {}, end() {}, tutorialDone }, { tutorial: script, pace: pace() });
   FLOORS = floors(current.stages);
   setAltitude(0, true);
   setMood("idle");
@@ -304,7 +307,7 @@ function startGame() {
   tip("");
   FLOORS = floors(current.stages);
   setAltitude(0, true);
-  game = new Game(current, $("sky"), { hud, event: onEvent, stageClear, end });
+  game = new Game(current, $("sky"), { hud, event: onEvent, stageClear, end }, { pace: pace() });
   seen = new Set(); shownTerms = new Set();
   mood.oopsUntil = 0;
   setMood("idle");

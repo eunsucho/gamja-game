@@ -13,6 +13,7 @@ export class Game {
     this.layer = sky.querySelector(".drops") || sky;
     this.hooks = hooks;              // { hud, event, stageClear, end, tutorialDone }
     this.script = opts.tutorial || null;
+    this.pace = opts.pace || 1;      // 1 = 데스크탑 기준, 폰은 CONFIG.mobilePace
     this.si = 0;
     this.uid = 0;
     this.drops = [];
@@ -21,7 +22,8 @@ export class Game {
     this.running = false;
     this.fails = 0;
     this.steps = 0;
-    this.timeLeft = CONFIG.stageSeconds;
+    this.stageSec = CONFIG.stageSeconds * this.pace;
+    this.timeLeft = this.stageSec;
     this.stats = {
       score: 0, combo: 0, maxCombo: 0, keys: 0, activeMs: 0,
       mineSpawned: 0, mineTyped: 0, salary: CONFIG.salaryBase,
@@ -48,9 +50,9 @@ export class Game {
     this.clearDrops();
     this.fails = 0;
     this.steps = 0;
-    this.timeLeft = this.isBonus ? CONFIG.bonusSeconds : CONFIG.stageSeconds;
-    this.fallSec = this.script ? CONFIG.tutorialFall : CONFIG.fallSeconds * Math.pow(CONFIG.fallSpeedUp, i);
-    this.spawnSec = CONFIG.spawnSeconds * Math.pow(CONFIG.spawnSpeedUp, i) * (this.isBonus ? 0.7 : 1);
+    this.timeLeft = this.isBonus ? CONFIG.bonusSeconds : this.stageSec;
+    this.fallSec = (this.script ? CONFIG.tutorialFall : CONFIG.fallSeconds * Math.pow(CONFIG.fallSpeedUp, i)) * this.pace;
+    this.spawnSec = CONFIG.spawnSeconds * Math.pow(CONFIG.spawnSpeedUp, i) * (this.isBonus ? 0.7 : 1) * this.pace;
     this.spawnIn = this.script ? 0.8 : 0.4;
     this.tutI = 0;
     this.slowUntil = 0;
@@ -133,7 +135,7 @@ export class Game {
     this.hooks.hud({
       stageName: this.stage.name, stageIndex: this.si, stageCount: this.p.stages.length, bonus: this.isBonus,
       tutorial: !!this.script,
-      timeLeft: Math.max(0, this.timeLeft), timeTotal: this.isBonus ? CONFIG.bonusSeconds : CONFIG.stageSeconds,
+      timeLeft: Math.max(0, this.timeLeft), timeTotal: this.isBonus ? CONFIG.bonusSeconds : this.stageSec,
       steps: this.steps, stepGoal: CONFIG.floorSteps, altitude: this.altitude(),
       fails: this.fails, failLimit: CONFIG.failLimit,
       score: Math.round(this.stats.score), combo: this.stats.combo, cpm: this.cpm(), salary: this.stats.salary, slow
