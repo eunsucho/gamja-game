@@ -896,3 +896,5 @@ body { font-family: var(--ui); }
 .lobby-hero .pedestal { bottom: 1px; z-index: 0; }
 @media (max-height: 760px) { .lobby-hero .pedestal { bottom: 3px; } }
 @media (max-height: 680px) { .lobby-hero .pedestal { bottom: 6px; } }
+#v-play.chat .msg.leave { animation: msgOut .35s ease forwards; }
+@keyframes msgOut { to { opacity: 0; translate: -30px 0; margin-top: -54px; } }

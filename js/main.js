@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103m";
-import { Game, MINE } from "./game.js?v=20261103m";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103m";
-import { esc } from "./util.js?v=20261103m";
-import { CONFIG } from "./config.js?v=20261103m";
-import { floors } from "./scene.js?v=20261103m";
-import * as T from "./copy.js?v=20261103m";
+import { loadIndex, loadPosting } from "./data.js?v=20261103n";
+import { Game, MINE } from "./game.js?v=20261103n";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103n";
+import { esc } from "./util.js?v=20261103n";
+import { CONFIG } from "./config.js?v=20261103n";
+import { floors } from "./scene.js?v=20261103n";
+import * as T from "./copy.js?v=20261103n";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];

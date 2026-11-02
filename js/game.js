@@ -1,7 +1,7 @@
 // 산성비 엔진. 화면 그리기는 단어 방울만 하고, 상태 변화는 hooks로 바깥(main.js)에 알린다.
 // 전형 하나 = 본사 한 층. 받아칠 때마다 엘리베이터가 한 칸씩 올라가고, 칸을 다 채우면 그 전형 합격.
-import { CONFIG } from "./config.js?v=20261103m";
-import { norm, keystrokes, shuffle } from "./util.js?v=20261103m";
+import { CONFIG } from "./config.js?v=20261103n";
+import { norm, keystrokes, shuffle } from "./util.js?v=20261103n";
 
 export const MINE = new Set(["X", "□"]);
 
@@ -238,7 +238,13 @@ export class Game {
   }
 
   remove(d, cls) {
-    if (this.chat) { this.drops = this.drops.filter(x => x !== d); d.el.classList.add(cls || "gone"); d.el.querySelector(".pass")?.remove(); return; }
+    if (this.chat) {
+      // 처리된 메시지는 잠깐 결과(✓·AI·놓침)를 보여 준 뒤 접히며 사라진다
+      this.drops = this.drops.filter(x => x !== d);
+      d.el.classList.add(cls || "gone"); d.el.querySelector(".pass")?.remove();
+      setTimeout(() => { d.el.classList.add("leave"); setTimeout(() => d.el.remove(), 350); }, cls === "grabbed" ? 1400 : 900);
+      return;
+    }
     this.drops = this.drops.filter(x => x !== d);
     if (cls) { d.el.classList.add(cls); setTimeout(() => d.el.remove(), 520); } else d.el.remove();
   }

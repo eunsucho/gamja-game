@@ -1,5 +1,5 @@
 // 게임 속 문구 모음. 대사·인트로·회고록 문장은 여기서만 고친다. (자리만 잡아 둔 예시 문구)
-import { CONFIG } from "./config.js?v=20261103m";
+import { CONFIG } from "./config.js?v=20261103n";
 
 // ---------- 세계관 인트로: 코미디 다큐 '감자극장' ----------
 // img: assets/intro/ 그림, nar: 내레이션 자막(다큐 성우 톤), say: 감자 속마음, ai: AI 동기 한마디
