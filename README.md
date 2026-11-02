@@ -111,6 +111,8 @@ py pipeline/build.py                                               # 4 게임 �
 
 ## 출처 표기
 
+- 글꼴: 넥슨 메이플스토리체 (assets/fonts, 무료 글꼴)
+
 - Anthropic Economic Index, 2026-06-26 릴리스 (CC-BY)
 - National Center for O*NET Development, O*NET 31.0 Database (CC BY 4.0)
 - 게임에서는 'AI가 대화를 끝까지 처리한 비율'을 AI 동기의 성공 확률로 단순화했습니다. 이 수치는 대체 가능성이 아닙니다.

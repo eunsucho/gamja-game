@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103h";
-import { Game, MINE } from "./game.js?v=20261103h";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103h";
-import { esc } from "./util.js?v=20261103h";
-import { CONFIG } from "./config.js?v=20261103h";
-import { floors } from "./scene.js?v=20261103h";
-import * as T from "./copy.js?v=20261103h";
+import { loadIndex, loadPosting } from "./data.js?v=20261103i";
+import { Game, MINE } from "./game.js?v=20261103i";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103i";
+import { esc } from "./util.js?v=20261103i";
+import { CONFIG } from "./config.js?v=20261103i";
+import { floors } from "./scene.js?v=20261103i";
+import * as T from "./copy.js?v=20261103i";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -115,10 +115,10 @@ function say(text) { $("say").textContent = text; }
 
 // 규칙 카드: 사람 몫 / AI 몫 / 옆 팀 일을 캐릭터 그림과 예시 단어로 보여 준다
 const WHO_IMG = { me: "assets/potato_cut.png", ai: "assets/ai_cut.png" };
-function rulesHTML() {
+function rulesHTML(ex = null) {
   return `<div class="how">` + T.RULES.map(r => `<div class="how-tile ${r.who}">
     <span class="how-pic">${WHO_IMG[r.who] ? `<img class="face" src="${WHO_IMG[r.who]}" alt="">` : ""}<img class="badge-it" src="assets/items/${r.item}.png" alt=""></span>
-    <span class="how-word">${esc(r.word)}</span><b>${esc(r.label)}</b></div>`).join("") + `</div>`;
+    <span class="how-txt2"><span class="how-word">${esc(ex?.[r.who] || r.word)}</span><b>${esc(r.label)}</b></span></div>`).join("") + `</div>`;
 }
 const item = (n, cls = "") => `<img class="it ${cls}" src="assets/items/${n}.png" alt="">`;
 // 목표: 쳐서 → 게이지 → 최종합격
@@ -340,7 +340,8 @@ function startTutorial() {
   say("연습이니까 마음 편하게…");
   enterLift();
   game.hud(false);
-  doorShow({ floor: "연습", msg: "", html: rulesHTML(), icon: "key" }, { button: "시작!" }).then(() => { doorOpen(); game.startStage(0); });
+  doorShow({ floor: "연습", msg: MODE === "chat" ? "이런 업무 3종류가 와요" : "이런 단어 3종류가 내려와요",
+    html: rulesHTML({ me: mine.text, ai: o.text, no: trap }), icon: "key" }, { button: "시작!" }).then(() => { doorOpen(); game.startStage(0); });
 }
 
 // 이번 층에 내려온 단어 속 낯선 용어 (한 번 보여 준 건 다시 안 보여 줌, 최대 2개)
@@ -562,7 +563,7 @@ const imgCache = {};
 const loadImg = src => imgCache[src] || (imgCache[src] = new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }));
 async function drawShare(cv) {
   const s = lastShare; if (!s) return;
-  await document.fonts?.load?.("80px Jua").catch(() => {});
+  await document.fonts?.load?.("80px Maplestory").catch(() => {});
   const g = cv.getContext("2d"), W = cv.width, H = cv.height, L = T.LEVELS[s.lv];
   // 카드 프레임(Figma) 위에: 감자 · 리본에 이름 · 아래 판에 타수
   g.clearRect(0, 0, W, H);
@@ -571,16 +572,16 @@ async function drawShare(cv) {
   const pot = await loadImg(L.img); if (pot) g.drawImage(pot, W / 2 - 330, 220, 660, 660);
   const outfit = await loadImg(s.outfit); if (outfit) g.drawImage(outfit, 110, 780, 250, 250);
   g.textAlign = "center";
-  g.font = "84px Jua"; g.fillStyle = "#8A4B00"; g.fillText(L.name, W / 2, 1200);
+  g.font = "84px Maplestory"; g.fillStyle = "#8A4B00"; g.fillText(L.name, W / 2, 1200);
   // 큰 타수 + 작은 '타'를 한 덩어리로 가운데
   g.fillStyle = "#3E2F27"; g.textAlign = "left";
-  g.font = "110px Jua"; const w1 = g.measureText(String(s.cpm)).width;
-  g.font = "48px Jua"; const w2 = g.measureText("타").width;
+  g.font = "110px Maplestory"; const w1 = g.measureText(String(s.cpm)).width;
+  g.font = "48px Maplestory"; const w2 = g.measureText("타").width;
   const x0 = W / 2 - (w1 + 10 + w2) / 2;
-  g.font = "110px Jua"; g.fillText(String(s.cpm), x0, 1440);
-  g.font = "48px Jua"; g.fillText("타", x0 + w1 + 10, 1440);
-  g.textAlign = "center"; g.font = "34px Jua"; g.fillStyle = "#6B5A4E"; g.fillText(`${s.job} · ${s.result}`, W / 2, 1500, W - 260);
-  g.font = "30px Jua"; g.fillStyle = "#A07A50"; g.fillText("감자 취업시켜줘!!", W / 2, 150);
+  g.font = "110px Maplestory"; g.fillText(String(s.cpm), x0, 1440);
+  g.font = "48px Maplestory"; g.fillText("타", x0 + w1 + 10, 1440);
+  g.textAlign = "center"; g.font = "34px Maplestory"; g.fillStyle = "#6B5A4E"; g.fillText(`${s.job} · ${s.result}`, W / 2, 1500, W - 260);
+  g.font = "30px Maplestory"; g.fillStyle = "#A07A50"; g.fillText("감자 취업시켜줘!!", W / 2, 150);
 }
 async function shareCard() {
   const cv = $("shareCanvas"); if (!cv) return;

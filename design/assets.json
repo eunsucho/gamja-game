@@ -124,5 +124,16 @@
     "tool": "Figma generate_image",
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 8:3)",
     "prompt": "empty collectible trading card frame, golden ornate border, ribbon banner, bottom plaque, no text"
+  },
+  "pedestal": {
+    "files": "assets/ui/pedestal.png",
+    "tool": "Figma generate_image",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 10:2)",
+    "prompt": "empty round character display pedestal, cream top, golden trim, caramel side"
+  },
+  "font": {
+    "files": "assets/fonts/MaplestoryBold.woff",
+    "source": "넥슨 메이플스토리체 (npm @noonnu/maplestory-otf-bold, https://noonnu.cc/font_page/427)",
+    "license": "넥슨 무료 글꼴, 상업적 사용 가능 (출처 표기)"
   }
 }

@@ -7,7 +7,7 @@
   --butter-1: #FFD978; --butter-2: #F5B53A; --butter-ink: #6A4410; --butter-lip: rgba(170, 100, 20, .32);
   --ci: #FC7088; --ci-deep: #E2506C;
   --shadow: 0 10px 28px rgba(90, 64, 40, .16);
-  --title: "Jua", "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif;
+  --title: "Maplestory", "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif;
   --ui: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --hand: "Gamja Flower", "Pretendard Variable", Pretendard, sans-serif;
   --phone: -apple-system, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, sans-serif;
@@ -426,7 +426,7 @@ body.desk .keyhint:empty, body.desk.narrow .keyhint { display: none; }
    게임 UI (레퍼런스: 모여봐요 동물의 숲 NookPhone·대화창)
    - 테두리 없음. 크림색 둥근 패널 + 같은 색 계열의 부드러운 그림자
    - 버튼은 알약 모양 단색, 아래쪽만 한 톤 진한 두께(같은 색)
-   - 둥근 글꼴(Jua), 설명은 글 대신 그림(assets/items)
+   - 둥근 글꼴(메이플스토리), 설명은 글 대신 그림(assets/items)
    ===================================================================== */
 :root { --cream: #FFF8E7; --cream-2: #F6ECD3; --mint: #7DD3B8; --mint-d: #4FB496; --sky: #8EC5FF; --sky-d: #5C9EE6;
   --rose: #FF9AA8; --rose-d: #EE6F84; --yolk: #FFD15C; --yolk-d: #F2B233; --soft: 0 10px 24px rgba(120, 90, 50, .18); }
@@ -856,3 +856,22 @@ body { font-family: var(--ui); }
 #dHow .how-tile.no .badge-it { width: 60px; height: 60px; }
 #dHow .how-tile b, #pauseHow .how-tile b { font-size: 28px; white-space: nowrap; }
 .card-pop:has(#dHow:not([hidden])) { background: #FFFDF6; }
+
+/* 글꼴: 메이플스토리 (넥슨 무료 글꼴, 저장소에 직접 포함) */
+@font-face { font-family: "Maplestory"; src: url(../assets/fonts/MaplestoryBold.woff) format("woff"); font-weight: 400 900; font-display: swap; }
+:root { --title: "Maplestory", "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif; }
+
+/* 로비: 감자는 원판 위에 */
+.lobby-hero .pedestal { position: absolute; left: 50%; bottom: 30px; top: auto; translate: -50% 0; width: 200px; height: auto; z-index: 0; filter: drop-shadow(0 8px 10px rgba(90, 60, 30, .25)); }
+.lobby-hero #lobbyHero { top: auto; bottom: 62px; z-index: 1; }
+@media (max-height: 760px) { .lobby-hero .pedestal { width: 160px; bottom: 30px; } .lobby-hero #lobbyHero { bottom: 54px; } }
+@media (max-height: 680px) { .lobby-hero .pedestal { width: 120px; } .lobby-hero #lobbyHero { bottom: 46px; } }
+
+/* 연습 안내: 세 종류 단어 + 할 일 */
+#dHow .how-txt2 { display: grid; gap: 4px; justify-items: start; min-width: 0; }
+#dHow .how-word { display: inline-block; font-family: var(--title); font-size: 15px; font-weight: 400; background: #fff; border-radius: 999px; padding: 4px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1); max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#dHow .how-tile.ai .how-word { box-shadow: 0 0 0 3px var(--sky); }
+#dHow .how-tile b { font-size: 24px; }
+#v-play.chat #dHow .how-word { border-radius: 14px 14px 14px 4px; }
+.pop-msg { font-size: 17px; }
