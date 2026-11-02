@@ -675,7 +675,7 @@ body { font-family: var(--ui); }
 .app.compact .title-top { margin-top: 12px; gap: 6px; }
 .app.compact #v-title .col { gap: 8px; }
 .stages .st:not(:last-child)::after { background: repeating-linear-gradient(#E3C98F 0 6px, transparent 6px 11px); }
-@media (max-height: 760px) {
+@media (max-height: 880px) {
   .hero-center .pot-xl { width: 140px; }
   .logo img { width: min(78%, 290px); }
   .title-top { margin-top: 20px; gap: 6px; }
