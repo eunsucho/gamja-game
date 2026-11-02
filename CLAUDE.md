@@ -14,6 +14,6 @@
 - 새 디자인은 실제 인기 게임 UI 레퍼런스를 찾아 근거로 삼는다.
 
 ## Git
-- 커밋 작성자는 항상 **eunsucho <eunsucho@unc.edu>** 로 한다. (`git config user.name "eunsucho"`, `git config user.email "eunsucho@unc.edu"` 를 먼저 설정)
+- 커밋 작성자는 항상 **eunsucho <eunsucho@ad.unc.edu>** 로 한다. (`git config user.name "eunsucho"`, `git config user.email "eunsucho@ad.unc.edu"` 를 먼저 설정)
 - 배포 전에 `py tools/bump.py` 로 CSS·JS·그림 주소의 버전 표시를 올린다.
 - 작업용 시안·견본 파일은 저장소에 남기지 않는다. 다 쓰면 지운다.
