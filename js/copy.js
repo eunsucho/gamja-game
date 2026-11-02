@@ -6,58 +6,41 @@ import { CONFIG } from "./config.js";
 // rules: true 인 장은 규칙 요약 카드
 export const DOCU_TITLE = "감자극장 · 제1화 취업";
 export const INTRO = [
-  { img: "assets/intro/1_born.jpg", nar: `강원도 어느 감자밭.
+  { img: "assets/intro/1_born.jpg", at: [0.5, 0.66], nar: `강원도 어느 감자밭.
 오늘, 한 알의 감자가 태어났다.`, say: "응애." },
-  { img: "assets/intro/2_child.jpg", nar: `감자는 무럭무럭 자랐다.
+  { img: "assets/intro/2_child.jpg", at: [0.47, 0.56], nar: `감자는 무럭무럭 자랐다.
 흙을 사랑했고, 햇볕을 사랑했다.
 장래희망은 '큰 감자'였다.`, say: "나 커서 큰 감자 될 거야!" },
-  { img: "assets/intro/3_college.jpg", nar: `스무 살, 감자는 감자대학교에 입학했다.
+  { img: "assets/intro/3_college.jpg", at: [0.5, 0.5], nar: `스무 살, 감자는 감자대학교에 입학했다.
 동아리, 축제, 그리고 학점 2.9.
 감자는 행복했다.`, say: "인생 별거 없네~" },
-  { img: "assets/intro/4_senior.jpg", nar: `그러나 졸업은 다가왔다.
+  { img: "assets/intro/4_senior.jpg", at: [0.62, 0.6], nar: `그러나 졸업은 다가왔다.
 동기들은 하나둘 떠나갔다.
 인턴으로, 대학원으로, 감자튀김으로.`, say: "…나도 이제 뭐라도 해야 하나?" },
-  { img: "assets/intro/5_dream.jpg", nar: `모든 감자의 꿈, 감자그룹.
+  { img: "assets/intro/5_dream.jpg", at: [0.3, 0.58], nar: `모든 감자의 꿈, 감자그룹.
 연봉, 복지, 그리고 부모님의 자랑.`, say: `뭐 하는 회사인지는 모르겠지만…
 나도 간다.` },
-  { img: "assets/intro/6_rival.jpg", nar: `그런데 올해 공채에는 특별한 지원자가 있었다.
+  { img: "assets/intro/6_rival.jpg", at: [0.32, 0.42], aiAt: [0.73, 0.43], nar: `그런데 올해 공채에는 특별한 지원자가 있었다.
 지치지 않고, 밥도 안 먹는 AI 동기.`, say: "쟤도 지원했어…?", ai: "잘 부탁드립니다." },
-  { img: "assets/intro/7_rain.jpg", nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
+  { img: "assets/intro/7_rain.jpg", at: [0.5, 0.7], nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
 사람 몫은 감자가, AI 몫은 AI 동기가.
 감자는 최종합격할 수 있을까.` },
   { img: "assets/bg/street.jpg", rules: true }
 ];
-// 규칙 카드 (인트로 마지막 장 · 연습 전 · 일시정지 화면에 같이 쓴다)
+// 규칙 카드: 그림 + 한 단어. (인트로 마지막 장 · 연습 전 · 일시정지)
 export const RULES = [
-  { who: "me", pill: "투자자에게 실적 설명", title: "사람 몫 → 쳐서 받아치기", desc: "사람이 판단하고 설명하는 일이에요. 똑같이 치고 Enter! 합격 게이지가 한 칸 차요." },
-  { who: "ai", pill: "시장 동향 모니터링", title: "AI 몫 → 그냥 두기", desc: "AI가 이미 많이 하는 일이에요. 두면 옆자리 AI 동기가 낚아채 가요. 쳐도 반 칸뿐." },
-  { who: "no", pill: "보도자료 배포", title: "옆 팀 일 → 치지 않기", desc: "비슷해 보여도 이 자리 일이 아니에요. 치면 게이지가 줄어요." }
+  { who: "me", item: "key", word: "투자자 설명", label: "쳐!" },
+  { who: "ai", item: "grab", word: "동향 모니터링", label: "두기" },
+  { who: "no", item: "ban", word: "보도자료 배포", label: "패스" }
 ];
-export const HOW = {
-  title: "어떤 단어를 쳐야 할까?",
-  goal: "단어를 받아쳐 합격 게이지를 채우면 다음 전형으로!",
-  lose: "사람 몫을 놓치면 불합격 문자. 3통이면 탈락이에요."
-};
 
 // ---------- 연습 라운드 ----------
 export const TUT = {
-  spawn: [
-    "치지 말고 지켜봐!\n이건 AI가 많이 하는 일 → 옆자리 AI 동기가 낚아채 가요",
-    "이건 사람 몫!\n아래 칸에 똑같이 치고 Enter!",
-    "이건 옆 팀 일!\n치지 말고 그냥 떨어지게 두세요"
-  ],
-  ok: [
-    "봤죠? AI 몫은 AI 동기가 가져가요.\n내 시간은 사람 몫에 쓰기!",
-    "좋아요! 사람 몫을 받아치면\n합격 게이지가 차요.",
-    "완벽해. 이제 진짜 공채다!"
-  ],
-  okTypedAi: "쳐도 되지만, AI 동기 몫이라 반 칸만 올라가.",
-  retry: [
-    "",
-    "앗, 떨어졌다! 한 번 더 내려와요.\n아래 칸에 쳐 보세요!",
-    "치면 안 돼요! 옆 팀 일이라 게이지가 줄어요. 다시!"
-  ],
-  done: { floor: "연습 끝", msg: "준비 완료!", tip: "이제 진짜 1단계 전형이 시작돼요." }
+  spawn: ["치지 말고 보기!", "똑같이 치고 Enter!", "이건 치지 마!"],
+  ok: ["AI 동기가 가져갔죠?", "게이지 +1!", "준비 끝!"],
+  okTypedAi: "AI 몫은 반 칸만!",
+  retry: ["", "한 번 더!", "옆 팀 일이에요!"],
+  done: { floor: "연습 끝!", msg: "", tip: "" }
 };
 
 // ---------- 플레이 중 감자 대사 ----------
@@ -94,16 +77,14 @@ export const FLOAT = {
 
 // ---------- 층 도착 카드 ----------
 export const DOOR = {
-  start: (f) => ({ floor: `${f.step}단계 · ${f.room}`, msg: "전형 시작!", tip: `사람 몫을 받아쳐 합격 게이지 ${CONFIG.floorSteps}칸을 채우면 다음 전형으로` }),
+  start: (f) => ({ floor: f.room, msg: `${f.step}단계`, tip: "" }),
   clear: (done, f, next) => ({
     floor: `${done.name} 합격!`,
-    msg: `다음: ${f.step}단계 · ${f.room}`,
-    tip: next.type === "bonus" ? "빨리 칠수록 초봉이 올라요" :
-      (next.features || []).includes("interview") ? "반짝이는 단어는 면접관 질문이에요" :
-      (next.features || []).includes("trap") ? "옆 팀의 일이 섞여 내려와요" : "비가 조금 더 빨라져요"
+    msg: `다음 → ${f.room}`,
+    tip: next.type === "bonus" ? "빨리 칠수록 초봉 UP" : ""
   }),
-  roof: { floor: "최종합격!", msg: "모든 전형 통과", tip: "사원증이 나왔어요" },
-  termsLabel: "이번 전형에서 나온 낯선 단어"
+  roof: { floor: "최종합격!", msg: "", tip: "" },
+  termsLabel: "새 단어"
 };
 
 // ---------- 휴대폰 문자: 실제 채용 문자처럼 쓴다 ([Web발신] + 홈페이지 확인 안내) ----------
@@ -135,11 +116,11 @@ export const RESULT = {
 // ---------- 로비 ----------
 export const LOBBY = {
   eyebrow: "감자그룹 채용 안내",
-  title: "어느 부서로 갈까?",
+  title: "어디 지원할까?",
   say: "다 가고 싶고 다 무섭다…",
   empty: "공고 준비 중"
 };
-export const BRIEF = { label: "전형 순서 · 단계마다 합격 게이지를 채우면 통과", tutorial: "연습 라운드부터 (추천)", go: "지원서 제출" };
+export const BRIEF = { label: "", tutorial: "연습하고 시작", go: "지원하기" };
 
 // ---------- 머릿돌 · 출처 ----------
 export const CREDITS = "AI 기록은 Anthropic Economic Index(2026-06-26 릴리스, CC-BY)를 O*NET 31.0(CC BY 4.0) 직무와 연결한 것이에요. 수치는 사람들이 그 일을 AI에게 시킨 대화 중 AI가 끝까지 처리한 비율이고, 게임에서는 이를 AI 동기의 성공 확률로 단순화했어요. 대체 가능성을 뜻하지 않아요. 회사와 공고는 실제 공고를 각색한 가상 공고예요. 분야 분류는 NCS 직무분류를 따랐어요.";
@@ -147,17 +128,17 @@ export const CREDITS = "AI 기록은 Anthropic Economic Index(2026-06-26 릴리�
 // ---------- 감자 회고록: 오늘 배운 것 ----------
 // 플레이 기록 r 과 공고 p 를 보고 맞는 문장을 우선순위대로 최대 3개 고른다. 모자라면 기본 문장으로 채운다.
 export const LESSONS = [
-  { when: (r, x) => x.missedMine.length >= 1, say: (r, x) => ({ head: "이 자리의 핵심은 사람이 판단하고 설명하는 일이었어요", body: `놓친 일: ${x.missedMine.slice(0, 3).join(", ")}` }) },
-  { when: r => r.trapHits >= 1, say: () => ({ head: "옆 팀의 일까지 이 자리 일로 봤어요", body: "비슷해 보이는 직무끼리도 맡는 일이 달라요. 공고의 '주요 업무'에 있는 일만 이 자리의 일이에요." }) },
-  { when: r => r.aiTyped >= 3, say: () => ({ head: "AI 동기가 잘하는 일에 시간을 썼어요", body: "실제로도 이런 일은 사람들이 AI에게 많이 맡겨요. 내 시간은 사람 몫에 쓰는 게 이득이에요." }) },
-  { when: r => r.claimOk >= 1, say: () => ({ head: "'이건 사람 몫'이라고 설명할 수 있었어요", body: "AI 시대 면접에서 내 몫을 설명하는 힘은 강력한 무기예요." }) },
-  { when: r => r.claimWrong >= 1, say: () => ({ head: "AI가 잘하는 일까지 내 몫이라고 우기면 설득력이 떨어져요", body: "어디까지 AI에게 맡기고 어디부터 내가 하는지 나눠서 말해 봐요." }) },
-  { when: r => r.specHits >= 3, say: () => ({ head: "스펙은 잠깐 도움이 될 뿐이에요", body: "이 자리에서 무슨 일을 하는지 아는 게 먼저예요." }) }
+  { when: (r, x) => x.missedMine.length >= 1, short: "놓친 일 = 사람 몫", say: (r, x) => ({ head: "이 자리의 핵심은 사람이 판단하고 설명하는 일이었어요", body: `놓친 일: ${x.missedMine.slice(0, 3).join(", ")}` }) },
+  { when: r => r.trapHits >= 1, short: "옆 팀 일은 패스", say: () => ({ head: "옆 팀의 일까지 이 자리 일로 봤어요", body: "비슷해 보이는 직무끼리도 맡는 일이 달라요. 공고의 '주요 업무'에 있는 일만 이 자리의 일이에요." }) },
+  { when: r => r.aiTyped >= 3, short: "AI 몫은 맡기기", say: () => ({ head: "AI 동기가 잘하는 일에 시간을 썼어요", body: "실제로도 이런 일은 사람들이 AI에게 많이 맡겨요. 내 시간은 사람 몫에 쓰는 게 이득이에요." }) },
+  { when: r => r.claimOk >= 1, short: "내 몫 설명 성공!", say: () => ({ head: "'이건 사람 몫'이라고 설명할 수 있었어요", body: "AI 시대 면접에서 내 몫을 설명하는 힘은 강력한 무기예요." }) },
+  { when: r => r.claimWrong >= 1, short: "우기면 설득력 ↓", say: () => ({ head: "AI가 잘하는 일까지 내 몫이라고 우기면 설득력이 떨어져요", body: "어디까지 AI에게 맡기고 어디부터 내가 하는지 나눠서 말해 봐요." }) },
+  { when: r => r.specHits >= 3, short: "스펙보다 할 일", say: () => ({ head: "스펙은 잠깐 도움이 될 뿐이에요", body: "이 자리에서 무슨 일을 하는지 아는 게 먼저예요." }) }
 ];
 export const LESSON_DEFAULTS = [
-  { head: "한 공고 안에도 AI가 많이 하는 일과 사람이 주도하는 일이 섞여 있어요", body: "직무 이름만 보고 'AI가 대체한대'라고 판단하기엔 일이 너무 다양해요." },
-  { head: "직무 이름보다 담당업무 한 줄 한 줄이 그 자리를 더 잘 설명해요", body: "같은 'IR'이어도 회사마다 하는 일이 달라요." },
-  { head: "AI가 하는 일이 있다고 그 자리가 사라지는 건 아니에요", body: "사람 몫이 어디인지 아는 사람이 그 자리에 맞는 사람이에요." }
+  { short: "한 공고 = AI 몫 + 사람 몫", head: "한 공고 안에도 AI가 많이 하는 일과 사람이 주도하는 일이 섞여 있어요", body: "직무 이름만 보고 'AI가 대체한대'라고 판단하기엔 일이 너무 다양해요." },
+  { short: "직무명보다 담당업무", head: "직무 이름보다 담당업무 한 줄 한 줄이 그 자리를 더 잘 설명해요", body: "같은 'IR'이어도 회사마다 하는 일이 달라요." },
+  { short: "AI가 해도 자리는 남아요", head: "AI가 하는 일이 있다고 그 자리가 사라지는 건 아니에요", body: "사람 몫이 어디인지 아는 사람이 그 자리에 맞는 사람이에요." }
 ];
 
 export const TODO_DEFAULT = [

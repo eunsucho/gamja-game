@@ -113,9 +113,14 @@ function say(text) { $("say").textContent = text; }
 // 규칙 카드: 사람 몫 / AI 몫 / 옆 팀 일을 캐릭터 그림과 예시 단어로 보여 준다
 const WHO_IMG = { me: "assets/potato_cut.png", ai: "assets/ai_cut.png" };
 function rulesHTML() {
-  return `<div class="how">` + T.RULES.map(r => `<div class="how-row ${r.who}">
-    <span class="how-face">${WHO_IMG[r.who] ? `<img src="${WHO_IMG[r.who]}" alt="">` : `<i class="ti ti-ban" aria-hidden="true"></i>`}</span>
-    <span class="how-txt"><span class="drop how-ex">${esc(r.pill)}</span><b>${esc(r.title)}</b><small>${esc(r.desc)}</small></span></div>`).join("") + `</div>`;
+  return `<div class="how">` + T.RULES.map(r => `<div class="how-tile ${r.who}">
+    <span class="how-pic">${WHO_IMG[r.who] ? `<img class="face" src="${WHO_IMG[r.who]}" alt="">` : ""}<img class="badge-it" src="assets/items/${r.item}.png" alt=""></span>
+    <span class="how-word">${esc(r.word)}</span><b>${esc(r.label)}</b></div>`).join("") + `</div>`;
+}
+const item = (n, cls = "") => `<img class="it ${cls}" src="assets/items/${n}.png" alt="">`;
+// 목표: 쳐서 → 게이지 → 최종합격
+function goalHTML() {
+  return `<div class="goal-row">${item("key")}<i class="arr"></i>${item("star")}<i class="arr"></i>${item("trophy")}</div>`;
 }
 
 // 단어가 AI 동기 쪽으로 빨려 들어간다
@@ -159,7 +164,9 @@ function notify(body) {
 function retrigger(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 // ---------- 층 도착 카드 ----------
-function doorShow({ floor, msg, tip, terms = [], html = "" }, { button = null, auto = 0 } = {}) {
+function doorShow({ floor, msg, tip, terms = [], html = "", icon = "" }, { button = null, auto = 0 } = {}) {
+  $("dIcon").hidden = !icon;
+  if (icon) $("dIcon").src = `assets/items/${icon}.png`;
   $("dHow").hidden = !html;
   $("dHow").innerHTML = html;
   $("dTerms").hidden = !terms.length;
@@ -167,7 +174,8 @@ function doorShow({ floor, msg, tip, terms = [], html = "" }, { button = null, a
   $("dFloor").textContent = floor || "";
   $("dMsg").textContent = msg || "";
   $("dTip").textContent = tip || "";
-  $("dDing").hidden = !floor;
+  $("dDing").hidden = true;
+  $("dMsg").hidden = !msg; $("dTip").hidden = !tip;
   $("doors").classList.remove("open");
   $("typeInput").blur();
   return new Promise(res => {
@@ -217,10 +225,31 @@ function renderIntro() {
   sub.hidden = !c.nar;
   retrigger(sub, "docu-sub");
   $("rulesCard").hidden = !c.rules;
-  if (c.rules) $("rulesCard").innerHTML = `<p class="pop-title">${esc(T.HOW.title)}</p>` + rulesHTML() + `<p class="how-goal">${esc(T.HOW.goal)}</p>`;
+  requestAnimationFrame(() => placeBubbles(c));
+  if (c.rules) $("rulesCard").innerHTML = rulesHTML() + goalHTML();
+  placeBubbles(c);
   $("introDots").innerHTML = T.INTRO.map((_, i) => `<i class="${i === introI ? "on" : ""}"></i>`).join("");
   $("introNext").textContent = introI === T.INTRO.length - 1 ? "로비로" : "다음";
 }
+// 말풍선을 그림 속 감자(c.at)·AI 동기(c.aiAt) 머리 위에 붙인다. 좌표는 그림 기준 0~1
+function placeBubbles(c) {
+  const bg = $("docuBg"), box = $("v-intro").getBoundingClientRect(), r = bg.getBoundingClientRect();
+  const IW = 900, IH = 1600, k = Math.max(r.width / IW, r.height / IH);
+  const ox = (r.width - IW * k) * 0.5, oy = (r.height - IH * k) * 0.72;   // background-position: center 72%
+  const pt = ([fx, fy]) => [r.left - box.left + ox + fx * IW * k, r.top - box.top + oy + fy * IH * k];
+  $("docuSays").querySelectorAll(".bubble").forEach(b => {
+    const at = b.classList.contains("ai") ? c.aiAt : c.at;
+    if (!at) { b.style.cssText = ""; return; }
+    const [x, y] = pt(at);
+    const w = b.offsetWidth, left = Math.max(12, Math.min(box.width - w - 12, x - w / 2));
+    b.style.position = "absolute";
+    b.style.left = `${left}px`;
+    b.style.top = `${Math.max(60, y - b.offsetHeight - 16)}px`;
+    b.style.setProperty("--tail", `${Math.max(16, Math.min(w - 16, x - left))}px`);
+  });
+}
+window.addEventListener("resize", () => { if (document.body.dataset.view === "v-intro") placeBubbles(T.INTRO[introI]); });
+
 function introNext() { if (introI < T.INTRO.length - 1) { introI++; renderIntro(); } else introDone(); }
 function introDone() { setFlag("intro"); openLobby(); }
 
@@ -253,11 +282,10 @@ async function openBrief(id) {
   $("problems").hidden = true;
   const fl = floors(current.stages);
   const rows = fl.map(f => `<li class="${f.bonus ? "bonus" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span></li>`)
-    .concat(`<li class="roof"><b><i class="ti ti-trophy" aria-hidden="true"></i></b><span>최종합격</span></li>`);
+    .concat(`<li class="roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
   $("brief").innerHTML = `<span class="eyebrow"><i class="ti ti-building-skyscraper" aria-hidden="true"></i>${esc(current.company)}</span>
     <h2>${esc(current.position)}</h2>
-    ${current.intro ? `<p class="intro">${esc(current.intro)}</p>` : ""}
-    <p class="label"><i class="ti ti-list-numbers" aria-hidden="true"></i>${esc(T.BRIEF.label)}</p>
+    
     <ol class="floors">${rows.join("")}</ol>`;
   $("tutCheck").checked = !getFlag("tutorial");
   show("v-brief");
@@ -288,7 +316,7 @@ function startTutorial() {
   say("연습이니까 마음 편하게…");
   enterLift();
   game.hud(false);
-  doorShow({ floor: "연습 라운드", msg: T.HOW.title, html: rulesHTML(), tip: T.HOW.lose }, { button: "알겠어요! 연습 시작" }).then(() => { doorOpen(); game.startStage(0); });
+  doorShow({ floor: "연습", msg: "", html: rulesHTML(), icon: "key" }, { button: "시작!" }).then(() => { doorOpen(); game.startStage(0); });
 }
 
 // 이번 층에 내려온 단어 속 낯선 용어 (한 번 보여 준 건 다시 안 보여 줌, 최대 2개)
@@ -299,10 +327,10 @@ function termsSeen() {
   return out;
 }
 
-function tip(text) {
+function tip(text, icon = "") {
   const t = $("tutTip");
   t.hidden = !text;
-  t.textContent = text || "";
+  t.innerHTML = text ? (icon ? item(icon) : "") + `<span>${esc(text)}</span>` : "";
   if (text) retrigger(t, "pop-in");
 }
 
@@ -310,7 +338,7 @@ function tutorialDone() {
   setFlag("tutorial");
   tip("");
   delete $("v-play").dataset.tut;
-  doorShow(T.TUT.done, { button: "진짜 공채 시작!" }).then(startGame);
+  doorShow({ ...T.TUT.done, icon: "check" }, { button: "진짜 시작!" }).then(startGame);
 }
 
 // ---------- 본 게임 ----------
@@ -333,7 +361,7 @@ function startGame() {
   say(T.LINES.start);
   enterLift();
   game.hud(false);
-  doorShow(T.DOOR.start(FLOORS[0]), { auto: 1500 }).then(() => { doorOpen(); game.startStage(0); });
+  doorShow({ ...T.DOOR.start(FLOORS[0]), icon: "badge" }, { auto: 1300 }).then(() => { doorOpen(); game.startStage(0); });
 }
 
 function hud(h) {
@@ -346,10 +374,10 @@ function hud(h) {
   $("hCombo").hidden = !combo;
   if (combo) $("hCombo").textContent = `콤보 ${h.combo}`;
   $("hFails").hidden = h.bonus || h.tutorial;
-  $("hFails").innerHTML = Array.from({ length: h.failLimit }, (_, i) => `<i class="ti ti-mail${i < h.fails ? " on" : ""}"></i>`).join("");
+  $("hFails").innerHTML = Array.from({ length: h.failLimit }, (_, i) => `<img src="assets/items/letter.png" class="${i < h.fails ? "on" : ""}" alt="">`).join("");
   $("hSteps").hidden = h.bonus || h.tutorial;
   $("hStepLabel").hidden = h.bonus || h.tutorial;
-  $("hStepLabel").textContent = `합격 게이지 ${Math.floor(h.steps)}/${h.stepGoal}`;
+
   $("hSteps").innerHTML = Array.from({ length: h.stepGoal }, (_, i) => `<i class="${h.steps >= i + 1 ? "on" : h.steps > i ? "half" : ""}"></i>`).join("");
   $("hTimeWrap").hidden = h.tutorial;
   $("hTime").style.width = `${(h.timeLeft / h.timeTotal) * 100}%`;
@@ -399,7 +427,7 @@ function onEvent(type, p) {
 
 function onTut(p) {
   if (p.phase === "spawn") {
-    tip(T.TUT.spawn[p.i]);
+    tip(T.TUT.spawn[p.i], ["grab", "key", "ban"][p.i]);
     $("buddy").classList.toggle("spot", p.i === 0);
     $("v-play").dataset.tut = p.i;
     $("typeForm").classList.toggle("glow", p.i === 1);
@@ -409,10 +437,10 @@ function onTut(p) {
   $("typeForm").classList.remove("glow");
   $("buddy").classList.remove("spot");
   if (p.phase === "ok") {
-    tip(p.outcome === "typed" && p.item.w?.judge === "O" ? T.TUT.okTypedAi : T.TUT.ok[p.i]);
+    tip(p.outcome === "typed" && p.item.w?.judge === "O" ? T.TUT.okTypedAi : T.TUT.ok[p.i], ["grab", "star", "check"][p.i]);
     if (p.outcome === "typed") buddy(p.i === 1 ? "nod" : "shrug", p.i === 1 ? T.BUDDY.nod : T.BUDDY.shrug);
   } else {
-    tip(T.TUT.retry[p.i]);
+    tip(T.TUT.retry[p.i], "ban");
     mood.oopsUntil = performance.now() + CONFIG.mood.oopsMs;
     setMood("oops");
     retrigger($("sky"), "jolt");
@@ -429,7 +457,8 @@ function stageClear(doneIdx, nextIdx) {
   if (stageTerm) card.tip = stageTerm.desc;              // 다음 전형 이름이 낯선 말이면 그 풀이를 보여 준다
   card.terms = termsSeen();
   seen = new Set();
-  doorShow(card, { button: "문 열기" }).then(() => { doorOpen(); game.startStage(nextIdx); });
+  card.icon = "check";
+  doorShow(card, { button: "GO!" }).then(() => { doorOpen(); game.startStage(nextIdx); });
 }
 
 $("typeForm").addEventListener("submit", e => {
@@ -486,7 +515,7 @@ function end(r) {
     setAltitude(1, true);
     setMood("hired");
     say(T.RESULT.sayPass);
-    doorShow(T.DOOR.roof, { auto: 1600 }).then(() => renderResult(r));
+    doorShow({ ...T.DOOR.roof, icon: "trophy" }, { auto: 1600 }).then(() => renderResult(r));
   } else {
     setMood("teary");
     setTimeout(() => renderResult(r), 500);
@@ -503,7 +532,7 @@ function quizPage() {
   if (!ai || human.length < 2) return null;
   quizAnswer = ai;
   const opts = [ai, ...human].sort(() => Math.random() - .5);
-  return `<p class="pg-h">퀴즈! 한 문제만</p><p class="pg-sub">이 중 사람들이 AI에게 맡겨서 AI가 가장 많이 끝까지 해낸 일은?</p>
+  return `<div class="pg-q">${item("quiz", "big")}<p class="pg-h">AI가 제일 잘한 일은?</p></div>
     <div class="quiz">${opts.map(w => `<button type="button" class="quiz-opt" data-q="${esc(w.text)}">${esc(w.text)}</button>`).join("")}</div>
     <p class="task-why" id="quizWhy" hidden></p>`;
 }
@@ -524,7 +553,7 @@ function renderResult(r) {
   // 오늘 배운 것 3가지
   const missedMine = current.words.filter(w => w.judge !== "O" && r.missed[w.text]).sort((a, b) => r.missed[b.text] - r.missed[a.text]);
   const x = { missedMine: missedMine.map(w => w.text) };
-  const lessons = T.LESSONS.filter(l => l.when(r, x)).map(l => l.say(r, x));
+  const lessons = T.LESSONS.filter(l => l.when(r, x)).map(l => ({ ...l.say(r, x), short: l.short }));
   for (const d of T.LESSON_DEFAULTS) { if (lessons.length >= 3) break; lessons.push(d); }
 
   // 회고록: 한 장에 한 가지만. 성찰(퀴즈 → 배운 것)이 맨 앞, 기록·통계는 뒤.
@@ -532,7 +561,7 @@ function renderResult(r) {
   const quiz = quizPage();
   memoPages = [
     ...(quiz ? [quiz] : []),
-    ...lessons.slice(0, 3).map((l, i) => `<p class="pg-sub">오늘 배운 것 ${i + 1}</p><div class="pg-lesson"><b>${esc(l.head)}</b><p>${esc(l.body)}</p></div>`),
+    ...lessons.slice(0, 3).map(l => `<div class="pg-lesson">${item("idea", "big")}<b>${esc(l.short || l.head)}</b></div>`),
     tasksPage(r),
     ...(missedMine.length ? [`<p class="pg-h">놓친 일</p><p class="pg-sub">이게 이 자리의 핵심이었어요</p><ul class="plain">${missedMine.slice(0, 3).map(w => `<li><i class="ti ti-alert-circle"></i>${esc(w.text)}</li>`).join("")}</ul>`] : []),
     `<p class="pg-sub">이번 공채 결과</p><p class="pg-record">${esc(title)}<br>${esc(result)}</p>
@@ -586,16 +615,15 @@ function renderMemo() {
   const locked = memoSeen < memoGate || !quizDone;
   $("memoNext").disabled = !quizDone;
   $("memoNext").classList.toggle("nudge", quizDone && memoI < memoPages.length - 1);
-  ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; });
-  $("memoGateNote").hidden = !locked;
-  $("memoGateNote").textContent = !quizDone ? "퀴즈를 풀면 다음 장이 열려요" : `회고록 ${Math.max(0, memoGate - memoSeen)}장 더 넘기면 버튼이 열려요`;
+  ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; $(id).classList.toggle("locked", locked); });
+  $("memoGateNote").hidden = true;
   page.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
     if (quizDone && page.querySelector(".quiz-opt.right")) return;
     const ok = b.dataset.q === quizAnswer.text;
     page.querySelectorAll("[data-q]").forEach(o => { if (o.dataset.q === quizAnswer.text) o.classList.add("right"); });
     if (!ok) b.classList.add("wrong");
     $("quizWhy").hidden = false;
-    $("quizWhy").textContent = `${ok ? "정답!" : "아쉬워요!"} '${quizAnswer.text}' · ${T.pctPhrase(quizAnswer)} 나머지는 사람이 판단하고 설명하는 몫이 큰 일이에요.`;
+    $("quizWhy").textContent = `${ok ? "정답!" : "땡!"} AI가 ${quizAnswer.pct}% 끝까지 해냈어요`;
     quizDone = true;
     renderMemoChrome();
   });
@@ -628,9 +656,8 @@ function renderMemoChrome() {
   const locked = memoSeen < memoGate || !quizDone;
   $("memoNext").disabled = !quizDone;
   $("memoNext").classList.toggle("nudge", quizDone && memoI < memoPages.length - 1);
-  ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; });
-  $("memoGateNote").hidden = !locked;
-  $("memoGateNote").textContent = `회고록 ${Math.max(0, memoGate - memoSeen)}장 더 넘기면 버튼이 열려요`;
+  ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; $(id).classList.toggle("locked", locked); });
+  $("memoGateNote").hidden = true;
 }
 $("memoPrev").onclick = () => { if (memoI > 0) { memoI--; renderMemo(); } };
 $("memoNext").onclick = () => { if (quizDone && memoI < memoPages.length - 1) { memoI++; renderMemo(); } };

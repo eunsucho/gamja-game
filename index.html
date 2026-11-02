@@ -16,7 +16,7 @@
   <link rel="icon" href="assets/potato_cut.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gamja+Flower&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -39,10 +39,10 @@
         <img class="pot pot-xl" src="assets/potato_cut.png" alt="넥타이를 비뚤게 매고 지원서를 든 멍한 감자">
         <p class="bubble hand">나도 이제<br>취업한다…!</p>
       </div>
-      <button class="btn" id="toStart">공채 지원하러 가기</button>
+      <button class="btn" id="toStart">시작!</button>
       <div class="row center">
-        <button class="btn-sm glass" id="toIntro"><i class="ti ti-movie" aria-hidden="true"></i>감자극장 다시 보기</button>
-        <button class="btn-sm glass" id="toWorksheet"><i class="ti ti-file-text" aria-hidden="true"></i>수업 학습지</button>
+        <button class="btn-sm glass" id="toIntro"><i class="ti ti-movie" aria-hidden="true"></i>감자극장</button>
+        <button class="btn-sm glass" id="toWorksheet"><img src="assets/items/note.png" alt="">학습지</button>
         <button class="btn-sm glass" id="toCredits"><i class="ti ti-info-circle" aria-hidden="true"></i>출처</button>
       </div>
     </div>
@@ -84,7 +84,7 @@
         <img class="pot pot-lg" src="assets/potato_cut.png" alt="">
         <p class="bubble hand" id="lobbySay"></p>
       </div>
-      <button class="btn sub" id="backTitle">밖으로 나가기</button>
+      <button class="btn sub" id="backTitle">처음으로</button>
     </div>
   </section>
 
@@ -96,7 +96,7 @@
       <div class="sheet glass" id="brief"></div>
       <label class="toggle glass" id="tutWrap"><input type="checkbox" id="tutCheck"><span class="knob"></span><span id="tutLabel">연습 라운드부터</span></label>
       <button class="btn" id="startGame"><i class="ti ti-arrow-big-up-lines" aria-hidden="true"></i><span id="goLabel">지원서 제출</span></button>
-      <button class="btn sub" id="backSelect">다른 공고 보기</button>
+      <button class="btn sub" id="backSelect">다른 공고</button>
     </div>
   </section>
 
@@ -116,10 +116,10 @@
       <div class="hud">
         <span class="pill glass"><b id="hFloor">1F</b><span id="hRoom">로비</span></span>
         <span class="score"><b id="hScore">0</b><em id="hCombo" hidden></em></span>
-        <span class="pill glass ai-count" id="hAiWrap" title="AI 동기가 가져간 일"><img src="assets/ai_cut.png" alt="AI 동기가 가져간 일"><b id="hAi">0</b></span>
+        <span class="pill glass ai-count" id="hAiWrap" title="AI 동기가 가져간 일"><img src="assets/items/grab.png" alt="AI 동기가 가져간 일"><b id="hAi">0</b></span>
         <span class="pill glass letters" id="hFails" aria-label="불합격 문자"></span>
       </div>
-      <p class="step-label" id="hStepLabel"></p>
+      <p class="step-label" id="hStepLabel"><img src="assets/items/star.png" alt="합격 게이지"></p>
       <div class="steps" id="hSteps"></div>
       <div class="timebar" id="hTimeWrap"><i id="hTime"></i></div>
       <div class="salary glass" id="hSalaryWrap" hidden><i class="ti ti-coin" aria-hidden="true"></i>초봉 <b id="hSalary"></b>만 원</div>
@@ -138,14 +138,15 @@
     <div class="tut-tip glass hand" id="tutTip" hidden></div>
 
     <form id="typeForm" class="dock glass" autocomplete="off">
-      <button class="ibtn sub" id="pauseBtn" type="button" aria-label="잠깐 멈춤"><i class="ti ti-player-pause"></i></button>
+      <button class="ibtn sub" id="pauseBtn" type="button" aria-label="잠깐 멈춤"><img src="assets/items/pause.png" alt=""></button>
       <label for="typeInput" class="sr">단어 입력</label>
-      <input id="typeInput" type="text" inputmode="text" enterkeyhint="send" placeholder="단어 입력 후 Enter" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input id="typeInput" type="text" inputmode="text" enterkeyhint="send" placeholder="여기에 치고 Enter" autocomplete="off" autocapitalize="off" spellcheck="false">
       <button class="ibtn" type="submit" aria-label="받아치기"><i class="ti ti-corner-down-left"></i></button>
     </form>
 
     <div class="overlay" id="doors">
       <div class="card-pop glass">
+        <img class="pop-icon" id="dIcon" src="assets/items/check.png" alt="" hidden>
         <p class="ding" id="dDing"><i class="ti ti-bell-ringing" aria-hidden="true"></i>띵!</p>
         <p class="pop-title" id="dFloor"></p>
         <p class="pop-msg" id="dMsg"></p>
@@ -159,8 +160,8 @@
       <div class="card-pop glass">
         <p class="pop-title">잠깐 멈춤</p>
         <div id="pauseHow"></div>
-        <button class="btn" id="resumeBtn" type="button">계속하기</button>
-        <button class="btn sub" id="quitBtn" type="button">이번 공채 포기하기</button>
+        <button class="btn" id="resumeBtn" type="button">계속</button>
+        <button class="btn sub" id="quitBtn" type="button">그만하기</button>
       </div>
     </div>
   </section>
@@ -171,12 +172,12 @@
     <div class="col">
       <div class="noti" id="notice"></div>
       <div class="result-hero mini">
-        <span class="hired-tag" id="hiredTag" hidden><i class="ti ti-id-badge-2" aria-hidden="true"></i>사원증 획득!</span>
+        <span class="hired-tag" id="hiredTag" hidden><img src="assets/items/badge.png" alt="">사원증!</span>
         <div class="who me big" id="resultHero"><img src="assets/potato_cut.png" alt=""><i class="fx badge"></i><i class="fx tear"></i></div>
         <p class="bubble hand" id="resultSay"></p>
       </div>
       <article class="memo" id="memo">
-        <div class="memo-top"><span class="eyebrow"><i class="ti ti-notebook" aria-hidden="true"></i>감자 회고록 · 오늘 배운 것</span><span class="memo-count" id="memoCount"></span></div>
+        <div class="memo-top"><span class="eyebrow"><img src="assets/items/note.png" alt="">회고록</span><span class="memo-count" id="memoCount"></span></div>
         <div class="memo-page" id="memoPage"></div>
         <div class="memo-nav">
           <button class="ibtn sub" id="memoPrev" type="button" aria-label="이전 장"><i class="ti ti-chevron-left"></i></button>
@@ -186,8 +187,8 @@
       </article>
       <p class="gate-note" id="memoGateNote" hidden></p>
       <div class="row">
-        <button class="btn grow" id="retry">다시 지원하기</button>
-        <button class="btn sub fit" id="toSelect2">로비로</button>
+        <button class="btn grow" id="retry"><img class="lk" src="assets/items/lock.png" alt="">다시 지원</button>
+        <button class="btn sub fit" id="toSelect2"><img class="lk" src="assets/items/lock.png" alt="">로비</button>
       </div>
     </div>
   </section>
