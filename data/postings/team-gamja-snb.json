@@ -66,7 +66,7 @@
    "from": "다양한 이해관계자와 협업"
   },
   {
-   "text": "CTR·ROAS 지표 분석",
+   "text": "CTR ROAS 지표 분석",
    "judge": "△",
    "pct": 67.1,
    "source": "Analyze website or related online data to track trends or usage.",
@@ -74,7 +74,7 @@
    "from": "데이터 분석을 통해 효율 개선"
   },
   {
-   "text": "A/B 테스트 결과 해석",
+   "text": "AB 테스트 결과 해석",
    "judge": "△",
    "pct": 44.2,
    "source": "Analyze data to identify trends or relationships among variables.",
@@ -114,7 +114,7 @@
    "from": "최적화된 마케팅·광고 전략 제안"
   },
   {
-   "text": "광고주 예산·키워드 컨설팅",
+   "text": "광고주 예산 키워드 컨설팅",
    "judge": "X",
    "pct": 36.1,
    "source": "Advise others on business or operational matters.",
@@ -161,9 +161,12 @@
   }
  ],
  "specs": [
-  "2026년 2월 졸업 예정",
-  "경력 1년 이하",
-  "전공 무관"
+  "엑셀",
+  "SQL",
+  "PPT 기획서",
+  "데이터 분석",
+  "광고 운영 경험",
+  "공모전"
  ],
  "skills": [
   "광고주와 파트너의 문제를 듣고 제안하는 힘",

@@ -741,3 +741,17 @@ body { font-family: var(--ui); }
 #v-play.chat .msg:is(.pop, .grabbed, .splash, .passed) { opacity: .75; }
 #v-play.chat .tut-tip { top: auto; bottom: calc(100% - var(--drop-top, 132px) - 70px); }
 #v-play.chat .msg.grabbed .body::after { width: 150px; height: 42px; background: url(../assets/ai_cut.png) left center / 40px no-repeat, url(../assets/items/grab.png) 44px center / 36px no-repeat; }
+
+/* 감자극장 뒤 게임 설명 카드 */
+.info { display: grid; gap: 10px; }
+.info-row { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 22px; padding: 10px 14px; text-align: left; }
+.info-row .it { width: 52px; height: 52px; }
+.info-row b { display: block; font-family: var(--title); font-weight: 400; font-size: 20px; line-height: 1.25; }
+.info-row small { display: block; margin-top: 2px; font-size: 13px; font-weight: 700; color: var(--ink-2); line-height: 1.35; }
+/* 전형 통과 카드의 감자 */
+.pop-icon.pot { width: 120px; height: 120px; margin-top: -86px; }
+/* 스피드업! · 스펙업! */
+.splash { position: absolute; z-index: 9; left: 50%; top: 34%; width: min(70%, 300px); translate: -50% -50%; pointer-events: none;
+  filter: drop-shadow(0 8px 12px rgba(80, 50, 20, .3)); animation: splashIn 1.4s cubic-bezier(.2, .9, .3, 1.3) forwards; }
+.splash.specup { width: min(52%, 220px); top: 42%; }
+@keyframes splashIn { 0% { scale: .3; opacity: 0; } 18% { scale: 1.12; opacity: 1; } 30% { scale: 1; } 75% { opacity: 1; translate: -50% -50%; } 100% { opacity: 0; translate: -50% -90%; } }

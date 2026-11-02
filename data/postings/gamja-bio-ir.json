@@ -33,7 +33,7 @@
  ],
  "words": [
   {
-   "text": "주가·외국인 수급 확인",
+   "text": "주가 외국인 수급 확인",
    "judge": "O",
    "pct": 98.9,
    "source": "Monitor financial information.",
@@ -113,7 +113,7 @@
    "from": "분기 실적 발표"
   },
   {
-   "text": "투자자 미팅 Q&A 대응",
+   "text": "투자자 미팅 QA 대응",
    "judge": "X",
    "pct": 20.2,
    "source": "Explain financial information to customers.",
@@ -153,7 +153,7 @@
  ],
  "specs": [
   "Valuation 이해",
-  "재무·회계 지식",
+  "재무 회계 지식",
   "MS Office",
   "영어 능통",
   "바이오 인턴",

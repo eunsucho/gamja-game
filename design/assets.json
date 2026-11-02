@@ -105,5 +105,11 @@
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 6:2)",
     "prompt": "16 cute fictional potato company emblem app icons, 4x4, no text",
     "map": "js/copy.js COMPANY_LOGO"
+  },
+  "popups": {
+    "files": "assets/ui/speedup.png, assets/ui/specup.png",
+    "tool": "Figma generate_image (gpt-image-2.5-flare)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 7:2)",
+    "prompt": "'스피드업!' orange-red, '스펙업!' mint, chunky rounded glossy game text logos"
   }
 }

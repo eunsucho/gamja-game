@@ -1,5 +1,5 @@
 // 게임 속 문구 모음. 대사·인트로·회고록 문장은 여기서만 고친다. (자리만 잡아 둔 예시 문구)
-import { CONFIG } from "./config.js?v=20261103b";
+import { CONFIG } from "./config.js?v=20261103c";
 
 // ---------- 세계관 인트로: 코미디 다큐 '감자극장' ----------
 // img: assets/intro/ 그림, nar: 내레이션 자막(다큐 성우 톤), say: 감자 속마음, ai: AI 동기 한마디
@@ -25,6 +25,15 @@ export const INTRO = [
   { img: "assets/intro/7_rain.jpg", at: [0.5, 0.7], nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
 사람 몫은 감자가, AI 몫은 AI 동기가.
 감자는 최종합격할 수 있을까.` },
+  { img: "assets/bg/street.jpg", info: [
+    { item: "key", head: "공고 속 업무를 받아치는 타자 게임" },
+    { item: "grab", head: "AI가 많이 하는 일은 AI 동기 몫", sub: "Anthropic Economic Index · 사람들이 실제로 AI에게 시킨 일 기록" },
+    { item: "trophy", head: "사람 몫을 지켜 최종합격까지" }
+  ] },
+  { img: "assets/bg/street.jpg", info: [
+    { item: "timer", head: "타수 = 1분에 친 자모 수", sub: "감자 = ㄱ ㅏ ㅁ ㅈ ㅏ 5타" },
+    { item: "check", head: "맞게 친 단어만 세요", sub: "첫 글자부터 Enter까지 · 오타·기다린 시간 빼고" }
+  ] },
   { img: "assets/bg/street.jpg", rules: true }
 ];
 // 규칙 카드: 그림 + 한 단어. (인트로 마지막 장 · 연습 전 · 일시정지)

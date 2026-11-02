@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103b";
-import { Game, MINE } from "./game.js?v=20261103b";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103b";
-import { esc } from "./util.js?v=20261103b";
-import { CONFIG } from "./config.js?v=20261103b";
-import { floors } from "./scene.js?v=20261103b";
-import * as T from "./copy.js?v=20261103b";
+import { loadIndex, loadPosting } from "./data.js?v=20261103c";
+import { Game, MINE } from "./game.js?v=20261103c";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103c";
+import { esc } from "./util.js?v=20261103c";
+import { CONFIG } from "./config.js?v=20261103c";
+import { floors } from "./scene.js?v=20261103c";
+import * as T from "./copy.js?v=20261103c";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -136,6 +136,17 @@ function flyToBuddy(el) {
   el.style.opacity = "0";
 }
 
+// 화면 가운데에 '스피드업!'·'스펙업!' 로고가 튀어나왔다 사라진다
+function splash(name) {
+  if (!name) return;
+  const im = document.createElement("img");
+  im.className = `splash ${name}`;
+  im.src = `assets/ui/${name}.png`;
+  im.alt = "";
+  $("v-play").appendChild(im);
+  setTimeout(() => im.remove(), 1400);
+}
+
 // 단어 자리에서 점수가 떠오른다
 function floatAt(el, text, tone) {
   if (!el || !text) return;
@@ -169,7 +180,8 @@ function retrigger(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.
 // ---------- 층 도착 카드 ----------
 function doorShow({ floor, msg, tip, terms = [], html = "", icon = "" }, { button = null, auto = 0 } = {}) {
   $("dIcon").hidden = !icon;
-  if (icon) $("dIcon").src = `assets/items/${icon}.png`;
+  if (icon) $("dIcon").src = icon.includes("/") ? icon : `assets/items/${icon}.png`;
+  $("dIcon").classList.toggle("pot", icon.includes("/"));
   $("dHow").hidden = !html;
   $("dHow").innerHTML = html;
   $("dTerms").hidden = !terms.length;
@@ -224,9 +236,10 @@ function renderIntro() {
   sub.textContent = c.nar || "";
   sub.hidden = !c.nar;
   retrigger(sub, "docu-sub");
-  $("rulesCard").hidden = !c.rules;
+  $("rulesCard").hidden = !c.rules && !c.info;
   requestAnimationFrame(() => placeBubbles(c));
   if (c.rules) $("rulesCard").innerHTML = rulesHTML() + goalHTML();
+  if (c.info) $("rulesCard").innerHTML = `<div class="info">` + c.info.map(x => `<div class="info-row">${item(x.item)}<div><b>${esc(x.head)}</b>${x.sub ? `<small>${esc(x.sub)}</small>` : ""}</div></div>`).join("") + `</div>`;
   placeBubbles(c);
   $("introDots").innerHTML = T.INTRO.map((_, i) => `<i class="${i === introI ? "on" : ""}"></i>`).join("");
   $("introNext").textContent = introI === T.INTRO.length - 1 ? "로비로" : "다음";
@@ -418,6 +431,7 @@ function onEvent(type, p) {
     mood.oopsUntil = performance.now() + CONFIG.mood.oopsMs;
     retrigger($("sky"), "jolt");
   }
+  if (type === "spec") splash("specup");
   if (type === "fail") { retrigger($("hFails"), "buzz"); notify(T.SMS.miss(game.stage.name, p.fails)); }
 
   const line = T.LINES[type];
@@ -456,8 +470,8 @@ function stageClear(doneIdx, nextIdx) {
   if (stageTerm) card.tip = stageTerm.desc;              // 다음 전형 이름이 낯선 말이면 그 풀이를 보여 준다
   card.terms = termsSeen();
   seen = new Set();
-  card.icon = "check";
-  doorShow(card, { button: "GO!" }).then(() => { doorOpen(); game.startStage(nextIdx); });
+  card.icon = T.LEVELS[Math.min(3, nextIdx)].img;   // 전형을 넘을수록 감자가 익어 간다
+  doorShow(card, { button: "GO!" }).then(() => { doorOpen(); game.startStage(nextIdx); splash(next.type === "bonus" ? "" : "speedup"); });
 }
 
 // 폰 타수: 첫 글자를 친 순간부터 Enter까지만 잰다. 한 번에 3글자 넘게 들어오면 자동완성으로 보고 타수에서 뺀다

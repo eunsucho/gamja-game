@@ -25,6 +25,18 @@ FEATURES = {"trap", "spec", "interview"}
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 
 
+# 게임에 내려오는 단어(업무·함정·스펙)는 폰·PC 키보드로 바로 칠 수 있는 글자만 남긴다
+TYPE_SPACE = str.maketrans({"·": " ", "ㆍ": " ", "•": " ", "-": " ", "_": " "})
+TYPE_DROP = re.compile(r"[^0-9A-Za-z가-힣 ]")
+# 지원 자격(졸업 예정·경력·전공 무관 등)은 스펙 아이템이 아니라서 뺀다
+NOT_SPEC = re.compile(r"졸업|경력|무관|학력|나이|연령|병역|군필|거주|채용|예정")
+
+
+def typable(t):
+    t = TYPE_DROP.sub("", t.translate(TYPE_SPACE))
+    return re.sub(r"\s+", " ", t).strip()
+
+
 def load_aliases(path):
     """실제 회사명 → 감자 회사명. 파일이 없으면 빈 표"""
     if not path or not Path(path).exists():
@@ -129,6 +141,7 @@ def main():
             if note:
                 warns.append(f"{path.name}: {note}")
             if w:
+                w["text"] = typable(w["text"])
                 if t.get("from"):
                     w["from"] = t["from"]          # 공고의 어느 줄에서 나온 업무인지
                 words.append(w)
@@ -141,8 +154,8 @@ def main():
             "id": p.get("id"), "sample": bool(p.get("sample")), "field": p.get("field"), "job": p.get("job"),
             "company": p["company"], "position": p.get("position"), "intro": p.get("intro", ""),
             "stages": p.get("stages", []), "words": words,
-            "traps": [t if isinstance(t, dict) else {"text": t} for t in p.get("traps", [])],
-            "specs": p.get("specs", []), "skills": p.get("skills", []),
+            "traps": [{**t, "text": typable(t["text"])} if isinstance(t, dict) else {"text": typable(t)} for t in p.get("traps", [])],
+            "specs": [typable(x) for x in p.get("specs", []) if not NOT_SPEC.search(x) and typable(x)], "skills": p.get("skills", []),
             "questions": p.get("questions", []), "terms": p.get("terms", []),
             "meta": {"aei_release": RELEASE, "period": PERIOD[:7], "onet": ONET, "builtAt": date.today().isoformat()}
         }

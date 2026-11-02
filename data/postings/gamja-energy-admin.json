@@ -35,7 +35,7 @@
  ],
  "words": [
   {
-   "text": "공문서 작성·발송",
+   "text": "공문서 작성 발송",
    "judge": "△",
    "pct": 47.2,
    "source": "Prepare business correspondence.",
@@ -75,7 +75,7 @@
    "from": "경영 실적 보고"
   },
   {
-   "text": "회의록·기록물 관리",
+   "text": "회의록 기록물 관리",
    "judge": "O",
    "pct": 82.3,
    "source": "Maintain records, documents, or other files.",
