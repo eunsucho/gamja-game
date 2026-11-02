@@ -1,0 +1,172 @@
+{
+  "id": "gamja-app-uiux",
+  "status": "reviewed",
+  "sample": true,
+  "field": "design",
+  "job": "uiux",
+  "company": "감자페이",
+  "position": "UI/UX 디자이너 신입",
+  "intro": "쓰기 쉬운 앱 화면을 설계하는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "과제 전형",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "포트폴리오 PT",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "처우협의",
+      "type": "bonus"
+    }
+  ],
+  "tasks": [
+    {
+      "text": "송금 화면 UI 디자인",
+      "source": "Design websites or web applications.",
+      "match": "높음",
+      "from": "앱 UI 디자인"
+    },
+    {
+      "text": "사용자 인터뷰 진행",
+      "source": "Collect data about customer needs.",
+      "match": "근사",
+      "from": "사용자 리서치"
+    },
+    {
+      "text": "경쟁 앱 사용성 조사",
+      "source": "Conduct market research.",
+      "match": "근사",
+      "from": "UX 리서치"
+    },
+    {
+      "text": "화면 흐름도 그리기",
+      "source": "Develop diagrams or flow charts of system operation.",
+      "match": "근사",
+      "from": "유저 플로우 설계"
+    },
+    {
+      "text": "개발자와 화면 스펙 맞추기",
+      "source": "Collaborate with others to determine design specifications or details.",
+      "match": "근사",
+      "from": "개발 협업"
+    },
+    {
+      "text": "아이콘 그래픽 제작",
+      "source": "Create computer-generated graphics or animation.",
+      "match": "근사",
+      "from": "그래픽 리소스"
+    },
+    {
+      "text": "디자인 시스템 가이드 작성",
+      "source": "Prepare instruction manuals.",
+      "match": "근사",
+      "from": "디자인 시스템"
+    },
+    {
+      "text": "디자인 리뷰 피드백",
+      "source": "Review art or design materials.",
+      "match": "근사",
+      "from": "디자인 리뷰"
+    },
+    {
+      "text": "화면 문구 다듬기",
+      "source": "Edit written materials.",
+      "match": "근사",
+      "from": "UX 라이팅"
+    },
+    {
+      "text": "앱 사용 데이터 확인",
+      "source": "Analyze website or related online data to track trends or usage.",
+      "match": "근사",
+      "from": "지표 기반 개선"
+    },
+    {
+      "text": "디자인 파일 버전 정리",
+      "source": "Maintain records, documents, or other files.",
+      "match": "근사",
+      "from": "디자인 에셋 관리"
+    },
+    {
+      "text": "QA 화면 동작 확인",
+      "source": "Test computer system operations to ensure proper functioning.",
+      "match": "근사",
+      "from": "출시 전 디자인 QA"
+    }
+  ],
+  "traps": [
+    {
+      "text": "결제 서버 개발",
+      "owner": "백엔드 개발자",
+      "why": "결제 처리는 서버 개발자 몫이에요."
+    },
+    {
+      "text": "금융 규제 해석",
+      "owner": "법무·컴플라이언스팀",
+      "why": "규제 해석은 법무팀이 해요."
+    },
+    {
+      "text": "앱 광고 집행",
+      "owner": "마케팅팀",
+      "why": "광고는 마케팅이 집행해요."
+    }
+  ],
+  "specs": [
+    "Figma",
+    "포트폴리오",
+    "프로토타이핑",
+    "UX 리서치 경험",
+    "GA4",
+    "부트캠프 수료"
+  ],
+  "skills": [
+    "사용자 입장에서 불편을 찾는 공감력",
+    "근거로 디자인을 설득하는 힘",
+    "개발자와 같은 말로 대화하는 능력"
+  ],
+  "questions": [
+    "AI가 화면을 그려 주면 UX 디자이너는 왜 필요해요?",
+    "예쁜 것과 쓰기 쉬운 것이 부딪치면?",
+    "사용자 인터뷰에서 뭘 물어볼 거예요?"
+  ],
+  "terms": [
+    {
+      "term": "UI",
+      "desc": "사용자가 보는 버튼·화면 같은 겉모습이에요."
+    },
+    {
+      "term": "UX",
+      "desc": "앱을 쓰면서 느끼는 경험 전체예요."
+    },
+    {
+      "term": "유저 플로우",
+      "desc": "사용자가 목표까지 거치는 화면 순서예요."
+    },
+    {
+      "term": "디자인 시스템",
+      "desc": "색·글꼴·버튼 규칙을 모아 둔 디자인 규칙집이에요."
+    },
+    {
+      "term": "UX 라이팅",
+      "desc": "버튼·안내 문구를 쉽고 정확하게 쓰는 일이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

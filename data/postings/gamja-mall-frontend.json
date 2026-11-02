@@ -1,0 +1,179 @@
+{
+ "id": "gamja-mall-frontend",
+ "sample": true,
+ "field": "it",
+ "job": "frontend",
+ "company": "감자몰",
+ "position": "웹 프론트엔드 신입",
+ "intro": "사용자가 보고 누르는 화면을 코드로 만드는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "과제 전형",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "기술면접",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "처우협의",
+   "type": "bonus"
+  }
+ ],
+ "words": [
+  {
+   "text": "상품 상세 페이지 구현",
+   "judge": "△",
+   "pct": 50.5,
+   "source": "Design websites or web applications.",
+   "match": "높음",
+   "from": "웹 서비스 화면 개발"
+  },
+  {
+   "text": "React 컴포넌트 작성",
+   "judge": "△",
+   "pct": 63.0,
+   "source": "Write computer programming code.",
+   "match": "높음",
+   "from": "프론트엔드 개발"
+  },
+  {
+   "text": "페이지 로딩 속도 개선",
+   "judge": "O",
+   "pct": 69.6,
+   "source": "Modify software programs to improve performance.",
+   "match": "근사",
+   "from": "웹 성능 최적화"
+  },
+  {
+   "text": "브라우저별 화면 깨짐 수정",
+   "judge": "O",
+   "pct": 76.9,
+   "source": "Resolve computer software problems.",
+   "match": "근사",
+   "from": "크로스 브라우징 대응"
+  },
+  {
+   "text": "화면 동작 테스트",
+   "judge": "O",
+   "pct": 94.4,
+   "source": "Test computer system operations to ensure proper functioning.",
+   "match": "근사",
+   "from": "QA 대응"
+  },
+  {
+   "text": "디자이너와 화면 스펙 맞추기",
+   "judge": "△",
+   "pct": 47.5,
+   "source": "Collaborate with others to determine design specifications or details.",
+   "match": "근사",
+   "from": "디자이너 협업"
+  },
+  {
+   "text": "화면 흐름도 그리기",
+   "judge": "△",
+   "pct": 43.0,
+   "source": "Develop diagrams or flow charts of system operation.",
+   "match": "근사",
+   "from": "화면 설계"
+  },
+  {
+   "text": "공통 컴포넌트 사용 가이드 작성",
+   "judge": "△",
+   "pct": 63.2,
+   "source": "Prepare instruction manuals.",
+   "match": "근사",
+   "from": "디자인 시스템 문서화"
+  },
+  {
+   "text": "개발 진행 상황 공유",
+   "judge": "△",
+   "pct": 48.3,
+   "source": "Communicate project information to others.",
+   "match": "근사",
+   "from": "스크럼 참여"
+  },
+  {
+   "text": "사용자 요구사항 정리",
+   "judge": "X",
+   "pct": 40.7,
+   "source": "Analyze project data to determine specifications or requirements.",
+   "match": "근사",
+   "from": "요구사항 분석"
+  }
+ ],
+ "traps": [
+  {
+   "text": "DB 테이블 설계",
+   "owner": "백엔드 개발자",
+   "why": "데이터 저장 구조는 백엔드 몫이에요."
+  },
+  {
+   "text": "상품 사진 촬영",
+   "owner": "콘텐츠팀",
+   "why": "사진은 찍지 않고 화면에 보여 주는 쪽이에요."
+  },
+  {
+   "text": "광고 예산 배분",
+   "owner": "마케팅팀",
+   "why": "예산은 마케팅이 정해요."
+  }
+ ],
+ "specs": [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "HTML/CSS",
+  "포트폴리오",
+  "Git"
+ ],
+ "skills": [
+  "디자인 의도를 화면으로 옮기는 감각",
+  "사용자 입장에서 불편을 찾는 눈",
+  "협업 도구로 소통하는 습관"
+ ],
+ "questions": [
+  "AI가 화면 코드를 뽑아 주는데 왜 사람을 뽑아요?",
+  "디자이너 시안대로 하면 느려져요. 어떻게 해요?",
+  "웹 접근성 챙겨 본 적 있어요?"
+ ],
+ "terms": [
+  {
+   "term": "프론트엔드",
+   "desc": "웹·앱에서 사용자가 직접 보는 화면 쪽 개발이에요."
+  },
+  {
+   "term": "React",
+   "desc": "화면을 블록(컴포넌트)처럼 조립하는 자바스크립트 도구예요."
+  },
+  {
+   "term": "컴포넌트",
+   "desc": "버튼, 카드처럼 여러 화면에서 다시 쓰는 화면 조각이에요."
+  },
+  {
+   "term": "크로스 브라우징",
+   "desc": "크롬, 사파리 등 어느 브라우저에서도 똑같이 보이게 맞추는 일이에요."
+  },
+  {
+   "term": "과제 전형",
+   "desc": "며칠 동안 작은 기능을 직접 만들어 제출하는 전형이에요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-11-02"
+ }
+}

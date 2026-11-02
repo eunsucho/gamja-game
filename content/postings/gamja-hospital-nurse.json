@@ -1,0 +1,174 @@
+{
+  "id": "gamja-hospital-nurse",
+  "status": "reviewed",
+  "sample": true,
+  "field": "health",
+  "job": "nurse",
+  "company": "감자대학교병원",
+  "position": "신규 간호사",
+  "intro": "환자 곁에서 24시간 몸과 마음을 살피는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "인성검사",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "실무면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "최종면접",
+      "features": [
+        "interview"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "text": "정맥주사 투여",
+      "source": "Administer intravenous medications.",
+      "match": "높음",
+      "from": "투약 간호"
+    },
+    {
+      "text": "수술 후 환자 관찰",
+      "source": "Monitor patients following surgeries or other treatments.",
+      "match": "높음",
+      "from": "병동 간호"
+    },
+    {
+      "text": "응급 상황 처치",
+      "source": "Treat medical emergencies.",
+      "match": "근사",
+      "from": "응급 간호"
+    },
+    {
+      "text": "보호자에게 시술 설명",
+      "source": "Explain medical procedures or test results to patients or family members.",
+      "match": "높음",
+      "from": "환자 교육"
+    },
+    {
+      "text": "퇴원 환자 건강 교육",
+      "source": "Teach health management classes.",
+      "match": "근사",
+      "from": "퇴원 교육"
+    },
+    {
+      "text": "의사에게 환자 상태 자문",
+      "source": "Advise medical personnel regarding healthcare issues.",
+      "match": "근사",
+      "from": "의료진 협업"
+    },
+    {
+      "text": "환자 불안 달래기",
+      "source": "Interact with patients to build rapport or provide emotional support.",
+      "match": "근사",
+      "from": "정서 지지"
+    },
+    {
+      "text": "환자 상태 평가",
+      "source": "Evaluate patient functioning, capabilities, or health.",
+      "match": "근사",
+      "from": "간호 사정"
+    },
+    {
+      "text": "간호 기록 작성",
+      "source": "Prepare reports summarizing patient diagnostic or care activities.",
+      "match": "근사",
+      "from": "간호 기록"
+    },
+    {
+      "text": "치료 반응 관찰 기록",
+      "source": "Monitor patient progress or responses to treatments.",
+      "match": "근사",
+      "from": "활력징후 측정"
+    },
+    {
+      "text": "입퇴원 서류 처리",
+      "source": "Process healthcare paperwork.",
+      "match": "근사",
+      "from": "행정 업무"
+    },
+    {
+      "text": "검체 채취",
+      "source": "Collect biological specimens from patients.",
+      "match": "근사",
+      "from": "검사 간호"
+    }
+  ],
+  "traps": [
+    {
+      "text": "약 처방하기",
+      "owner": "의사",
+      "why": "처방은 의사가 하고, 간호사는 정확히 투약해요."
+    },
+    {
+      "text": "MRI 영상 판독",
+      "owner": "영상의학과 의사",
+      "why": "영상 판독은 의사 몫이에요."
+    },
+    {
+      "text": "병원 진료비 청구 심사",
+      "owner": "원무팀",
+      "why": "진료비 청구는 원무·보험심사팀이 해요."
+    }
+  ],
+  "specs": [
+    "간호사 면허(예정)",
+    "BLS",
+    "학점 3.8",
+    "실습 우수",
+    "토익",
+    "봉사활동"
+  ],
+  "skills": [
+    "작은 변화도 놓치지 않는 관찰력",
+    "위급할 때 침착한 판단",
+    "환자·보호자와 신뢰를 쌓는 소통"
+  ],
+  "questions": [
+    "AI가 기록을 다 써 주면 간호사는 뭐에 집중해요?",
+    "환자가 투약을 거부해요. 어떻게 해요?",
+    "3교대 체력 관리 어떻게 할 거예요?"
+  ],
+  "terms": [
+    {
+      "term": "BLS",
+      "desc": "기본 심폐소생술 자격이에요. 병원 지원 때 많이 봐요."
+    },
+    {
+      "term": "활력징후",
+      "desc": "체온·맥박·호흡·혈압 같은 기본 생명 신호예요."
+    },
+    {
+      "term": "간호 사정",
+      "desc": "환자 상태를 체계적으로 살피고 판단하는 첫 단계예요."
+    },
+    {
+      "term": "3교대",
+      "desc": "낮·저녁·밤 근무를 돌아가며 서는 근무 방식이에요."
+    },
+    {
+      "term": "검체",
+      "desc": "검사를 위해 채취하는 혈액·소변 같은 시료예요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

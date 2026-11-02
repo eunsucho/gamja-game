@@ -1,0 +1,193 @@
+{
+ "id": "gamja-food-marketing",
+ "sample": true,
+ "field": "sales",
+ "job": "marketing",
+ "company": "감자식품",
+ "position": "브랜드 마케팅 신입",
+ "intro": "과자 한 봉지에 이야기를 입히는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "인적성검사",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "직무면접",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "임원면접",
+   "features": [
+    "interview"
+   ]
+  },
+  {
+   "name": "처우협의",
+   "type": "bonus"
+  }
+ ],
+ "words": [
+  {
+   "text": "SNS 반응·트렌드 모니터링",
+   "judge": "O",
+   "pct": 93.1,
+   "source": "Monitor market conditions or trends.",
+   "match": "높음",
+   "from": "시장·트렌드 조사"
+  },
+  {
+   "text": "신제품 소비자 조사",
+   "judge": "△",
+   "pct": 52.9,
+   "source": "Conduct market research.",
+   "match": "높음",
+   "from": "소비자 조사"
+  },
+  {
+   "text": "광고 카피 쓰기",
+   "judge": "X",
+   "pct": 35.5,
+   "source": "Write advertising or promotional material.",
+   "match": "높음",
+   "from": "광고·캠페인 기획"
+  },
+  {
+   "text": "보도자료 문장 다듬기",
+   "judge": "X",
+   "pct": 25.9,
+   "source": "Edit written materials.",
+   "match": "근사",
+   "from": "콘텐츠 제작"
+  },
+  {
+   "text": "팝업스토어 진열 기획",
+   "judge": "△",
+   "pct": 53.6,
+   "source": "Design layout of art or product exhibits, displays, or promotional materials.",
+   "match": "근사",
+   "from": "오프라인 프로모션"
+  },
+  {
+   "text": "캠페인 성과 리포트",
+   "judge": "O",
+   "pct": 85.5,
+   "source": "Prepare operational progress or status reports.",
+   "match": "근사",
+   "from": "성과 분석"
+  },
+  {
+   "text": "광고 클릭 데이터 확인",
+   "judge": "△",
+   "pct": 67.1,
+   "source": "Analyze website or related online data to track trends or usage.",
+   "match": "근사",
+   "from": "디지털 마케팅 성과 관리"
+  },
+  {
+   "text": "광고대행사와 일정 조율",
+   "judge": "O",
+   "pct": 87.5,
+   "source": "Coordinate project activities with other personnel or departments.",
+   "match": "근사",
+   "from": "대행사 협업"
+  },
+  {
+   "text": "인플루언서 협업 제안서",
+   "judge": "X",
+   "pct": 35.1,
+   "source": "Develop proposals for current or prospective customers.",
+   "match": "근사",
+   "from": "제휴 마케팅"
+  },
+  {
+   "text": "브랜드 메시지 정하기",
+   "judge": "X",
+   "pct": 34.2,
+   "source": "Determine presentation subjects or content.",
+   "match": "근사",
+   "from": "브랜드 전략 수립"
+  },
+  {
+   "text": "소비자 인터뷰 진행",
+   "judge": "□",
+   "pct": null,
+   "source": "Collect data about customer needs.",
+   "match": "근사",
+   "from": "소비자 인사이트"
+  }
+ ],
+ "traps": [
+  {
+   "text": "공장 생산량 조정",
+   "owner": "생산관리팀",
+   "why": "얼마나 만들지는 생산관리가 정해요."
+  },
+  {
+   "text": "거래처 납품 단가 협상",
+   "owner": "영업팀",
+   "why": "유통 거래처와의 협상은 영업 몫이에요."
+  },
+  {
+   "text": "원재료 품질 검사",
+   "owner": "품질관리팀",
+   "why": "품질 검사는 QC가 해요."
+  }
+ ],
+ "specs": [
+  "공모전 수상",
+  "SNS 운영 경험",
+  "GA4",
+  "포토샵",
+  "마케팅 인턴",
+  "토익"
+ ],
+ "skills": [
+  "소비자 마음을 읽는 관찰력",
+  "한 줄로 꽂히는 카피 감각",
+  "숫자로 성과를 증명하는 습관"
+ ],
+ "questions": [
+  "AI가 광고 카피를 쓰면 마케터는 뭐 해요?",
+  "우리 과자를 MZ에게 어떻게 알릴 거예요?",
+  "캠페인이 망했어요. 어떻게 보고해요?"
+ ],
+ "terms": [
+  {
+   "term": "브랜드 마케팅",
+   "desc": "제품 하나를 넘어 브랜드의 이미지와 이야기를 쌓는 일이에요."
+  },
+  {
+   "term": "팝업스토어",
+   "desc": "짧은 기간만 여는 체험형 임시 매장이에요."
+  },
+  {
+   "term": "인플루언서",
+   "desc": "SNS에서 영향력이 큰 사람이에요."
+  },
+  {
+   "term": "광고대행사",
+   "desc": "광고 제작·집행을 대신 맡아 주는 회사예요."
+  },
+  {
+   "term": "인적성검사",
+   "desc": "성격과 기초 능력(언어·수리 등)을 보는 시험이에요. 대기업 공채에 많아요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-11-02"
+ }
+}

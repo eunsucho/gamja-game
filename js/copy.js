@@ -23,34 +23,41 @@ export const INTRO = [
   { img: "assets/intro/6_rival.jpg", nar: `그런데 올해 공채에는 특별한 지원자가 있었다.
 지치지 않고, 밥도 안 먹는 AI 동기.`, say: "쟤도 지원했어…?", ai: "잘 부탁드립니다." },
   { img: "assets/intro/7_rain.jpg", nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
-감자는 과연 옥상까지 올라갈 수 있을까.` },
+사람 몫은 감자가, AI 몫은 AI 동기가.
+감자는 최종합격할 수 있을까.` },
   { img: "assets/bg/street.jpg", rules: true }
 ];
+// 규칙 카드 (인트로 마지막 장 · 연습 전 · 일시정지 화면에 같이 쓴다)
 export const RULES = [
-  { pill: "투자자에게 실적 설명", cls: "", title: "내 몫", desc: "쳐서 받아치면 올라가요" },
-  { pill: "시장 동향 모니터링", cls: "", title: "AI 동기 몫", desc: "두면 AI 동기가 가져가요" },
-  { pill: "보도자료 배포", cls: "", title: "옆 팀의 일", desc: "헷갈려도 치면 덜컹 내려가요" }
+  { who: "me", pill: "투자자에게 실적 설명", title: "사람 몫 → 쳐서 받아치기", desc: "사람이 판단하고 설명하는 일이에요. 똑같이 치고 Enter! 합격 게이지가 한 칸 차요." },
+  { who: "ai", pill: "시장 동향 모니터링", title: "AI 몫 → 그냥 두기", desc: "AI가 이미 많이 하는 일이에요. 두면 옆자리 AI 동기가 낚아채 가요. 쳐도 반 칸뿐." },
+  { who: "no", pill: "보도자료 배포", title: "옆 팀 일 → 치지 않기", desc: "비슷해 보여도 이 자리 일이 아니에요. 치면 게이지가 줄어요." }
 ];
+export const HOW = {
+  title: "어떤 단어를 쳐야 할까?",
+  goal: "단어를 받아쳐 합격 게이지를 채우면 다음 전형으로!",
+  lose: "사람 몫을 놓치면 불합격 문자. 3통이면 탈락이에요."
+};
 
 // ---------- 연습 라운드 ----------
 export const TUT = {
   spawn: [
-    "가만히 봐! 이건 AI가 많이 하는 일이야.\nAI 동기가 가져가지?",
-    "이건 내 몫이야!\n똑같이 입력하고 Enter!",
-    "비슷해 보여도 이건 옆 팀 일이야.\n치지 마!"
+    "치지 말고 지켜봐!\n이건 AI가 많이 하는 일 → 옆자리 AI 동기가 낚아채 가요",
+    "이건 사람 몫!\n아래 칸에 똑같이 치고 Enter!",
+    "이건 옆 팀 일!\n치지 말고 그냥 떨어지게 두세요"
   ],
   ok: [
-    "봤지? AI 동기 몫은 맡겨도 돼.",
-    "좋아! 내 몫을 받아치면 엘리베이터가 올라가.",
+    "봤죠? AI 몫은 AI 동기가 가져가요.\n내 시간은 사람 몫에 쓰기!",
+    "좋아요! 사람 몫을 받아치면\n합격 게이지가 차요.",
     "완벽해. 이제 진짜 공채다!"
   ],
   okTypedAi: "쳐도 되지만, AI 동기 몫이라 반 칸만 올라가.",
   retry: [
     "",
-    "앗, 떨어졌다! 한 번 더 내려올게. 쳐 봐!",
-    "치면 안 돼! 면접관이 실망해서 덜컹 내려가. 다시!"
+    "앗, 떨어졌다! 한 번 더 내려와요.\n아래 칸에 쳐 보세요!",
+    "치면 안 돼요! 옆 팀 일이라 게이지가 줄어요. 다시!"
   ],
-  done: { floor: "연습 끝", msg: "준비 완료!", tip: "이제 진짜 서류 접수가 시작돼요." }
+  done: { floor: "연습 끝", msg: "준비 완료!", tip: "이제 진짜 1단계 전형이 시작돼요." }
 };
 
 // ---------- 플레이 중 감자 대사 ----------
@@ -87,16 +94,16 @@ export const FLOAT = {
 
 // ---------- 층 도착 카드 ----------
 export const DOOR = {
-  start: (f) => ({ floor: `${f.label} ${f.room}`, msg: "지원서 접수 시작", tip: `사람 몫 ${CONFIG.floorSteps}칸을 채우면 다음 층으로` }),
+  start: (f) => ({ floor: `${f.step}단계 · ${f.room}`, msg: "전형 시작!", tip: `사람 몫을 받아쳐 합격 게이지 ${CONFIG.floorSteps}칸을 채우면 다음 전형으로` }),
   clear: (done, f, next) => ({
-    floor: `${f.label} ${f.room} 도착`,
-    msg: `${done.name} 합격!`,
+    floor: `${done.name} 합격!`,
+    msg: `다음: ${f.step}단계 · ${f.room}`,
     tip: next.type === "bonus" ? "빨리 칠수록 초봉이 올라요" :
       (next.features || []).includes("interview") ? "반짝이는 단어는 면접관 질문이에요" :
       (next.features || []).includes("trap") ? "옆 팀의 일이 섞여 내려와요" : "비가 조금 더 빨라져요"
   }),
-  roof: { floor: "옥상", msg: "최종합격!", tip: "사원증이 나왔어요" },
-  termsLabel: "이번 층에서 나온 낯선 단어"
+  roof: { floor: "최종합격!", msg: "모든 전형 통과", tip: "사원증이 나왔어요" },
+  termsLabel: "이번 전형에서 나온 낯선 단어"
 };
 
 // ---------- 휴대폰 문자: 실제 채용 문자처럼 쓴다 ([Web발신] + 홈페이지 확인 안내) ----------
@@ -127,12 +134,12 @@ export const RESULT = {
 
 // ---------- 로비 ----------
 export const LOBBY = {
-  eyebrow: "1F 로비 · 채용 안내",
+  eyebrow: "감자그룹 채용 안내",
   title: "어느 부서로 갈까?",
   say: "다 가고 싶고 다 무섭다…",
   empty: "공고 준비 중"
 };
-export const BRIEF = { label: "전형 = 층", tutorial: "연습 라운드부터", go: "지원서 제출" };
+export const BRIEF = { label: "전형 순서 · 단계마다 합격 게이지를 채우면 통과", tutorial: "연습 라운드부터 (추천)", go: "지원서 제출" };
 
 // ---------- 머릿돌 · 출처 ----------
 export const CREDITS = "AI 기록은 Anthropic Economic Index(2026-06-26 릴리스, CC-BY)를 O*NET 31.0(CC BY 4.0) 직무와 연결한 것이에요. 수치는 사람들이 그 일을 AI에게 시킨 대화 중 AI가 끝까지 처리한 비율이고, 게임에서는 이를 AI 동기의 성공 확률로 단순화했어요. 대체 가능성을 뜻하지 않아요. 회사와 공고는 실제 공고를 각색한 가상 공고예요. 분야 분류는 NCS 직무분류를 따랐어요.";

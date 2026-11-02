@@ -1,0 +1,158 @@
+{
+  "id": "gamja-forensic-lab",
+  "status": "reviewed",
+  "sample": true,
+  "field": "science",
+  "job": "forensic",
+  "company": "감자과학수사연구원",
+  "position": "법과학 연구원 신입",
+  "intro": "증거로 진실을 밝히는 실험실의 탐정",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "전공 필기",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "실험 면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "최종면접",
+      "features": [
+        "interview"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "text": "범죄 현장 증거 확보",
+      "source": "Examine crime scenes to obtain evidence.",
+      "match": "높음",
+      "from": "현장 감식"
+    },
+    {
+      "text": "현장 증거 분석",
+      "source": "Analyze crime scene evidence.",
+      "match": "근사",
+      "from": "증거물 감정"
+    },
+    {
+      "text": "법정에서 감정 결과 증언",
+      "source": "Testify at legal or legislative proceedings.",
+      "match": "높음",
+      "from": "법정 증언"
+    },
+    {
+      "text": "분석 장비 조작",
+      "source": "Operate laboratory or field equipment.",
+      "match": "근사",
+      "from": "실험 장비 운용"
+    },
+    {
+      "text": "시약 조제",
+      "source": "Prepare compounds or solutions for products or testing.",
+      "match": "근사",
+      "from": "실험 준비"
+    },
+    {
+      "text": "감정 보고서 작성",
+      "source": "Prepare scientific or technical reports or presentations.",
+      "match": "근사",
+      "from": "감정서 작성"
+    },
+    {
+      "text": "분석 데이터 검증",
+      "source": "Verify accuracy of data.",
+      "match": "근사",
+      "from": "결과 검증"
+    },
+    {
+      "text": "실험 결과 기록",
+      "source": "Record research or operational data.",
+      "match": "근사",
+      "from": "실험 기록"
+    },
+    {
+      "text": "신규 직원 실험 교육",
+      "source": "Train personnel in technical or scientific procedures.",
+      "match": "근사",
+      "from": "교육"
+    },
+    {
+      "text": "현장 치수 측정 정리",
+      "source": "Verify information or specifications.",
+      "match": "근사",
+      "from": "현장 측정"
+    }
+  ],
+  "traps": [
+    {
+      "text": "피의자 체포",
+      "owner": "경찰",
+      "why": "체포는 경찰이 하고, 연구원은 증거를 감정해요."
+    },
+    {
+      "text": "유죄 판결 내리기",
+      "owner": "판사",
+      "why": "판결은 판사 몫이에요."
+    },
+    {
+      "text": "기소 여부 결정",
+      "owner": "검사",
+      "why": "기소는 검사가 정해요."
+    }
+  ],
+  "specs": [
+    "화학·생명 전공",
+    "실험 경력",
+    "논문",
+    "분석기기 실습",
+    "석사",
+    "영어 논문 독해"
+  ],
+  "skills": [
+    "증거 앞에서 선입견을 버리는 객관성",
+    "절차를 한 치도 어기지 않는 정확성",
+    "법정에서 쉽게 설명하는 힘"
+  ],
+  "questions": [
+    "AI가 분석을 하면 연구원은 뭘 책임져요?",
+    "결과가 수사 방향과 달라요. 어떻게 보고해요?",
+    "법정에서 판사가 이해 못 하면 어떻게 설명해요?"
+  ],
+  "terms": [
+    {
+      "term": "감정",
+      "desc": "전문가가 증거를 분석해 사실을 판단하는 일이에요."
+    },
+    {
+      "term": "감식",
+      "desc": "현장에서 지문·혈흔 같은 증거를 찾아 채취하는 일이에요."
+    },
+    {
+      "term": "시약",
+      "desc": "실험에서 반응을 보려고 쓰는 화학 물질이에요."
+    },
+    {
+      "term": "증언",
+      "desc": "법정에서 전문가로서 사실과 의견을 말하는 일이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

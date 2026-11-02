@@ -21,9 +21,24 @@ def judge(v):
     return "O" if v >= Q3 else ("X" if v < Q1 else "△")
 
 
+# 원자료가 없을 때 쓰는 작은 표: 수업 정답지(answer_key_raw.csv 등)에서 옮긴 5월 값과 4월 판정
+SUBSET = Path(__file__).resolve().parent / "aei_subset.csv"
+
+
 def load_aei(path=DEFAULT_AEI):
-    """DWA 영문명 → (5월 값, 4월 값)"""
+    """DWA 영문명 → (5월 값, 4월 값). 4월은 값 또는 판정 글자(O·△·X·□)"""
     may, apr = {}, {}
+    if not Path(path).exists():
+        print(f"[안내] {path} 없음 → {SUBSET.name} 사용")
+        path = SUBSET
+    if Path(path).name == SUBSET.name:
+        with open(path, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if r["may_pct"]:
+                    may[r["dwa"]] = float(r["may_pct"])
+                if r["apr_judge"] != "□":
+                    apr[r["dwa"]] = r["apr_judge"]
+        return may, apr
     with open(path, encoding="utf-8") as f:
         for r in csv.DictReader(f):
             if r["metric_id"] != METRIC:
@@ -41,8 +56,9 @@ def rate(task, may, apr):
     src = task["source"].strip()
     v, prev = may.get(src), apr.get(src)
     j = judge(v)
-    if (v is not None or prev is not None) and judge(prev) != j:
-        return None, f"'{task['text']}': 4월({judge(prev)})과 5월({j}) 판정이 달라서 뺌"
+    pj = prev if isinstance(prev, str) else judge(prev)
+    if (v is not None or prev is not None) and pj != j:
+        return None, f"'{task['text']}': 4월({pj})과 5월({j}) 판정이 달라서 뺌"
     note = None
     if v is None and prev is None:
         note = f"'{task['text']}': AEI 기록 없음(□). DWA 이름 철자를 한 번 더 확인"

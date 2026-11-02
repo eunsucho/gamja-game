@@ -1,0 +1,178 @@
+{
+  "id": "gamja-electronics-backend",
+  "status": "reviewed",
+  "sample": true,
+  "field": "it",
+  "job": "backend",
+  "company": "감자전자",
+  "position": "백엔드 개발 신입",
+  "intro": "앱 뒤에서 데이터가 오가는 길을 만드는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "코딩테스트",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "기술면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "임원면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "처우협의",
+      "type": "bonus"
+    }
+  ],
+  "tasks": [
+    {
+      "text": "API 서버 코드 작성",
+      "source": "Write computer programming code.",
+      "match": "높음",
+      "from": "서버 API 개발"
+    },
+    {
+      "text": "주문 서비스 기능 개발",
+      "source": "Develop computer or online applications.",
+      "match": "근사",
+      "from": "신규 서비스 백엔드 개발"
+    },
+    {
+      "text": "느린 쿼리 튜닝",
+      "source": "Modify software programs to improve performance.",
+      "match": "높음",
+      "from": "성능 개선"
+    },
+    {
+      "text": "장애 로그 보고 버그 수정",
+      "source": "Resolve computer software problems.",
+      "match": "근사",
+      "from": "운영 이슈 대응"
+    },
+    {
+      "text": "부하 테스트 돌리기",
+      "source": "Test software performance.",
+      "match": "높음",
+      "from": "성능 테스트"
+    },
+    {
+      "text": "서버 모니터링 대시보드 확인",
+      "source": "Monitor computer system performance to ensure proper operation.",
+      "match": "근사",
+      "from": "서비스 운영·모니터링"
+    },
+    {
+      "text": "API 문서 정리",
+      "source": "Document design or development procedures.",
+      "match": "근사",
+      "from": "기술 문서화"
+    },
+    {
+      "text": "기획자와 요구사항 정의",
+      "source": "Analyze project data to determine specifications or requirements.",
+      "match": "근사",
+      "from": "요구사항 분석"
+    },
+    {
+      "text": "서비스 구조 설계",
+      "source": "Develop models of information or communications systems.",
+      "match": "근사",
+      "from": "시스템 아키텍처 설계"
+    },
+    {
+      "text": "성능 목표 지표 정하기",
+      "source": "Develop performance metrics or standards related to information technology.",
+      "match": "근사",
+      "from": "SLO 수립"
+    },
+    {
+      "text": "배포 일정 조율",
+      "source": "Coordinate software or hardware installation.",
+      "match": "근사",
+      "from": "배포 관리"
+    }
+  ],
+  "traps": [
+    {
+      "text": "버튼 색상 시안 만들기",
+      "owner": "UI 디자이너",
+      "why": "화면 디자인은 디자이너가 맡아요."
+    },
+    {
+      "text": "앱 화면 애니메이션 구현",
+      "owner": "프론트엔드 개발자",
+      "why": "백엔드는 화면 뒤의 서버를 맡아요."
+    },
+    {
+      "text": "회원가입 이벤트 기획",
+      "owner": "마케팅팀",
+      "why": "이벤트를 여는 건 마케팅, 그걸 돌리는 서버가 백엔드예요."
+    }
+  ],
+  "specs": [
+    "Java",
+    "Spring",
+    "SQL",
+    "Git",
+    "알고리즘",
+    "정보처리기사",
+    "AWS"
+  ],
+  "skills": [
+    "요구사항을 구조로 바꾸는 설계력",
+    "장애 원인을 끝까지 파고드는 끈기",
+    "동료와 코드 리뷰로 소통하는 힘"
+  ],
+  "questions": [
+    "AI가 코드를 다 짜면 개발자는 뭐 해요?",
+    "서버가 새벽에 죽었어요. 뭐부터 봐요?",
+    "이 기능, 왜 이렇게 설계했어요?"
+  ],
+  "terms": [
+    {
+      "term": "API",
+      "desc": "프로그램끼리 데이터를 주고받는 약속된 창구예요."
+    },
+    {
+      "term": "쿼리",
+      "desc": "데이터베이스에 '이 데이터 줘'라고 묻는 명령문이에요."
+    },
+    {
+      "term": "부하 테스트",
+      "desc": "사용자가 한꺼번에 몰리는 상황을 흉내 내 서버가 버티는지 보는 시험이에요."
+    },
+    {
+      "term": "SLO",
+      "desc": "서비스가 지켜야 할 목표치예요. 예: 응답 99.9%를 0.3초 안에."
+    },
+    {
+      "term": "배포",
+      "desc": "새로 만든 코드를 실제 서비스에 올리는 일이에요."
+    },
+    {
+      "term": "코딩테스트",
+      "desc": "제한 시간 안에 알고리즘 문제를 코드로 푸는 개발자 필기시험이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

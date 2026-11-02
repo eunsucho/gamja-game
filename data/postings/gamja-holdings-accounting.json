@@ -1,0 +1,185 @@
+{
+ "id": "gamja-holdings-accounting",
+ "sample": true,
+ "field": "biz",
+ "job": "accounting",
+ "company": "감자홀딩스",
+ "position": "재무회계 신입",
+ "intro": "회사의 돈 흐름을 정확하게 기록하고 설명하는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "인적성검사",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "실무면접",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "임원면접",
+   "features": [
+    "interview"
+   ]
+  },
+  {
+   "name": "처우협의",
+   "type": "bonus"
+  }
+ ],
+ "words": [
+  {
+   "text": "월 결산 재무제표 작성",
+   "judge": "△",
+   "pct": 50.6,
+   "source": "Prepare financial documents.",
+   "match": "높음",
+   "from": "월·분기 결산"
+  },
+  {
+   "text": "부서별 예산 실적 분석",
+   "judge": "△",
+   "pct": 49.7,
+   "source": "Analyze budgetary or accounting data.",
+   "match": "높음",
+   "from": "예산 관리"
+  },
+  {
+   "text": "전표·증빙 대조",
+   "judge": "△",
+   "pct": 53.4,
+   "source": "Verify accuracy of records.",
+   "match": "근사",
+   "from": "전표 검토"
+  },
+  {
+   "text": "재무 숫자 정확성 검증",
+   "judge": "△",
+   "pct": 46.2,
+   "source": "Verify accuracy of financial information.",
+   "match": "근사",
+   "from": "재무 데이터 관리"
+  },
+  {
+   "text": "계정별 원장 살펴보기",
+   "judge": "△",
+   "pct": 56.8,
+   "source": "Examine financial records.",
+   "match": "근사",
+   "from": "회계 처리"
+  },
+  {
+   "text": "결산 결과 팀장 보고",
+   "judge": "O",
+   "pct": 79.1,
+   "source": "Report information to managers or other personnel.",
+   "match": "근사",
+   "from": "결산 보고"
+  },
+  {
+   "text": "회계 증빙 파일 보관",
+   "judge": "O",
+   "pct": 82.3,
+   "source": "Maintain records, documents, or other files.",
+   "match": "근사",
+   "from": "증빙 관리"
+  },
+  {
+   "text": "손익 변동 원인 분석",
+   "judge": "X",
+   "pct": 40.7,
+   "source": "Analyze financial information.",
+   "match": "근사",
+   "from": "손익 분석"
+  },
+  {
+   "text": "사업부에 비용 절감 조언",
+   "judge": "X",
+   "pct": 35.5,
+   "source": "Advise others on financial matters.",
+   "match": "근사",
+   "from": "재무 자문"
+  },
+  {
+   "text": "외부 감사 대응",
+   "judge": "□",
+   "pct": null,
+   "source": "Conduct financial or regulatory audits.",
+   "match": "근사",
+   "from": "회계감사 대응"
+  }
+ ],
+ "traps": [
+  {
+   "text": "주가 전망 발표",
+   "owner": "IR팀",
+   "why": "투자자에게 숫자를 설명하는 건 IR이에요."
+  },
+  {
+   "text": "직원 연봉 협상",
+   "owner": "인사팀",
+   "why": "연봉은 인사팀이 다뤄요."
+  },
+  {
+   "text": "법인세 소송 변론",
+   "owner": "법무팀·변호사",
+   "why": "소송은 법무 몫이에요."
+  }
+ ],
+ "specs": [
+  "재경관리사",
+  "전산회계 1급",
+  "엑셀",
+  "회계원리",
+  "CPA 1차",
+  "ERP"
+ ],
+ "skills": [
+  "숫자 하나도 그냥 넘기지 않는 꼼꼼함",
+  "숫자의 의미를 경영진에게 설명하는 힘",
+  "마감 일정을 지키는 책임감"
+ ],
+ "questions": [
+  "AI가 결산을 자동으로 하면 회계팀은 뭐 해요?",
+  "숫자가 1원 안 맞아요. 어떻게 해요?",
+  "비용 줄이자고 사업부를 어떻게 설득해요?"
+ ],
+ "terms": [
+  {
+   "term": "결산",
+   "desc": "일정 기간의 장부를 마감해 이익과 재산을 확정하는 일이에요."
+  },
+  {
+   "term": "전표",
+   "desc": "거래 하나를 회계 장부에 적는 기록표예요."
+  },
+  {
+   "term": "재무제표",
+   "desc": "회사의 재산·빚·이익을 보여 주는 표 묶음이에요."
+  },
+  {
+   "term": "외부 감사",
+   "desc": "회계법인이 회사 장부가 맞는지 확인하는 절차예요."
+  },
+  {
+   "term": "ERP",
+   "desc": "회계·구매·인사를 한데 관리하는 회사 전산 시스템이에요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-11-02"
+ }
+}

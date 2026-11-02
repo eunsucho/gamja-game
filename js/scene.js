@@ -1,11 +1,6 @@
-// 층 이름. 전형 하나 = 본사 한 층. (창밖 풍경은 assets/bg 그림을 높이에 따라 겹쳐서 바꾼다: main.js setAltitude)
-// 층 이름. 공고 stages[i].room 이 있으면 그걸 쓰고, 없으면 기본 방 이름
-const ROOMS = ["로비", "시험장", "면접실", "임원실", "회의실", "인사팀"];
+// 전형 단계 이름. 전형 하나 = 한 단계. 'n층' 대신 '1단계 · 서류'처럼 몇 번째 전형인지 바로 보이게 한다.
+// (창밖 풍경은 진행도에 따라 assets/bg 그림을 겹쳐 바꾼다: main.js setAltitude)
 export function floors(stages) {
-  let normal = 0;
-  return stages.map((s, i) => {
-    const room = s.room || (s.type === "bonus" ? "인사팀" : ROOMS[Math.min(normal, ROOMS.length - 2)]);
-    if (s.type !== "bonus") normal++;
-    return { label: `${1 + i * 7}F`, room, name: s.name };
-  });
+  const n = stages.length;
+  return stages.map((s, i) => ({ label: `${i + 1}/${n}`, step: i + 1, total: n, room: s.name, name: s.name, bonus: s.type === "bonus" }));
 }

@@ -1,0 +1,179 @@
+{
+ "id": "gamja-telecom-data",
+ "sample": true,
+ "field": "it",
+ "job": "data",
+ "company": "감자텔레콤",
+ "position": "데이터 분석 신입",
+ "intro": "숫자 속에서 '왜'를 찾아 결정을 돕는 자리",
+ "stages": [
+  {
+   "name": "서류",
+   "features": [
+    "spec"
+   ]
+  },
+  {
+   "name": "SQL 테스트",
+   "features": [
+    "trap"
+   ]
+  },
+  {
+   "name": "PT 면접",
+   "features": [
+    "trap",
+    "interview"
+   ]
+  },
+  {
+   "name": "처우협의",
+   "type": "bonus"
+  }
+ ],
+ "words": [
+  {
+   "text": "분석용 데이터 정리",
+   "judge": "△",
+   "pct": 62.3,
+   "source": "Prepare data for analysis.",
+   "match": "높음",
+   "from": "데이터 전처리"
+  },
+  {
+   "text": "요금제 이탈 추세 분석",
+   "judge": "△",
+   "pct": 44.2,
+   "source": "Analyze data to identify trends or relationships among variables.",
+   "match": "높음",
+   "from": "고객 데이터 분석"
+  },
+  {
+   "text": "A/B 테스트 통계 검정",
+   "judge": "△",
+   "pct": 52.3,
+   "source": "Apply mathematical principles or statistical approaches to solve problems in scientific or applied fields.",
+   "match": "근사",
+   "from": "실험 설계·분석"
+  },
+  {
+   "text": "주간 지표 리포트 발행",
+   "judge": "O",
+   "pct": 85.5,
+   "source": "Prepare operational progress or status reports.",
+   "match": "근사",
+   "from": "KPI 리포트"
+  },
+  {
+   "text": "앱 사용 로그 추적",
+   "judge": "△",
+   "pct": 67.1,
+   "source": "Analyze website or related online data to track trends or usage.",
+   "match": "근사",
+   "from": "로그 분석"
+  },
+  {
+   "text": "대시보드 숫자 업데이트",
+   "judge": "O",
+   "pct": 86.6,
+   "source": "Update computer database information.",
+   "match": "근사",
+   "from": "대시보드 운영"
+  },
+  {
+   "text": "분석 결과 팀장 보고",
+   "judge": "O",
+   "pct": 79.1,
+   "source": "Report information to managers or other personnel.",
+   "match": "근사",
+   "from": "분석 결과 공유"
+  },
+  {
+   "text": "데이터 정합성 검증",
+   "judge": "△",
+   "pct": 46.7,
+   "source": "Verify accuracy of data.",
+   "match": "근사",
+   "from": "데이터 품질 관리"
+  },
+  {
+   "text": "사업부에 개선안 제안",
+   "judge": "X",
+   "pct": 36.1,
+   "source": "Advise others on business or operational matters.",
+   "match": "근사",
+   "from": "인사이트 도출·제안"
+  },
+  {
+   "text": "핵심 지표 정의하기",
+   "judge": "X",
+   "pct": 30.6,
+   "source": "Develop performance metrics or standards related to information technology.",
+   "match": "근사",
+   "from": "지표 체계 수립"
+  }
+ ],
+ "traps": [
+  {
+   "text": "기지국 장비 설치",
+   "owner": "네트워크 엔지니어",
+   "why": "데이터 분석은 장비가 아니라 숫자를 다뤄요."
+  },
+  {
+   "text": "요금제 광고 카피 쓰기",
+   "owner": "마케팅팀",
+   "why": "분석가는 광고 결과를 분석하는 쪽이에요."
+  },
+  {
+   "text": "서버 증설 구매",
+   "owner": "인프라팀",
+   "why": "서버를 사는 건 인프라팀이에요."
+  }
+ ],
+ "specs": [
+  "SQL",
+  "Python",
+  "통계학",
+  "ADsP",
+  "SQLD",
+  "Tableau"
+ ],
+ "skills": [
+  "숫자를 이야기로 바꾸는 설명력",
+  "가설을 세우고 검증하는 습관",
+  "데이터 품질을 의심하는 꼼꼼함"
+ ],
+ "questions": [
+  "AI가 분석까지 해 주면 분석가는 왜 필요해요?",
+  "지표가 갑자기 떨어졌어요. 뭐부터 봐요?",
+  "상관관계랑 인과관계 차이 설명해 봐요."
+ ],
+ "terms": [
+  {
+   "term": "A/B 테스트",
+   "desc": "두 가지 버전을 나눠 보여 주고 어느 쪽이 나은지 비교하는 실험이에요."
+  },
+  {
+   "term": "KPI",
+   "desc": "목표 달성 정도를 보는 핵심 숫자예요."
+  },
+  {
+   "term": "이탈",
+   "desc": "고객이 서비스를 그만 쓰고 떠나는 거예요."
+  },
+  {
+   "term": "전처리",
+   "desc": "분석하기 좋게 데이터를 정리·청소하는 일이에요."
+  },
+  {
+   "term": "SQL",
+   "desc": "데이터베이스에서 데이터를 꺼내는 언어예요."
+  }
+ ],
+ "meta": {
+  "aei_release": "2026-06-26",
+  "period": "2026-05",
+  "onet": "31.0",
+  "builtAt": "2026-11-02"
+ }
+}

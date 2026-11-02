@@ -1,0 +1,158 @@
+{
+  "id": "gamja-energy-admin",
+  "status": "reviewed",
+  "sample": true,
+  "field": "biz",
+  "job": "admin",
+  "company": "한국감자공사",
+  "position": "일반행정 신입 (NCS)",
+  "intro": "공공기관의 살림을 규정대로 꼼꼼히 챙기는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "NCS 필기",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "PT·토론면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "인성면접",
+      "features": [
+        "interview"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "text": "공문서 작성·발송",
+      "source": "Prepare business correspondence.",
+      "match": "높음",
+      "from": "문서 관리"
+    },
+    {
+      "text": "계약 서류 검토",
+      "source": "Prepare contracts, disclosures, or applications.",
+      "match": "근사",
+      "from": "계약 관리"
+    },
+    {
+      "text": "기관 예산 집행 분석",
+      "source": "Analyze budgetary or accounting data.",
+      "match": "근사",
+      "from": "예산 집행"
+    },
+    {
+      "text": "민원 문의 응대",
+      "source": "Respond to customer inquiries.",
+      "match": "높음",
+      "from": "민원 처리"
+    },
+    {
+      "text": "업무 실적 보고서",
+      "source": "Prepare operational progress or status reports.",
+      "match": "근사",
+      "from": "경영 실적 보고"
+    },
+    {
+      "text": "회의록·기록물 관리",
+      "source": "Maintain records, documents, or other files.",
+      "match": "근사",
+      "from": "기록물 관리"
+    },
+    {
+      "text": "물품 구매 행정 처리",
+      "source": "Perform administrative or clerical tasks.",
+      "match": "근사",
+      "from": "총무"
+    },
+    {
+      "text": "경영평가 자료 정리",
+      "source": "Coordinate regulatory documentation activities.",
+      "match": "근사",
+      "from": "경영평가 대응"
+    },
+    {
+      "text": "내년도 예산안 편성",
+      "source": "Prepare operational budgets.",
+      "match": "근사",
+      "from": "예산 편성"
+    },
+    {
+      "text": "제도 개선 아이디어 제안",
+      "source": "Advise others on business or operational matters.",
+      "match": "근사",
+      "from": "제도 개선"
+    }
+  ],
+  "traps": [
+    {
+      "text": "발전소 설비 정비",
+      "owner": "기술직",
+      "why": "행정직은 설비를 직접 정비하지 않아요."
+    },
+    {
+      "text": "요금 인상 법안 발의",
+      "owner": "국회",
+      "why": "법을 만드는 건 국회예요."
+    },
+    {
+      "text": "뉴스 기사 쓰기",
+      "owner": "기자",
+      "why": "기관은 보도자료를 내고, 기사는 기자가 써요."
+    }
+  ],
+  "specs": [
+    "NCS 직업기초능력",
+    "한국사 능력검정",
+    "컴활 1급",
+    "토익 800",
+    "지역인재",
+    "봉사활동"
+  ],
+  "skills": [
+    "규정을 정확히 지키는 성실함",
+    "민원인 입장에서 설명하는 친절함",
+    "공정함과 청렴"
+  ],
+  "questions": [
+    "AI 챗봇이 민원 답하면 행정직은 뭐 해요?",
+    "규정과 민원인 사정이 부딪쳐요. 어떻게 해요?",
+    "공공기관 직원에게 가장 중요한 가치는?"
+  ],
+  "terms": [
+    {
+      "term": "NCS",
+      "desc": "국가직무능력표준. 공공기관 채용이 이 기준으로 직무와 시험을 짜요."
+    },
+    {
+      "term": "경영평가",
+      "desc": "정부가 공공기관의 1년 경영 성과를 채점하는 제도예요."
+    },
+    {
+      "term": "공문서",
+      "desc": "기관이 공식적으로 주고받는 문서예요. 정해진 양식이 있어요."
+    },
+    {
+      "term": "블라인드 채용",
+      "desc": "학교·나이 같은 정보를 가리고 직무 능력만 보는 채용 방식이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

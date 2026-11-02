@@ -1,0 +1,168 @@
+{
+  "id": "gamja-chem-hr",
+  "status": "reviewed",
+  "sample": true,
+  "field": "biz",
+  "job": "hr",
+  "company": "감자케미칼",
+  "position": "인사(HR) 신입",
+  "intro": "사람이 일하기 좋은 회사를 설계하는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "인적성검사",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "직무면접",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "임원면접",
+      "features": [
+        "interview"
+      ]
+    },
+    {
+      "name": "처우협의",
+      "type": "bonus"
+    }
+  ],
+  "tasks": [
+    {
+      "text": "신입 교육 프로그램 기획",
+      "source": "Develop educational programs.",
+      "match": "높음",
+      "from": "교육 기획·운영"
+    },
+    {
+      "text": "교육 만족도 효과 평가",
+      "source": "Evaluate program effectiveness.",
+      "match": "근사",
+      "from": "교육 효과 분석"
+    },
+    {
+      "text": "직원 성장 면담 지원",
+      "source": "Support the professional development of others.",
+      "match": "근사",
+      "from": "경력 개발 지원"
+    },
+    {
+      "text": "현업 팀장에게 인사 규정 안내",
+      "source": "Advise others on human resources topics.",
+      "match": "근사",
+      "from": "인사 제도 운영"
+    },
+    {
+      "text": "교대 근무표 배정",
+      "source": "Assign duties or work schedules to employees.",
+      "match": "근사",
+      "from": "근태 관리"
+    },
+    {
+      "text": "면접 일정 잡기",
+      "source": "Schedule appointments.",
+      "match": "높음",
+      "from": "채용 운영"
+    },
+    {
+      "text": "인사 기록 정리",
+      "source": "Maintain records, documents, or other files.",
+      "match": "근사",
+      "from": "인사 DB 관리"
+    },
+    {
+      "text": "재직증명서 발급 처리",
+      "source": "Perform administrative or clerical tasks.",
+      "match": "근사",
+      "from": "인사 행정"
+    },
+    {
+      "text": "지원자 안내 메일 발송",
+      "source": "Prepare business correspondence.",
+      "match": "근사",
+      "from": "채용 커뮤니케이션"
+    },
+    {
+      "text": "퇴사율 추세 분석",
+      "source": "Analyze data to identify trends or relationships among variables.",
+      "match": "근사",
+      "from": "HR 데이터 분석"
+    },
+    {
+      "text": "노조와 근무제도 논의",
+      "source": "Discuss business strategies, practices, or policies with managers.",
+      "match": "근사",
+      "from": "노사 협의"
+    }
+  ],
+  "traps": [
+    {
+      "text": "급여 세금 신고",
+      "owner": "재무회계팀",
+      "why": "급여 계산까지는 인사, 세금 신고는 회계 몫인 회사가 많아요."
+    },
+    {
+      "text": "채용 광고 영상 촬영",
+      "owner": "홍보팀",
+      "why": "영상 제작은 홍보팀이 해요."
+    },
+    {
+      "text": "공장 안전 설비 점검",
+      "owner": "환경안전팀",
+      "why": "설비 안전은 EHS팀 일이에요."
+    }
+  ],
+  "specs": [
+    "공인노무사 1차",
+    "HRD 경험",
+    "엑셀",
+    "컴활 1급",
+    "인사 인턴",
+    "토익스피킹"
+  ],
+  "skills": [
+    "사람 이야기를 끝까지 듣는 공감력",
+    "규정을 공정하게 적용하는 판단력",
+    "민감한 정보를 지키는 신뢰"
+  ],
+  "questions": [
+    "AI가 서류를 거르면 인사팀은 뭐 해요?",
+    "팀장과 팀원 갈등, 어떻게 중재해요?",
+    "좋은 교육이란 뭐라고 생각해요?"
+  ],
+  "terms": [
+    {
+      "term": "HRD",
+      "desc": "직원 교육과 성장을 돕는 인사 분야예요."
+    },
+    {
+      "term": "HRM",
+      "desc": "채용·평가·보상처럼 인력을 관리하는 인사 분야예요."
+    },
+    {
+      "term": "근태",
+      "desc": "출근·퇴근·휴가 같은 근무 기록이에요."
+    },
+    {
+      "term": "노사 협의",
+      "desc": "회사와 노동조합이 근무 조건을 함께 정하는 과정이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

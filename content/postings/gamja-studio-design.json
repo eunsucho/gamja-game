@@ -1,0 +1,158 @@
+{
+  "id": "gamja-studio-design",
+  "status": "reviewed",
+  "sample": true,
+  "field": "design",
+  "job": "graphic",
+  "company": "감자스튜디오",
+  "position": "그래픽 디자이너 신입",
+  "intro": "브랜드의 첫인상을 그림으로 만드는 자리",
+  "stages": [
+    {
+      "name": "서류",
+      "features": [
+        "spec"
+      ]
+    },
+    {
+      "name": "포트폴리오 심사",
+      "features": [
+        "trap"
+      ]
+    },
+    {
+      "name": "실무 과제",
+      "features": [
+        "trap",
+        "interview"
+      ]
+    },
+    {
+      "name": "면접",
+      "features": [
+        "interview"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "text": "SNS 홍보 이미지 제작",
+      "source": "Create computer-generated graphics or animation.",
+      "match": "높음",
+      "from": "디지털 콘텐츠 디자인"
+    },
+    {
+      "text": "브로슈어 지면 디자인",
+      "source": "Design layouts for print publications.",
+      "match": "높음",
+      "from": "편집 디자인"
+    },
+    {
+      "text": "행사 배너·부스 디자인",
+      "source": "Design layout of art or product exhibits, displays, or promotional materials.",
+      "match": "근사",
+      "from": "프로모션 디자인"
+    },
+    {
+      "text": "캐릭터 일러스트 그리기",
+      "source": "Draw detailed or technical illustrations.",
+      "match": "근사",
+      "from": "일러스트 작업"
+    },
+    {
+      "text": "클라이언트 요구 듣기",
+      "source": "Confer with clients to determine needs.",
+      "match": "근사",
+      "from": "클라이언트 미팅"
+    },
+    {
+      "text": "시안 피드백 검토",
+      "source": "Review art or design materials.",
+      "match": "근사",
+      "from": "디자인 검수"
+    },
+    {
+      "text": "레퍼런스 리서치",
+      "source": "Conduct research to inform art, designs, or other work.",
+      "match": "높음",
+      "from": "트렌드 리서치"
+    },
+    {
+      "text": "광고 문구 다듬기",
+      "source": "Write advertising or promotional material.",
+      "match": "근사",
+      "from": "카피 협업"
+    },
+    {
+      "text": "팀원과 시안 발전시키기",
+      "source": "Collaborate with others to develop or refine designs.",
+      "match": "근사",
+      "from": "디자인 협업"
+    },
+    {
+      "text": "작업 파일 정리 보관",
+      "source": "Maintain records, documents, or other files.",
+      "match": "근사",
+      "from": "파일 관리"
+    }
+  ],
+  "traps": [
+    {
+      "text": "앱 버튼 코딩",
+      "owner": "프론트엔드 개발자",
+      "why": "디자인을 코드로 옮기는 건 개발자예요."
+    },
+    {
+      "text": "광고 매체 구매",
+      "owner": "미디어플래너",
+      "why": "광고 자리를 사는 건 미디어팀이에요."
+    },
+    {
+      "text": "인쇄기 수리",
+      "owner": "인쇄소",
+      "why": "인쇄 장비는 인쇄소가 관리해요."
+    }
+  ],
+  "specs": [
+    "포트폴리오",
+    "Photoshop",
+    "Illustrator",
+    "Figma",
+    "공모전",
+    "컬러리스트"
+  ],
+  "skills": [
+    "브랜드 톤을 지키는 일관성",
+    "피드백을 디자인으로 바꾸는 유연함",
+    "왜 이렇게 그렸는지 말로 설명하는 힘"
+  ],
+  "questions": [
+    "AI가 이미지를 뽑아 주면 디자이너는 뭐 해요?",
+    "클라이언트가 '로고 크게'만 반복해요. 어떻게 해요?",
+    "포트폴리오에서 가장 고민한 작업은?"
+  ],
+  "terms": [
+    {
+      "term": "시안",
+      "desc": "확정 전 보여 주는 디자인 초안이에요."
+    },
+    {
+      "term": "편집 디자인",
+      "desc": "책·잡지·브로슈어처럼 글과 그림을 지면에 배치하는 디자인이에요."
+    },
+    {
+      "term": "레퍼런스",
+      "desc": "디자인할 때 참고하는 다른 작업물이에요."
+    },
+    {
+      "term": "포트폴리오",
+      "desc": "내 작업을 모은 작품집이에요. 디자이너 서류의 핵심이에요."
+    }
+  ],
+  "provenance": {
+    "site": "",
+    "scrapedAt": "2026-11-02",
+    "url": "",
+    "note": "공개 채용공고 여러 건(2026 하반기 신입 공채)의 담당업무·전형절차를 묶어 각색한 가상 공고. 실제 회사와 무관. 현직자 확인 필요"
+  }
+}

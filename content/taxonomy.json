@@ -1,6 +1,6 @@
 {
   "note": "분야 = 로비 안내판의 동(棟). NCS 직무분류 대분류 코드를 따른다. 직무 = 그 동 안의 한 줄. soc는 O*NET 직업 코드(확인된 것만 적고 모르면 비워 둠). icon은 Tabler 아이콘 이름(https://tabler.io/icons), short는 로비 탭에 보일 짧은 이름.",
-  "season": "2026 하반기 감자그룹 공채 (샘플)",
+  "season": "2026 하반기 감자그룹 공채",
   "fields": [
     {
       "id": "biz",
@@ -13,10 +13,44 @@
           "name": "IR",
           "ncs": "0203",
           "soc": ""
+        },
+        {
+          "id": "accounting",
+          "name": "재무·회계",
+          "ncs": "0203",
+          "soc": "13-2011.00"
+        },
+        {
+          "id": "hr",
+          "name": "인사·교육",
+          "ncs": "0202",
+          "soc": ""
+        },
+        {
+          "id": "admin",
+          "name": "공공기관 행정",
+          "ncs": "0201",
+          "soc": ""
         }
       ],
       "icon": "briefcase",
       "short": "경영·사무"
+    },
+    {
+      "id": "finance",
+      "name": "금융·보험",
+      "ncs": "03",
+      "wing": "남관",
+      "jobs": [
+        {
+          "id": "bank",
+          "name": "은행",
+          "ncs": "0301",
+          "soc": ""
+        }
+      ],
+      "icon": "building-bank",
+      "short": "금융"
     },
     {
       "id": "sales",
@@ -29,6 +63,12 @@
           "name": "서비스·사업 기획",
           "ncs": "1001",
           "soc": ""
+        },
+        {
+          "id": "marketing",
+          "name": "마케팅",
+          "ncs": "1001",
+          "soc": ""
         }
       ],
       "icon": "speakerphone",
@@ -39,9 +79,82 @@
       "name": "정보통신",
       "ncs": "20",
       "wing": "서관",
-      "jobs": [],
+      "jobs": [
+        {
+          "id": "backend",
+          "name": "백엔드 개발",
+          "ncs": "2001",
+          "soc": "15-1252.00"
+        },
+        {
+          "id": "frontend",
+          "name": "프론트엔드 개발",
+          "ncs": "2001",
+          "soc": "15-1254.00"
+        },
+        {
+          "id": "data",
+          "name": "데이터 분석",
+          "ncs": "2001",
+          "soc": ""
+        }
+      ],
       "icon": "device-desktop",
       "short": "정보통신"
+    },
+    {
+      "id": "design",
+      "name": "문화·예술·디자인",
+      "ncs": "08",
+      "wing": "별관",
+      "jobs": [
+        {
+          "id": "graphic",
+          "name": "그래픽 디자인",
+          "ncs": "0803",
+          "soc": "27-1024.00"
+        },
+        {
+          "id": "uiux",
+          "name": "UI/UX 디자인",
+          "ncs": "0803",
+          "soc": ""
+        }
+      ],
+      "icon": "palette",
+      "short": "디자인"
+    },
+    {
+      "id": "health",
+      "name": "보건·의료",
+      "ncs": "06",
+      "wing": "의료동",
+      "jobs": [
+        {
+          "id": "nurse",
+          "name": "간호",
+          "ncs": "0601",
+          "soc": "29-1141"
+        }
+      ],
+      "icon": "stethoscope",
+      "short": "보건의료"
+    },
+    {
+      "id": "science",
+      "name": "연구·과학",
+      "ncs": "",
+      "wing": "연구동",
+      "jobs": [
+        {
+          "id": "forensic",
+          "name": "법과학",
+          "ncs": "",
+          "soc": "19-4092.00"
+        }
+      ],
+      "icon": "flask",
+      "short": "연구"
     }
   ]
 }

@@ -421,3 +421,130 @@ body.desk .keyhint:empty, body.desk.narrow .keyhint { display: none; }
   .card:not(.soon):hover { transform: translateX(3px); box-shadow: 0 12px 26px rgba(90, 64, 40, .2); }
   .chip:not([aria-selected="true"]):hover { background: rgba(255, 255, 255, .8); color: var(--ink); }
 }
+
+/* =====================================================================
+   게임 UI 레이어 (2026-11): 두꺼운 테두리 + 딱딱한 그림자 + 눌리는 버튼.
+   위 기본 스타일을 덮어쓴다. 색은 그대로 버터·감자색.
+   ===================================================================== */
+:root { --edge: #5A3A12; --edge-soft: rgba(90, 58, 18, .55); --press: 6px; }
+
+/* 주 버튼: 아케이드 버튼처럼 테두리·광택·눌림 */
+.btn { position: relative; border: 3px solid var(--edge); border-radius: 18px; min-height: 60px; letter-spacing: .01em;
+  background: linear-gradient(#FFE79E 0%, var(--butter-1) 45%, var(--butter-2) 100%);
+  box-shadow: 0 var(--press) 0 var(--edge), 0 calc(var(--press) + 6px) 14px rgba(90, 58, 18, .35);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, .6); transition: transform .08s, box-shadow .08s, filter .15s; overflow: hidden; }
+.btn::before { content: ""; position: absolute; left: 10px; right: 10px; top: 5px; height: 38%; border-radius: 12px; background: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, 0)); pointer-events: none; }
+.btn:hover { filter: brightness(1.05) saturate(1.1); }
+.btn:active, .btn.pressed { transform: translateY(var(--press)); box-shadow: 0 0 0 var(--edge), 0 3px 8px rgba(90, 58, 18, .3); }
+.btn.sub { border: 3px solid var(--edge); color: var(--ink); background: linear-gradient(#fff, #F4EBDD); backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: 0 5px 0 var(--edge-soft), 0 10px 14px rgba(90, 58, 18, .2); }
+.btn.sub:active { transform: translateY(5px); box-shadow: 0 0 0 var(--edge-soft); }
+.btn:disabled { filter: grayscale(.85) brightness(.95); opacity: .7; cursor: not-allowed; transform: none; }
+.btn#toStart { min-height: 68px; font-size: 25px; animation: btnBreath 1.8s ease-in-out infinite; }
+@keyframes btnBreath { 50% { transform: translateY(-3px) scale(1.02); } }
+
+.btn-sm, .btn-sm.glass { height: 42px; border: 2.5px solid var(--edge); border-radius: 14px; background: linear-gradient(#fff, #F4EBDD); color: var(--ink);
+  box-shadow: 0 4px 0 var(--edge-soft); backdrop-filter: none; -webkit-backdrop-filter: none; text-decoration: none; transition: transform .08s, box-shadow .08s; }
+.btn-sm:active { transform: translateY(4px); box-shadow: 0 0 0 var(--edge-soft); }
+
+.ibtn { border: 3px solid var(--edge); box-shadow: 0 4px 0 var(--edge); transition: transform .08s, box-shadow .08s; }
+.ibtn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--edge); }
+.ibtn.sub { border: 2.5px solid var(--edge); background: linear-gradient(#fff, #F4EBDD); box-shadow: 0 4px 0 var(--edge-soft); }
+.ibtn:disabled { opacity: .35; cursor: not-allowed; }
+.ibtn.nudge { animation: nudge 1.2s ease-in-out infinite; background: linear-gradient(var(--butter-1), var(--butter-2)); }
+@keyframes nudge { 0%, 100% { translate: 0 0; } 50% { translate: 4px 0; } }
+
+/* 패널: 게임 대화창처럼 테두리를 준다 */
+.card-pop, .sheet, .memo, .rules, .hang { border: 3px solid var(--edge); box-shadow: 0 6px 0 var(--edge-soft), 0 14px 26px rgba(90, 58, 18, .25); }
+.card-pop { background: #FFFBF2; }
+
+/* 로비 분야 탭: 많아져서 가로로 밀어 본다 */
+.chips { overflow-x: auto; scrollbar-width: none; padding: 2px 2px 8px; margin: 0 -2px; scroll-snap-type: x mandatory; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; min-width: 84px; padding: 10px 12px 8px; border: 2.5px solid var(--edge-soft); background: rgba(255, 255, 255, .85);
+  box-shadow: 0 4px 0 var(--edge-soft); scroll-snap-align: start; transition: transform .08s, box-shadow .08s; }
+.chip:active { transform: translateY(4px); box-shadow: 0 0 0 var(--edge-soft); }
+.chip[aria-selected="true"] { border-color: var(--edge); background: linear-gradient(#FFE79E, var(--butter-1)); box-shadow: 0 4px 0 var(--edge); }
+.chip[aria-selected="true"] i { color: var(--butter-ink); }
+
+/* 공고 카드: 퀘스트 카드 */
+.card { border: 3px solid var(--edge); box-shadow: 0 5px 0 var(--edge-soft); transition: transform .08s, box-shadow .08s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--edge-soft); }
+.card:active { transform: translateY(5px); box-shadow: 0 0 0 var(--edge-soft); }
+.card .go { border: 2.5px solid var(--edge); }
+
+/* 공고 화면: 전형 단계 (1 → 2 → 3 → 최종합격) */
+.sheet .intro { font-size: 15px; font-weight: 700; color: var(--ink-2); }
+.floors { display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: center; }
+.floors li { flex-direction: column; gap: 4px; padding: 8px 8px 6px; min-width: 64px; flex: 1 1 64px; text-align: center; justify-content: flex-start;
+  border: 2.5px solid var(--edge-soft); background: #fff; font-size: 14px; line-height: 1.25; position: relative; }
+.floors li b { min-width: 30px; height: 30px; border-radius: 50%; padding: 0; background: linear-gradient(var(--butter-1), var(--butter-2)); color: var(--butter-ink); border: 2px solid var(--edge); }
+.floors li.bonus b { background: #E6F4EA; }
+.floors li.roof { border-color: var(--edge); background: #FFF6D8; }
+.floors li.roof b { background: linear-gradient(#FFE79E, var(--butter-2)); }
+.floors li i { margin: 0; color: var(--butter-ink); font-size: 16px; }
+
+/* 규칙 카드: 캐릭터 + 예시 단어 + 할 일 */
+.how { display: grid; gap: 8px; text-align: left; }
+.how-row { display: flex; gap: 10px; align-items: center; border-radius: 16px; padding: 8px 10px; border: 2.5px solid; background: #fff; }
+.how-row.me { border-color: #F5B53A; background: #FFF8E3; }
+.how-row.ai { border-color: #6F9BE8; background: #EEF4FF; }
+.how-row.no { border-color: #E2506C; background: #FFF0F2; }
+.how-face { flex: none; width: 54px; height: 54px; display: grid; place-items: center; }
+.how-face img { width: 100%; }
+.how-row.no .how-face i { font-size: 40px; color: #E2506C; }
+.how-txt { display: grid; gap: 2px; min-width: 0; }
+.how-txt .drop.how-ex { position: static; justify-self: start; font-size: 13px; padding: 3px 10px; box-shadow: none; border: 1.5px solid rgba(62, 47, 39, .2); }
+.how-txt b { font-family: var(--title); font-weight: 400; font-size: 18px; line-height: 1.2; }
+.how-row.me b { color: #9A5B00; } .how-row.ai b { color: #2F5DB8; } .how-row.no b { color: #C33452; }
+.how-txt small { font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--ink-2); }
+.how-goal { font-weight: 800; font-size: 15px; text-align: center; }
+.rules { gap: 8px; }
+#dHow .how-row { padding: 6px 8px; }
+#pauseHow .how-txt small { display: none; }
+.card-pop:has(#dHow:not([hidden])) { width: min(100%, 380px); }
+
+/* 플레이 HUD: '1/4 서류' + 합격 게이지 글자 + AI가 가져간 수 */
+.pill b { font-size: 17px; }
+.ai-count { gap: 4px; padding: 0 10px 0 6px; }
+.ai-count img { width: 30px; height: 30px; object-fit: contain; }
+.ai-count b { color: #2F5DB8; }
+.ai-count.buzz { animation: buzz .4s; }
+.step-label { justify-self: center; margin-bottom: -4px; font-size: 12px; font-weight: 900; color: #fff; letter-spacing: .02em; text-shadow: 0 1px 3px rgba(40, 70, 110, .6); }
+.steps i { height: 10px; border: 1.5px solid rgba(90, 58, 18, .35); }
+.steps i.on { background: linear-gradient(var(--butter-1), var(--butter-2)); box-shadow: 0 0 10px rgba(255, 214, 107, .9); }
+.app.kb .step-label { display: none; }
+
+/* AI 동기: 늘 이름표, 가져갈 때 단어에 파란 테두리 + 떠오르는 글자 */
+.nameplate { position: absolute; left: 50%; bottom: -6px; translate: -50% 0; white-space: nowrap; font-size: 12px; font-weight: 900; color: #fff; background: #3F6FD1;
+  border: 2px solid #1F3F86; border-radius: 999px; padding: 1px 9px; }
+.app.kb .nameplate { font-size: 10px; padding: 0 6px; }
+.drop.seized { background: #DCE8FF !important; color: #1F3F86; box-shadow: 0 0 0 3px #3F6FD1, 0 0 18px rgba(63, 111, 209, .8); }
+.float.ai { font-size: 20px; color: #fff; text-shadow: 0 2px 0 #1F3F86, 0 0 10px rgba(63, 111, 209, .9); }
+.who.ai.react-grab .nameplate { animation: buzz .4s; background: #2A58B8; }
+.who.ai.spot::before { content: ""; position: absolute; inset: -14px; border-radius: 50%; border: 4px dashed #3F6FD1; animation: spin 6s linear infinite; z-index: -1; }
+@keyframes spin { to { rotate: 360deg; } }
+
+/* 연습 안내 말풍선: 잘 보이게 진한 바탕 */
+.tut-tip { background: rgba(40, 28, 18, .9); color: #fff; border: 3px solid var(--butter-1); box-shadow: 0 6px 0 rgba(0, 0, 0, .35); font-size: 22px; font-weight: 400;
+  font-family: var(--title); text-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.app.compact .tut-tip { font-size: 19px; }
+.app.kb .tut-tip { font-size: 15px; }
+
+/* 결과: 회고록이 화면의 주인공. 감자는 작게 */
+#v-result .memo { flex: 1; min-height: 0; grid-template-rows: auto 1fr auto; background: #FFFBF2; }
+#v-result .memo-page { max-height: none; min-height: 0; }
+.result-hero.mini { justify-content: flex-start; gap: 0; margin-top: -4px; }
+.result-hero.mini .who.me.big { width: 82px; margin: 0 -4px -6px -6px; }
+.result-hero.mini .bubble { margin-bottom: 20px; font-size: 18px; max-width: none; padding: 7px 12px; }
+.result-hero.mini .hired-tag { left: 120px; top: -6px; translate: 0 0; }
+.gate-note { text-align: center; font-size: 13px; font-weight: 800; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, .6); margin: -4px 0; }
+.pg-lesson b { font-size: 21px; }
+.quiz { display: grid; gap: 8px; }
+.quiz-opt { border: 2.5px solid var(--edge-soft); border-radius: 14px; background: #fff; padding: 10px 12px; font-weight: 800; font-size: 16px; text-align: left;
+  box-shadow: 0 4px 0 var(--edge-soft); transition: transform .08s, box-shadow .08s; }
+.quiz-opt:active { transform: translateY(4px); box-shadow: 0 0 0 var(--edge-soft); }
+.quiz-opt.right { border-color: #2E8B57; background: #E6F6EC; }
+.quiz-opt.right::after { content: " ✓ AI가 많이 하는 일"; color: #2E8B57; font-size: 13px; }
+.quiz-opt.wrong { border-color: #E2506C; background: #FFF0F2; }
+.ws-link { justify-self: start; }
