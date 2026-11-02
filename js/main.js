@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103n";
-import { Game, MINE } from "./game.js?v=20261103n";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103n";
-import { esc } from "./util.js?v=20261103n";
-import { CONFIG } from "./config.js?v=20261103n";
-import { floors } from "./scene.js?v=20261103n";
-import * as T from "./copy.js?v=20261103n";
+import { loadIndex, loadPosting } from "./data.js?v=202611021719";
+import { Game, MINE } from "./game.js?v=202611021719";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=202611021719";
+import { esc } from "./util.js?v=202611021719";
+import { CONFIG } from "./config.js?v=202611021719";
+import { floors } from "./scene.js?v=202611021719";
+import * as T from "./copy.js?v=202611021719";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -114,13 +114,13 @@ function buddy(kind, text) {
 function say(text) { $("say").textContent = text; }
 
 // 규칙 카드: 사람 몫 / AI 몫 / 옆 팀 일을 캐릭터 그림과 예시 단어로 보여 준다
-const WHO_IMG = { me: "assets/potato_cut.png", ai: "assets/ai_cut.png" };
+const WHO_IMG = { me: "assets/potato_cut.png?v=202611021719", ai: "assets/ai_cut.png?v=202611021719" };
 function rulesHTML(ex = null) {
   return `<div class="how">` + T.RULES.map(r => `<div class="how-tile ${r.who}">
-    <span class="how-pic">${WHO_IMG[r.who] ? `<img class="face" src="${WHO_IMG[r.who]}" alt="">` : ""}<img class="badge-it" src="assets/items/${r.item}.png" alt=""></span>
+    <span class="how-pic">${WHO_IMG[r.who] ? `<img class="face" src="${WHO_IMG[r.who]}" alt="">` : ""}<img class="badge-it" src="assets/items/${r.item}.png?v=202611021719" alt=""></span>
     <span class="how-txt2"><span class="how-word">${esc(ex?.[r.who] || r.word)}</span><b>${esc(r.label)}</b></span></div>`).join("") + `</div>`;
 }
-const item = (n, cls = "") => `<img class="it ${cls}" src="assets/items/${n}.png" alt="">`;
+const item = (n, cls = "") => `<img class="it ${cls}" src="assets/items/${n}.png?v=202611021719" alt="">`;
 // 목표: 쳐서 → 게이지 → 최종합격
 function goalHTML() {
   return `<div class="goal-row">${item("key")}<i class="arr"></i>${item("star")}<i class="arr"></i>${item("trophy")}</div>`;
@@ -141,7 +141,7 @@ function splash(name) {
   if (!name) return;
   const im = document.createElement("img");
   im.className = `splash ${name}`;
-  im.src = `assets/ui/${name}.png`;
+  im.src = `assets/ui/${name}.png?v=202611021719`;
   im.alt = "";
   $("v-play").appendChild(im);
   setTimeout(() => im.remove(), 1400);
@@ -180,7 +180,7 @@ function retrigger(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.
 // ---------- 층 도착 카드 ----------
 function doorShow({ floor, msg, tip, terms = [], html = "", icon = "" }, { button = null, auto = 0 } = {}) {
   $("dIcon").hidden = !icon;
-  if (icon) $("dIcon").src = icon.includes("/") ? icon : `assets/items/${icon}.png`;
+  if (icon) $("dIcon").src = icon.includes("/") ? icon : `assets/items/${icon}.png?v=202611021719`;
   $("dIcon").classList.toggle("pot", icon.includes("/"));
   $("dHow").hidden = !html;
   $("dHow").innerHTML = html;
@@ -224,7 +224,7 @@ async function init() {
   const first = INDEX.fields.find(f => f.jobs.some(j => j.postings.length)) || INDEX.fields[0];
   wingId = first?.id;
   // 배경 그림을 미리 받아 둔다
-  ["lobby", "hall", "lift_day", "lift_sunset", "lift_clouds", "roof", "exit"].forEach(n => { new Image().src = `assets/bg/${n}.jpg`; });
+  ["lobby", "hall", "lift_day", "lift_sunset", "lift_clouds", "roof", "exit"].forEach(n => { new Image().src = `assets/bg/${n}.jpg?v=202611021719`; });
 }
 
 // ---------- 감자극장 (인트로) ----------
@@ -246,7 +246,7 @@ function renderIntro() {
   $("v-intro").classList.toggle("spot", !!(c.rules || c.story));
   requestAnimationFrame(() => placeBubbles(c));
   if (c.rules) $("rulesCard").innerHTML = rulesHTML() + goalHTML();
-  if (c.story) $("rulesCard").innerHTML = `<div class="story ${c.story.who}"><img class="story-face" src="${c.story.who === "ai" ? "assets/ai_cut.png" : "assets/potato_cut.png"}" alt="">
+  if (c.story) $("rulesCard").innerHTML = `<div class="story ${c.story.who}"><img class="story-face" src="${c.story.who === "ai" ? "assets/ai_cut.png?v=202611021719" : "assets/potato_cut.png?v=202611021719"}" alt="">
     <p class="story-say">${esc(c.story.text).replace(/\n/g, "<br>")}</p>${c.story.sub ? `<p class="story-sub">${esc(c.story.sub)}</p>` : ""}</div>`;
   placeBubbles(c);
   $("introDots").innerHTML = T.INTRO.map((_, i) => `<i class="${i === introI ? "on" : ""}"></i>`).join("");
@@ -307,7 +307,7 @@ async function openBrief(id) {
   const fl = floors(current.stages);
   // 전형 = 스테이지. 한 줄로 이어진 길: 1 서류(START) → 2 → … → 최종합격
   const rows = fl.map((f, i) => `<li class="st ${f.bonus ? "bonus" : ""} ${i === 0 ? "first" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span>${i === 0 ? `<em>START</em>` : ""}</li>`)
-    .concat(`<li class="st roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
+    .concat(`<li class="st roof"><img src="assets/items/trophy.png?v=202611021719" alt=""><span>최종합격</span></li>`);
   $("hero").querySelector("img").src = T.outfitOf(current.field);
   $("brief").innerHTML = `<div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
     
@@ -399,7 +399,7 @@ function hud(h) {
   $("hCombo").hidden = !combo;
   if (combo) $("hCombo").textContent = `콤보 ${h.combo}`;
   $("hFails").hidden = h.bonus || h.tutorial;
-  $("hFails").innerHTML = Array.from({ length: h.failLimit }, (_, i) => `<img src="assets/items/letter.png" class="${i < h.fails ? "on" : ""}" alt="">`).join("");
+  $("hFails").innerHTML = Array.from({ length: h.failLimit }, (_, i) => `<img src="assets/items/letter.png?v=202611021719" class="${i < h.fails ? "on" : ""}" alt="">`).join("");
   $("hSteps").hidden = h.bonus || h.tutorial;
   $("hStepLabel").hidden = h.bonus || h.tutorial;
 
@@ -567,7 +567,7 @@ async function drawShare(cv) {
   const g = cv.getContext("2d"), W = cv.width, H = cv.height, L = T.LEVELS[s.lv];
   // 카드 프레임(Figma) 위에: 감자 · 리본에 이름 · 아래 판에 타수
   g.clearRect(0, 0, W, H);
-  const frame = await loadImg("assets/ui/card_frame.png");
+  const frame = await loadImg("assets/ui/card_frame.png?v=202611021719");
   if (frame) g.drawImage(frame, 0, 0, W, H);
   const pot = await loadImg(L.img); if (pot) g.drawImage(pot, W / 2 - 330, 220, 660, 660);
   const outfit = await loadImg(s.outfit); if (outfit) g.drawImage(outfit, 110, 780, 250, 250);
@@ -611,7 +611,7 @@ function quizPage() {
 let quizAnswer = null;
 function renderResult(r) {
   const reason = r.passed ? "pass" : (r.reason || "letters");
-  $("resultBg").style.backgroundImage = `url(assets/bg/${r.passed ? "roof" : "exit"}.jpg)`;
+  $("resultBg").style.backgroundImage = `url(assets/bg/${r.passed ? "roof" : "exit"}.jpg?v=202611021719)`;
   $("notice").innerHTML = smsHTML(r.passed ? T.SMS.pass() : T.SMS[reason](r.failedStage));
   $("hiredTag").hidden = !r.passed;
   $("resultHero").className = `who me big mood-${r.passed ? "hired" : "teary"}`;
@@ -646,7 +646,7 @@ function renderResult(r) {
     `<div class="pg-lesson">${item("idea", "big")}<b>${esc(lessons[0].short || lessons[0].head)}</b></div>`,
     ...(missedMine.length ? [`<div class="pg-lesson">${item("letter", "big")}<b>놓친 사람 몫</b><div class="miss-chips">${missedMine.slice(0, 3).map(w => `<span>${esc(w.text)}</span>`).join("")}</div></div>`] : []),
     `<div class="share-wrap"><canvas id="shareCanvas" width="1080" height="1626"></canvas></div>
-     <div class="row"><button class="btn grow" id="shareBtn" type="button">공유하기</button><button class="btn sub fit" id="dogamBtn" type="button"><img src="assets/potato/lv4_gold.png" alt="">도감</button></div>`
+     <div class="row"><button class="btn grow" id="shareBtn" type="button">공유하기</button><button class="btn sub fit" id="dogamBtn" type="button"><img src="assets/potato/lv4_gold.png?v=202611021719" alt="">도감</button></div>`
   ];
   // 성찰 장(퀴즈 + 배운 것 3장 + 진짜 할 일)을 다 넘겨야 다시 하기·로비 버튼이 열린다
   memoGate = memoPages.length - 1;   // 공유 카드 전 장까지 다 보면 버튼이 열린다
@@ -785,7 +785,7 @@ function openDogam() {
   $("dogamGrid").innerHTML = ps.map(p => {
     const lv = rec[p.id]?.level ?? -1, L = T.LEVELS[lv];
     return `<button type="button" class="dg ${lv < 0 ? "empty" : ""}" data-id="${esc(p.id)}">
-      <img class="dg-pot" src="${L ? L.img : "assets/potato/lv4_gold_sil.png"}" alt="">
+      <img class="dg-pot" src="${L ? L.img : "assets/potato/lv4_gold_sil.png?v=202611021719"}" alt="">
       <b class="dg-name">${L ? esc(L.name) : "???"}</b>
       <span class="dg-cpm">${L && rec[p.id].bestCpm ? `${rec[p.id].bestCpm}타` : "-"}</span><span class="dg-job">${esc(p.job)}</span></button>`;
   }).join("");

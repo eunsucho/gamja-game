@@ -1,35 +1,35 @@
 // 게임 속 문구 모음. 대사·인트로·회고록 문장은 여기서만 고친다. (자리만 잡아 둔 예시 문구)
-import { CONFIG } from "./config.js?v=20261103n";
+import { CONFIG } from "./config.js?v=202611021719";
 
 // ---------- 세계관 인트로: 코미디 다큐 '감자극장' ----------
 // img: assets/intro/ 그림, nar: 내레이션 자막(다큐 성우 톤), say: 감자 속마음, ai: AI 동기 한마디
 // rules: true 인 장은 규칙 요약 카드
 export const DOCU_TITLE = "감자극장 · 제1화 취업";
 export const INTRO = [
-  { img: "assets/intro/1_born.jpg", at: [0.5, 0.66], nar: `강원도 어느 감자밭.
+  { img: "assets/intro/1_born.jpg?v=202611021719", at: [0.5, 0.66], nar: `강원도 어느 감자밭.
 오늘, 한 알의 감자가 태어났다.`, say: "응애." },
-  { img: "assets/intro/2_child.jpg", at: [0.47, 0.56], nar: `감자는 무럭무럭 자랐다.
+  { img: "assets/intro/2_child.jpg?v=202611021719", at: [0.47, 0.56], nar: `감자는 무럭무럭 자랐다.
 흙을 사랑했고, 햇볕을 사랑했다.
 장래희망은 '큰 감자'였다.`, say: "나 커서 큰 감자 될 거야!" },
-  { img: "assets/intro/3_college.jpg", at: [0.5, 0.5], nar: `스무 살, 감자는 감자대학교에 입학했다.
+  { img: "assets/intro/3_college.jpg?v=202611021719", at: [0.5, 0.5], nar: `스무 살, 감자는 감자대학교에 입학했다.
 동아리, 축제, 그리고 학점 2.9.
 감자는 행복했다.`, say: "인생 별거 없네~" },
-  { img: "assets/intro/4_senior.jpg", at: [0.62, 0.6], nar: `그러나 졸업은 다가왔다.
+  { img: "assets/intro/4_senior.jpg?v=202611021719", at: [0.62, 0.6], nar: `그러나 졸업은 다가왔다.
 동기들은 하나둘 떠나갔다.
 인턴으로, 대학원으로, 감자튀김으로.`, say: "…나도 이제 뭐라도 해야 하나?" },
-  { img: "assets/intro/5_dream.jpg", at: [0.3, 0.58], nar: `모든 감자의 꿈, 감자그룹.
+  { img: "assets/intro/5_dream.jpg?v=202611021719", at: [0.3, 0.58], nar: `모든 감자의 꿈, 감자그룹.
 연봉, 복지, 그리고 부모님의 자랑.`, say: `뭐 하는 회사인지는 모르겠지만…
 나도 간다.` },
-  { img: "assets/intro/6_rival.jpg", at: [0.32, 0.42], aiAt: [0.73, 0.43], nar: `그런데 올해 공채에는 특별한 지원자가 있었다.
+  { img: "assets/intro/6_rival.jpg?v=202611021719", at: [0.32, 0.42], aiAt: [0.73, 0.43], nar: `그런데 올해 공채에는 특별한 지원자가 있었다.
 지치지 않고, 밥도 안 먹는 AI 동기.`, say: "쟤도 지원했어…?", ai: "잘 부탁드립니다." },
-  { img: "assets/intro/7_rain.jpg", at: [0.5, 0.7], nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
+  { img: "assets/intro/7_rain.jpg?v=202611021719", at: [0.5, 0.7], nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
 사람 몫은 감자가, AI 몫은 AI 동기가.
 감자는 최종합격할 수 있을까.` },
   // 게임 설명: 화면 가운데에서 감자와 AI 동기가 번갈아 이야기한다
-  { img: "assets/bg/street.jpg", story: { who: "me", text: "여기는 감자그룹 공채장.\n공고 속 진짜 업무가\n비처럼 쏟아진대!" } },
-  { img: "assets/bg/street.jpg", story: { who: "ai", text: "난 AI 동기.\n사람들이 실제로 AI에게\n많이 맡기는 일은 내가 가져갈게.", sub: "근거: Anthropic Economic Index" } },
-  { img: "assets/bg/street.jpg", story: { who: "me", text: "그럼 난 사람이 할 일을\n똑같이 쳐서 지킬게.\n이건 타자 게임이야!" } },
-  { img: "assets/bg/street.jpg", story: { who: "ai", text: "타수는 맞게 친 단어로만 재.\n오타는 안 쳐줘!", sub: "1분에 친 자모 수 · 감자 = 5타" } }
+  { img: "assets/bg/street.jpg?v=202611021719", story: { who: "me", text: "여기는 감자그룹 공채장.\n공고 속 진짜 업무가\n비처럼 쏟아진대!" } },
+  { img: "assets/bg/street.jpg?v=202611021719", story: { who: "ai", text: "난 AI 동기.\n사람들이 실제로 AI에게\n많이 맡기는 일은 내가 가져갈게.", sub: "근거: Anthropic Economic Index" } },
+  { img: "assets/bg/street.jpg?v=202611021719", story: { who: "me", text: "그럼 난 사람이 할 일을\n똑같이 쳐서 지킬게.\n이건 타자 게임이야!" } },
+  { img: "assets/bg/street.jpg?v=202611021719", story: { who: "ai", text: "타수는 맞게 친 단어로만 재.\n오타는 안 쳐줘!", sub: "1분에 친 자모 수 · 감자 = 5타" } }
 ];
 // 규칙 카드: 그림 + 한 단어. (인트로 마지막 장 · 연습 전 · 일시정지)
 export const RULES = [
@@ -162,11 +162,11 @@ export function pctPhrase(w) {
 
 // ---------- 감자 행복도 (결과 · 도감 · 공유 카드) ----------
 export const LEVELS = [
-  { img: "assets/potato/lv0_dirt.png", name: "흙감자", say: "흙으로 돌아갈래…" },
-  { img: "assets/potato/lv1_steam.png", name: "찐감자", say: "그래도 좀 익었다" },
-  { img: "assets/potato/lv2_pancake.png", name: "감자전", say: "노릇노릇 자신감!" },
-  { img: "assets/potato/lv3_fries.png", name: "감자튀김", say: "바삭하게 거의 다 왔다!" },
-  { img: "assets/potato/lv4_gold.png", name: "황금감자", say: "최종합격! 사원증 GET" }
+  { img: "assets/potato/lv0_dirt.png?v=202611021719", name: "흙감자", say: "흙으로 돌아갈래…" },
+  { img: "assets/potato/lv1_steam.png?v=202611021719", name: "찐감자", say: "그래도 좀 익었다" },
+  { img: "assets/potato/lv2_pancake.png?v=202611021719", name: "감자전", say: "노릇노릇 자신감!" },
+  { img: "assets/potato/lv3_fries.png?v=202611021719", name: "감자튀김", say: "바삭하게 거의 다 왔다!" },
+  { img: "assets/potato/lv4_gold.png?v=202611021719", name: "황금감자", say: "최종합격! 사원증 GET" }
 ];
 // 합격 = 4. 아니면 통과한 전형 비율로 0~3, 사람 몫을 80% 넘게 지켰으면 한 단계 위(최대 3)
 export function levelOf(r, stages) {
@@ -185,8 +185,8 @@ export const COMPANY_LOGO = {
   "팀감자": "team", "감자식품": "food", "감자전자": "electronics", "감자몰": "mall", "감자텔레콤": "telecom",
   "감자스튜디오": "studio", "감자페이": "pay", "감자대학교병원": "hospital", "감자과학수사연구원": "forensic"
 };
-export const logoOf = name => `assets/logos/${COMPANY_LOGO[name] || "sprout"}.png`;
+export const logoOf = name => `assets/logos/${COMPANY_LOGO[name] || "sprout"}.png?v=202611021719`;
 
 // 분야별 감자 옷 (assets/outfit, Figma 생성)
 export const OUTFIT = { biz: "biz", finance: "finance", sales: "sales", it: "it", design: "design", health: "health", science: "science" };
-export const outfitOf = field => `assets/outfit/${OUTFIT[field] || "default"}.png`;
+export const outfitOf = field => `assets/outfit/${OUTFIT[field] || "default"}.png?v=202611021719`;

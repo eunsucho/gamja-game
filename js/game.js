@@ -1,7 +1,7 @@
 // 산성비 엔진. 화면 그리기는 단어 방울만 하고, 상태 변화는 hooks로 바깥(main.js)에 알린다.
 // 전형 하나 = 본사 한 층. 받아칠 때마다 엘리베이터가 한 칸씩 올라가고, 칸을 다 채우면 그 전형 합격.
-import { CONFIG } from "./config.js?v=20261103n";
-import { norm, keystrokes, shuffle } from "./util.js?v=20261103n";
+import { CONFIG } from "./config.js?v=202611021719";
+import { norm, keystrokes, shuffle } from "./util.js?v=202611021719";
 
 export const MINE = new Set(["X", "□"]);
 
@@ -207,14 +207,14 @@ export class Game {
     const el = document.createElement("div");
     el.className = `msg kind-${kind}` + (spotlight ? " spotlight" : "");
     const who = kind === "trap" ? (this.trapOwner || "옆 팀") : kind === "spec" ? "스펙" : "팀장님";
-    const av = kind === "trap" ? "assets/items/coins.png" : kind === "spec" ? "assets/items/star.png" : "assets/items/badge.png";
+    const av = kind === "trap" ? "assets/items/coins.png?v=202611021719" : kind === "spec" ? "assets/items/star.png?v=202611021719" : "assets/items/badge.png?v=202611021719";
     el.innerHTML = `<img class="av" src="${av}" alt=""><div class="body"><span class="from"></span><span class="bub"><span class="t"></span><i class="ring"></i></span></div>`;
     el.querySelector(".from").textContent = who;
     el.querySelector(".t").textContent = text;
     if (spotlight) el.dataset.q = this.p.questions?.length ? pick(this.p.questions) : "이건 AI가 하면 안 돼요?";
     if (kind === "trap") {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "pass"; b.innerHTML = `<img src="assets/items/ban.png" alt="">넘기기`;
+      b.type = "button"; b.className = "pass"; b.innerHTML = `<img src="assets/items/ban.png?v=202611021719" alt="">넘기기`;
       b.onclick = () => { const d = this.drops.find(x => x.el === el); if (d) this.pass(d); };
       el.appendChild(b);
     }

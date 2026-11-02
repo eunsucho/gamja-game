@@ -131,4 +131,4 @@ py pipeline/build.py                                               # 4 게임 �
 
 ## 배포할 때 버전 올리기
 
-`index.html`의 `style.css?v=…`, `main.js?v=…`와 `js/*.js` 안의 `import … ?v=…`를 같은 새 값으로 바꿔요. 안 바꾸면 브라우저에 남은 예전 CSS·JS가 새 HTML과 섞여 화면이 깨질 수 있어요.
+`py tools/bump.py` 를 실행하면 CSS·JS·그림 주소의 버전 표시가 한 번에 바뀌어요. 안 바꾸면 브라우저에 남은 예전 파일(특히 같은 이름의 그림)이 새 화면과 섞일 수 있어요.

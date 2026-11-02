@@ -521,7 +521,7 @@ body { font-family: var(--ui); }
 .step-label { justify-self: center; margin: 0 0 -6px; height: 0; }
 .step-label img { display: none; }
 .hud-wrap .steps { align-items: center; gap: 4px; }
-.hud-wrap .steps::before { content: ""; width: 30px; height: 30px; margin-right: 2px; background: url(../assets/items/star.png) center / contain no-repeat; }
+.hud-wrap .steps::before { content: ""; width: 30px; height: 30px; margin-right: 2px; background: url(../assets/items/star.png?v=202611021719) center / contain no-repeat; }
 .steps i { width: 22px; height: 10px; border: 0; background: rgba(255, 255, 255, .55); }
 .steps i.on { background: var(--yolk); box-shadow: 0 0 8px rgba(255, 209, 92, .9); }
 .app.kb .hud-wrap .steps::before { width: 18px; height: 18px; }
@@ -534,7 +534,7 @@ body { font-family: var(--ui); }
 .app.kb .nameplate { font-size: 10px; padding: 0 6px; }
 .drop { font-family: var(--title); font-weight: 400; font-size: 17px; }
 .drop.seized { background: #DCEBFF !important; color: #2B5EA8; box-shadow: 0 0 0 4px var(--sky), 0 0 20px rgba(92, 158, 230, .8); }
-.float.ai { font-size: 0; width: 64px; height: 64px; background: url(../assets/items/grab.png) center / contain no-repeat; animation-duration: 1s; }
+.float.ai { font-size: 0; width: 64px; height: 64px; background: url(../assets/items/grab.png?v=202611021719) center / contain no-repeat; animation-duration: 1s; }
 .who.ai.react-grab .nameplate { animation: buzz .4s; }
 .who.ai.spot::before { content: ""; position: absolute; inset: -16px; border-radius: 50%; background: radial-gradient(rgba(142, 197, 255, .7), rgba(142, 197, 255, 0) 70%); animation: pulse .9s ease-in-out infinite; z-index: -1; }
 
@@ -611,24 +611,24 @@ body { font-family: var(--ui); }
 
 /* =====================================================================
    버튼 (레퍼런스: 쿠키런 킹덤) — 알약 대신 살짝 둥근 사각 젤리 버튼.
-   Figma로 만든 버튼 그림(assets/ui/btn_*.png)을 9분할로 늘려 쓴다.
+   Figma로 만든 버튼 그림(assets/ui/btn_*.png?v=202611021719)을 9분할로 늘려 쓴다.
    ===================================================================== */
 .btn, .btn-sm, .btn-sm.glass, .ibtn, .quiz-opt, .chip, .dg {
-  --bimg: url(../assets/ui/btn_yellow.png);
+  --bimg: url(../assets/ui/btn_yellow.png?v=202611021719);
   border-style: solid; border-color: transparent; border-width: 14px 16px 18px; border-radius: 0;
   border-image: var(--bimg) 44 48 54 48 fill / 14px 16px 18px stretch;
   background: none !important; box-shadow: none !important; filter: drop-shadow(0 6px 8px rgba(120, 80, 30, .22));
   transition: transform .08s, filter .15s; }
 .btn { padding: 0 10px; min-height: 64px; }
 .btn:active, .btn-sm:active, .ibtn:active, .quiz-opt:active, .chip:active, .dg:active { transform: translateY(3px) scale(.98); box-shadow: none; filter: brightness(.96); }
-.btn.sub, .btn-sm, .btn-sm.glass, .ibtn.sub, .quiz-opt, .chip, .dg { --bimg: url(../assets/ui/btn_cream.png); }
-.btn#toStart { --bimg: url(../assets/ui/btn_mint.png); min-height: 76px; }
-.chip[aria-selected="true"] { --bimg: url(../assets/ui/btn_mint.png); }
-.quiz-opt.right { --bimg: url(../assets/ui/btn_mint.png); }
-.quiz-opt.wrong { --bimg: url(../assets/ui/btn_pink.png); }
-.btn.locked, .btn:disabled { --bimg: url(../assets/ui/btn_grey.png); opacity: 1; filter: none; color: #6F6F6F; }
+.btn.sub, .btn-sm, .btn-sm.glass, .ibtn.sub, .quiz-opt, .chip, .dg { --bimg: url(../assets/ui/btn_cream.png?v=202611021719); }
+.btn#toStart { --bimg: url(../assets/ui/btn_mint.png?v=202611021719); min-height: 76px; }
+.chip[aria-selected="true"] { --bimg: url(../assets/ui/btn_mint.png?v=202611021719); }
+.quiz-opt.right { --bimg: url(../assets/ui/btn_mint.png?v=202611021719); }
+.quiz-opt.wrong { --bimg: url(../assets/ui/btn_pink.png?v=202611021719); }
+.btn.locked, .btn:disabled { --bimg: url(../assets/ui/btn_grey.png?v=202611021719); opacity: 1; filter: none; color: #6F6F6F; }
 .ibtn { width: 60px; height: 60px; border-width: 12px 14px 16px; border-image-width: 12px 14px 16px; }
-.ibtn.nudge { --bimg: url(../assets/ui/btn_yellow.png); }
+.ibtn.nudge { --bimg: url(../assets/ui/btn_yellow.png?v=202611021719); }
 .btn-sm { height: 48px; padding: 0 6px; border-width: 10px 12px 14px; border-image-width: 10px 12px 14px; }
 .chip { border-width: 10px 12px 14px; border-image-width: 10px 12px 14px; padding: 2px 6px 0; }
 .quiz-opt { padding: 4px 6px; }
@@ -734,13 +734,13 @@ body { font-family: var(--ui); }
 #v-play.chat .msg.pop .bub::after { content: " ✓"; }
 #v-play.chat .msg.grabbed .bub { background: #DCEBFF; color: #2B5EA8; text-decoration: line-through; }
 #v-play.chat .msg.grabbed .body::after { content: ""; justify-self: start; width: 120px; height: 34px; margin-top: 2px;
-  background: url(../assets/ai_cut.png) left center / 30px no-repeat, url(../assets/items/grab.png) 34px center / 28px no-repeat; }
+  background: url(../assets/ai_cut.png?v=202611021719) left center / 30px no-repeat, url(../assets/items/grab.png?v=202611021719) 34px center / 28px no-repeat; }
 #v-play.chat .msg.splash .bub { background: #F0E6E6; color: #A88; text-decoration: line-through; }
 #v-play.chat .msg.splash .av { filter: grayscale(1); }
 #v-play.chat .msg.passed { opacity: .5; }
 #v-play.chat .msg:is(.pop, .grabbed, .splash, .passed) { opacity: .75; }
 #v-play.chat .tut-tip { top: auto; bottom: calc(100% - var(--drop-top, 132px) - 70px); }
-#v-play.chat .msg.grabbed .body::after { width: 150px; height: 42px; background: url(../assets/ai_cut.png) left center / 40px no-repeat, url(../assets/items/grab.png) 44px center / 36px no-repeat; }
+#v-play.chat .msg.grabbed .body::after { width: 150px; height: 42px; background: url(../assets/ai_cut.png?v=202611021719) left center / 40px no-repeat, url(../assets/items/grab.png?v=202611021719) 44px center / 36px no-repeat; }
 
 /* 감자극장 뒤 게임 설명 카드 */
 .info { display: grid; gap: 10px; }
@@ -797,7 +797,7 @@ body { font-family: var(--ui); }
 
 /* 감자도감: 공유 카드와 같은 카드 프레임 */
 .dg, .dg.empty { --bimg: none; border: 0 !important; border-image: none !important; aspect-ratio: 717 / 1080; padding: 0; position: relative;
-  background: url(../assets/ui/card_frame.png) center / 100% 100% no-repeat !important; display: block; filter: drop-shadow(0 4px 6px rgba(90, 60, 30, .25)); }
+  background: url(../assets/ui/card_frame.png?v=202611021719) center / 100% 100% no-repeat !important; display: block; filter: drop-shadow(0 4px 6px rgba(90, 60, 30, .25)); }
 .dg.empty { filter: grayscale(.8) brightness(.95); }
 .dg-pot { position: absolute; left: 14%; top: 10%; width: 72%; height: 44%; object-fit: contain; }
 .dg-name { position: absolute; left: 0; right: 0; top: 66%; font-family: var(--title); font-weight: 400; font-size: 13px; color: #8A4B00; text-align: center; }
@@ -858,7 +858,7 @@ body { font-family: var(--ui); }
 .card-pop:has(#dHow:not([hidden])) { background: #FFFDF6; }
 
 /* 글꼴: 메이플스토리 (넥슨 무료 글꼴, 저장소에 직접 포함) */
-@font-face { font-family: "Maplestory"; src: url(../assets/fonts/MaplestoryBold.woff) format("woff"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Maplestory"; src: url(../assets/fonts/MaplestoryBold.woff?v=202611021719) format("woff"); font-weight: 400 900; font-display: swap; }
 :root { --title: "Maplestory", "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif; }
 
 /* 로비: 감자는 원판 위에 */
@@ -880,7 +880,7 @@ body { font-family: var(--ui); }
 .lobby-hero #lobbyHero { width: 190px; height: 190px; bottom: 74px; }
 .lobby-hero .pedestal { width: 210px; bottom: 30px; }
 .lobby-hero span { bottom: 0; min-width: 190px; text-align: center; padding: 8px 26px 10px; color: #FFF6DF; font-size: 21px;
-  background: url(../assets/ui/nameplate.png) center / 100% 100% no-repeat; text-shadow: 0 2px 0 rgba(90, 45, 10, .55); }
+  background: url(../assets/ui/nameplate.png?v=202611021719) center / 100% 100% no-repeat; text-shadow: 0 2px 0 rgba(90, 45, 10, .55); }
 @media (max-height: 760px) {
   .lobby-hero { height: 206px; } .lobby-hero #lobbyHero { width: 150px; height: 150px; bottom: 62px; }
   .lobby-hero .pedestal { width: 170px; bottom: 26px; } .lobby-hero span { font-size: 18px; min-width: 160px; padding: 6px 22px 8px; } }
