@@ -608,3 +608,32 @@ body { font-family: var(--ui); }
 .lobby-top { display: flex; align-items: center; gap: 10px; }
 .lobby-top h1 { flex: 1; font-size: 28px; color: #fff; text-shadow: 0 2px 6px rgba(90, 60, 30, .45); }
 .lobby-pot { width: 64px; margin: -8px -6px -10px 0; animation: sway 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+
+/* =====================================================================
+   버튼 (레퍼런스: 쿠키런 킹덤) — 알약 대신 살짝 둥근 사각 젤리 버튼.
+   Figma로 만든 버튼 그림(assets/ui/btn_*.png)을 9분할로 늘려 쓴다.
+   ===================================================================== */
+.btn, .btn-sm, .btn-sm.glass, .ibtn, .quiz-opt, .chip, .dg {
+  --bimg: url(../assets/ui/btn_yellow.png);
+  border-style: solid; border-color: transparent; border-width: 14px 16px 18px; border-radius: 0;
+  border-image: var(--bimg) 44 48 54 48 fill / 14px 16px 18px stretch;
+  background: none !important; box-shadow: none !important; filter: drop-shadow(0 6px 8px rgba(120, 80, 30, .22));
+  transition: transform .08s, filter .15s; }
+.btn { padding: 0 10px; min-height: 64px; }
+.btn:active, .btn-sm:active, .ibtn:active, .quiz-opt:active, .chip:active, .dg:active { transform: translateY(3px) scale(.98); box-shadow: none; filter: brightness(.96); }
+.btn.sub, .btn-sm, .btn-sm.glass, .ibtn.sub, .quiz-opt, .chip, .dg { --bimg: url(../assets/ui/btn_cream.png); }
+.btn#toStart { --bimg: url(../assets/ui/btn_mint.png); min-height: 76px; }
+.chip[aria-selected="true"] { --bimg: url(../assets/ui/btn_mint.png); }
+.quiz-opt.right { --bimg: url(../assets/ui/btn_mint.png); }
+.quiz-opt.wrong { --bimg: url(../assets/ui/btn_pink.png); }
+.btn.locked, .btn:disabled { --bimg: url(../assets/ui/btn_grey.png); opacity: 1; filter: none; color: #6F6F6F; }
+.ibtn { width: 60px; height: 60px; border-width: 12px 14px 16px; border-image-width: 12px 14px 16px; }
+.ibtn.nudge { --bimg: url(../assets/ui/btn_yellow.png); }
+.btn-sm { height: 48px; padding: 0 6px; border-width: 10px 12px 14px; border-image-width: 10px 12px 14px; }
+.chip { border-width: 10px 12px 14px; border-image-width: 10px 12px 14px; padding: 2px 6px 0; }
+.quiz-opt { padding: 4px 6px; }
+.dg { border-width: 10px 12px 14px; border-image-width: 10px 12px 14px; padding: 0 0 2px; }
+#v-title .row.center { gap: 4px; flex-wrap: nowrap; }
+#v-title .btn-sm { font-size: 14px; padding: 0 2px; gap: 3px; height: 44px; }
+#v-title .btn-sm img { width: 18px; height: 18px; }
+#v-title .btn-sm i { display: none; }

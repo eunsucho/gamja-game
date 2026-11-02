@@ -91,5 +91,12 @@
     "tool": "Figma generate_image (gpt-image-2.5-flare)",
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 4:2, 글씨만)",
     "prompt": "Cute casual mobile game title logo, Korean text '감자 취업시켜줘!!', chunky rounded golden letters, potato peeking, glossy 3D clay"
+  },
+  "buttons": {
+    "files": "assets/ui/btn_{yellow,mint,cream,sky,pink,grey}.png",
+    "tool": "Figma generate_image (gpt-image-2.5-flare)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 5:2)",
+    "prompt": "Cookie Run Kingdom style blank jelly buttons, soft rounded rectangle (not pill), glossy top highlight, bottom bevel lip, 6 colors",
+    "use": "CSS border-image 9분할 (44 48 54 48)"
   }
 }
