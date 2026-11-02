@@ -831,3 +831,10 @@ body { font-family: var(--ui); }
 #v-result.sms-only .noti { transform: none; }
 #v-result.sms-only .noti .noti-from { font-size: 21px; }
 #v-result.sms-only .noti .noti-body { font-size: 18px; line-height: 1.5; }
+/* 문자를 누른 뒤에는 문자는 사라지고 결과만 */
+#v-result:not(.sms-only) .noti { display: none; }
+/* 로비 감자 뒤 네모 판 */
+.lobby-hero::before { content: ""; position: absolute; left: 50%; top: 8px; bottom: 0; width: min(78%, 290px); translate: -50% 0; border-radius: 32px;
+  background: rgba(255, 248, 231, .88); box-shadow: var(--soft); }
+.lobby-hero img { z-index: 1; }
+.lobby-hero span { z-index: 2; }
