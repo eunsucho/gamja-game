@@ -805,3 +805,29 @@ body { font-family: var(--ui); }
 .dg-job { position: absolute; left: 0; right: 0; top: 56%; font-size: 10px; font-weight: 800; color: var(--ink-2); text-align: center; }
 .dogam-grid { gap: 10px; }
 .share-wrap canvas { width: min(100%, 210px); border-radius: 0; box-shadow: none; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .3)); }
+
+/* 로비: 옷 입은 감자를 크게, 자리 고정 (분야 이름 길이와 무관) */
+.lobby-hero { position: relative; display: block; height: 220px; flex: none; }
+.lobby-hero img { position: absolute; left: 50%; top: 0; translate: -50% 0; width: 220px; height: 220px; }
+.lobby-hero span { position: absolute; left: 50%; bottom: 4px; translate: -50% 0; white-space: nowrap; z-index: 1; }
+@media (max-height: 760px) { .lobby-hero { height: 170px; } .lobby-hero img { width: 170px; height: 170px; } }
+@media (max-height: 680px) { .lobby-hero { height: 130px; } .lobby-hero img { width: 130px; height: 130px; } }
+#v-select .list { flex: 1; }
+
+/* 타자 직전 규칙 안내 */
+#dHow .how-tile { padding: 10px 4px 8px; }
+
+/* 결과: 먼저 문자만 크게 → 누르면 결과 */
+#v-result .noti { cursor: pointer; transition: transform .35s, padding .35s; }
+#v-result.sms-only .col { justify-content: center; }
+#v-result.sms-only .noti { transform: scale(1.12); padding: 18px 18px 20px; border-radius: 28px; animation: smsIn .6s cubic-bezier(.2, .9, .3, 1.3); }
+#v-result.sms-only .noti .noti-from { font-size: 19px; }
+#v-result.sms-only .noti .noti-body { font-size: 17px; -webkit-line-clamp: 6; }
+#v-result.sms-only :is(.memo, .row, .result-hero, .gate-note) { display: none !important; }
+.tap-hint { display: none; text-align: center; font-family: var(--title); font-size: 18px; color: #fff; animation: bob 1.2s ease-in-out infinite; margin-top: 10px; }
+#v-result.sms-only .tap-hint { display: block; }
+@keyframes smsIn { from { translate: 0 -120%; opacity: 0; } }
+#v-result .memo.unfold { animation: popIn .4s cubic-bezier(.2, .8, .3, 1.3); }
+#v-result.sms-only .noti { transform: none; }
+#v-result.sms-only .noti .noti-from { font-size: 21px; }
+#v-result.sms-only .noti .noti-body { font-size: 18px; line-height: 1.5; }

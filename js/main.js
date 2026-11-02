@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103d";
-import { Game, MINE } from "./game.js?v=20261103d";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103d";
-import { esc } from "./util.js?v=20261103d";
-import { CONFIG } from "./config.js?v=20261103d";
-import { floors } from "./scene.js?v=20261103d";
-import * as T from "./copy.js?v=20261103d";
+import { loadIndex, loadPosting } from "./data.js?v=20261103f";
+import { Game, MINE } from "./game.js?v=20261103f";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103f";
+import { esc } from "./util.js?v=20261103f";
+import { CONFIG } from "./config.js?v=20261103f";
+import { floors } from "./scene.js?v=20261103f";
+import * as T from "./copy.js?v=20261103f";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -385,7 +385,7 @@ function startGame() {
   say(T.LINES.start);
   enterLift();
   game.hud(false);
-  doorShow({ ...T.DOOR.start(FLOORS[0]), icon: "badge" }, { auto: 1300 }).then(() => { doorOpen(); game.startStage(0); });
+  doorShow({ ...T.DOOR.start(FLOORS[0]), html: rulesHTML(), icon: "badge" }, { auto: 2600 }).then(() => { doorOpen(); game.startStage(0); });
 }
 
 function hud(h) {
@@ -654,6 +654,9 @@ function renderResult(r) {
   memoI = 0;
   renderMemo();
   show("v-result");
+  // 채용팀 문자가 먼저 크게 온다. 누르면 문자가 위로 올라가고 결과 카드가 펼쳐진다
+  $("v-result").classList.add("sms-only");
+  $("notice").focus({ preventScroll: true });
 
   // 공유 문구
   window.__shareText = `${line}\n오늘 배운 것: ${lessons[0].head}`;
@@ -737,6 +740,13 @@ function renderMemoChrome() {
   ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; $(id).classList.toggle("locked", locked); });
   $("memoGateNote").hidden = true;
 }
+function openResult() {
+  if (!$("v-result").classList.contains("sms-only")) return;
+  $("v-result").classList.remove("sms-only");
+  retrigger($("memo"), "unfold");
+}
+$("notice").onclick = openResult;
+$("notice").onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openResult(); } };
 $("memoPrev").onclick = () => { if (memoI > 0) { memoI--; renderMemo(); } };
 $("memoNext").onclick = () => { if ((quizDone || memoI !== 1) && memoI < memoPages.length - 1) { memoI++; renderMemo(); } };
 // 회고록 넘기기: 좌우로 밀기

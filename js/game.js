@@ -1,7 +1,7 @@
 // 산성비 엔진. 화면 그리기는 단어 방울만 하고, 상태 변화는 hooks로 바깥(main.js)에 알린다.
 // 전형 하나 = 본사 한 층. 받아칠 때마다 엘리베이터가 한 칸씩 올라가고, 칸을 다 채우면 그 전형 합격.
-import { CONFIG } from "./config.js?v=20261103d";
-import { norm, keystrokes, shuffle } from "./util.js?v=20261103d";
+import { CONFIG } from "./config.js?v=20261103f";
+import { norm, keystrokes, shuffle } from "./util.js?v=20261103f";
 
 export const MINE = new Set(["X", "□"]);
 
