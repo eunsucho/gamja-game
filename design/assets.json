@@ -85,5 +85,11 @@
     "tool": "Figma generate_image (gpt-image-2.5-flare)",
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 2:2)",
     "prompt": "5 cute potato mascots getting happier: dirty crying potato, steamed potato, potato pancake, french fries, golden potato with crown and ID card"
+  },
+  "logo": {
+    "files": "assets/logo.png",
+    "tool": "Figma generate_image (gpt-image-2.5-flare)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 3:2)",
+    "prompt": "Cute casual mobile game title logo, Korean text '감자 취업시켜줘!!', chunky rounded golden letters, potato peeking, glossy 3D clay"
   }
 }

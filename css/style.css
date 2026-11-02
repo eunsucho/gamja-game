@@ -601,3 +601,4 @@ body { font-family: var(--ui); }
 .lv-bar img.on { filter: none; }
 .share-wrap { display: grid; place-items: center; }
 .share-wrap canvas { width: min(100%, 230px); height: auto; border-radius: 18px; box-shadow: var(--soft); }
+.logo img { display: block; width: min(92%, 380px); margin: 0 auto; filter: drop-shadow(0 8px 14px rgba(120, 80, 30, .28)); animation: bob 2.4s ease-in-out infinite; }
