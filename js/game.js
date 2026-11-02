@@ -25,7 +25,7 @@ export class Game {
     this.stageSec = CONFIG.stageSeconds * this.pace;
     this.timeLeft = this.stageSec;
     this.stats = {
-      score: 0, combo: 0, maxCombo: 0, keys: 0, activeMs: 0,
+      score: 0, combo: 0, maxCombo: 0, keys: 0, activeMs: 0, typeKeys: 0, typeMs: 0,
       mineSpawned: 0, mineTyped: 0, salary: CONFIG.salaryBase,
       trapHits: 0, specHits: 0, claimOk: 0, claimWrong: 0, aiTyped: 0,
       typed: {}, aiGrabbed: {}, missed: {}   // 단어 text → 횟수
@@ -134,7 +134,12 @@ export class Game {
     });
   }
 
-  cpm() { return this.stats.activeMs > 3000 ? Math.round(this.stats.keys / (this.stats.activeMs / 60000)) : 0; }
+  // 타수 = 자모 수 ÷ 실제로 친 시간(분). 단어마다 첫 글자~Enter만 잰다(기다린 시간 제외). 기록이 적으면 전체 시간으로
+  cpm() {
+    const s = this.stats;
+    if (s.typeMs > 2000) return Math.round(s.typeKeys / (s.typeMs / 60000));
+    return s.activeMs > 3000 ? Math.round(s.keys / (s.activeMs / 60000)) : 0;
+  }
 
   hud(slow) {
     this.hooks.hud({
@@ -255,7 +260,8 @@ export class Game {
   }
 
   // ---------- 입력 ----------
-  submit(raw) {
+  // info: { ms: 첫 글자부터 Enter까지 걸린 시간, assisted: 자동완성으로 한 번에 들어온 글자가 있었는지 }
+  submit(raw, info = {}) {
     if (!this.running || this.paused) return false;
     const n = norm(raw);
     if (!n) return false;
@@ -265,6 +271,7 @@ export class Game {
     this.remove(d, "pop");
     if (this.script) { this.tutResolve(d, "typed"); return true; }
     S.keys += keystrokes(d.text);
+    if (info.ms > 0 && !info.assisted) { S.typeKeys += keystrokes(d.text); S.typeMs += info.ms; }
     const emit = (type, points, extra = {}) => { S.score += points; this.hooks.event(type, { el: d.el, points, ...extra }); };
 
     if (d.kind === "trap") {

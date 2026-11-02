@@ -79,5 +79,11 @@
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 1:2)",
     "prompt": "Cute casual mobile game item icon sheet, strict 4x4 grid, 16 icons, white background, soft glossy 3D clay style, warm pastel, no text",
     "note": "시트를 4x4로 잘라 흰 배경을 투명하게, 160px"
+  },
+  "potato_levels": {
+    "files": "assets/potato/lv0_dirt ~ lv4_gold.png (+ lv4_gold_sil.png 실루엣은 원본을 어둡게 처리)",
+    "tool": "Figma generate_image (gpt-image-2.5-flare)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 2:2)",
+    "prompt": "5 cute potato mascots getting happier: dirty crying potato, steamed potato, potato pancake, french fries, golden potato with crown and ID card"
   }
 }

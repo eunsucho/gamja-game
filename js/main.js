@@ -461,10 +461,20 @@ function stageClear(doneIdx, nextIdx) {
   doorShow(card, { button: "GO!" }).then(() => { doorOpen(); game.startStage(nextIdx); });
 }
 
+// 폰 타수: 첫 글자를 친 순간부터 Enter까지만 잰다. 한 번에 3글자 넘게 들어오면 자동완성으로 보고 타수에서 뺀다
+let typing0 = 0, typingAssist = false, lastLen = 0;
+$("typeInput").addEventListener("input", e => {
+  const v = e.target.value;
+  if (!v) { typing0 = 0; typingAssist = false; lastLen = 0; return; }
+  if (!typing0) typing0 = performance.now();
+  if (v.length - lastLen >= 3 && !e.isComposing) typingAssist = true;
+  lastLen = v.length;
+});
 $("typeForm").addEventListener("submit", e => {
   e.preventDefault();
   const input = $("typeInput");
-  game?.submit(input.value);
+  game?.submit(input.value, { ms: typing0 ? performance.now() - typing0 : 0, assisted: typingAssist });
+  typing0 = 0; typingAssist = false;
   input.value = "";   // 산성비처럼 Enter를 누르면 맞든 틀리든 입력창을 비운다
   input.focus();
 });
@@ -522,6 +532,43 @@ function end(r) {
   }
 }
 
+// ---------- 공유 카드: 감자 그림 + 큰 타수 + 배운 것 한 줄 ----------
+let lastShare = null;
+const imgCache = {};
+const loadImg = src => imgCache[src] || (imgCache[src] = new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }));
+async function drawShare(cv) {
+  const s = lastShare; if (!s) return;
+  await document.fonts?.load?.("80px Jua").catch(() => {});
+  const g = cv.getContext("2d"), W = cv.width, H = cv.height, L = T.LEVELS[s.lv];
+  const grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#FFF4D6"); grad.addColorStop(1, "#FFE0B8");
+  g.fillStyle = grad; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#FFFFFF"; g.globalAlpha = .6; g.beginPath(); g.arc(W / 2, 470, 330, 0, Math.PI * 2); g.fill(); g.globalAlpha = 1;
+  const pot = await loadImg(L.img); if (pot) g.drawImage(pot, W / 2 - 300, 170, 600, 600);
+  g.textAlign = "center"; g.fillStyle = "#3E2F27";
+  g.font = "64px Jua"; g.fillText("감자도감", W / 2, 110);
+  g.font = "84px Jua"; g.fillStyle = "#C98A00"; g.fillText(L.name, W / 2, 860);
+  // 큰 타수 + 작은 '타'를 한 덩어리로 가운데
+  g.fillStyle = "#3E2F27"; g.textAlign = "left";
+  g.font = "210px Jua"; const w1 = g.measureText(String(s.cpm)).width;
+  g.font = "80px Jua"; const w2 = g.measureText("타").width;
+  const x0 = W / 2 - (w1 + 12 + w2) / 2;
+  g.font = "210px Jua"; g.fillText(String(s.cpm), x0, 1080);
+  g.font = "80px Jua"; g.fillText("타", x0 + w1 + 12, 1080);
+  g.textAlign = "center"; g.font = "46px Jua"; g.fillStyle = "#6B5A4E"; g.fillText(`${s.job} · ${s.result}`, W / 2, 1170, W - 120);
+  g.font = "50px Jua"; g.fillStyle = "#3E2F27"; g.fillText(`"${s.lesson}"`, W / 2, 1250, W - 120);
+  g.font = "34px Jua"; g.fillStyle = "#A08C7C"; g.fillText("감자 취업시켜줘!! · eunsucho.github.io/gamja-game", W / 2, 1320);
+}
+async function shareCard() {
+  const cv = $("shareCanvas"); if (!cv) return;
+  const blob = await new Promise(r => cv.toBlob(r, "image/png"));
+  const file = new File([blob], "gamja.png", { type: "image/png" });
+  const text = `${T.LEVELS[lastShare.lv].name} · ${lastShare.cpm}타 · ${lastShare.job}`;
+  try {
+    if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], text }); return; }
+  } catch { return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "gamja.png"; a.click();
+}
+
 let memoPages = [], memoI = 0, memoGate = 0, memoSeen = 0, quizDone = true;
 
 // 첫 장 퀴즈: 이 공고에서 AI가 가장 많이 하는 일은? (보기 3개: 가장 높은 O 하나 + 사람 몫 둘)
@@ -548,7 +595,11 @@ function renderResult(r) {
   const result = r.passed ? T.RESULT.pass : T.RESULT[reason](r.failedStage);
   const title = `${current.company} ${current.position}`;
   const line = `${title} · ${result} · ${r.cpm}타${r.guard == null ? "" : ` · 사람 몫 사수율 ${r.guard}%`}`;
-  saveRecord(current.id, { passed: r.passed, failedStage: r.failedStage, reached: r.reached, score: r.score, cpm: r.cpm, guard: r.guard });
+  const lv = T.levelOf(r, current.stages), L = T.LEVELS[lv];
+  saveRecord(current.id, { passed: r.passed, failedStage: r.failedStage, reached: r.reached, score: r.score, cpm: r.cpm, guard: r.guard, level: lv });
+  $("resultHero").querySelector("img").src = L.img;
+  $("resultSay").textContent = L.say;
+  lastShare = { lv, cpm: r.cpm, job: `${current.company} ${current.position}`, result, lesson: "", guard: r.guard };
 
   // 오늘 배운 것 3가지
   const missedMine = current.words.filter(w => w.judge !== "O" && r.missed[w.text]).sort((a, b) => r.missed[b.text] - r.missed[a.text]);
@@ -559,7 +610,12 @@ function renderResult(r) {
   // 회고록: 한 장에 한 가지만. 성찰(퀴즈 → 배운 것)이 맨 앞, 기록·통계는 뒤.
   const stat = (icon, text) => `<span><i class="ti ti-${icon}" aria-hidden="true"></i>${esc(text)}</span>`;
   const quiz = quizPage();
+  lastShare.lesson = lessons[0].short || lessons[0].head;
+  const avg = TOUCH.matches ? T.AVG_CPM.phone : T.AVG_CPM.pc;
   memoPages = [
+    `<div class="pg-level"><img src="${L.img}" alt=""><p class="lv-name">${esc(L.name)}</p>
+      <p class="cpm"><b>${r.cpm}</b>타</p><p class="cpm-avg">${TOUCH.matches ? "폰" : "PC"} 평균 ${avg}타 ${r.cpm >= avg ? "보다 빨라요!" : ""}</p>
+      <div class="lv-bar">${T.LEVELS.map((x, i) => `<img src="${x.img}" class="${i <= lv ? "on" : ""}" alt="${esc(x.name)}">`).join("")}</div></div>`,
     ...(quiz ? [quiz] : []),
     ...lessons.slice(0, 3).map(l => `<div class="pg-lesson">${item("idea", "big")}<b>${esc(l.short || l.head)}</b></div>`),
     tasksPage(r),
@@ -569,11 +625,11 @@ function renderResult(r) {
     ...(current.terms?.length ? [termsPage()] : []),
     `<p class="pg-h">다음 지원 전에</p><ul class="plain">${T.TODO_DEFAULT.concat((current.skills || []).slice(0, 2).map(s => `역량 점검: ${s}`)).map(t => `<li><i class="ti ti-square-check"></i>${esc(t)}</li>`).join("")}</ul>
      <a class="btn-sm glass ws-link" href="worksheet/" target="_blank" rel="noopener"><i class="ti ti-file-text" aria-hidden="true"></i>수업 학습지로 더 해 보기</a>`,
-    `<div class="share"><img src="assets/potato_cut.png" alt=""><div><b>감자 취업시켜줘!! ㅜㅜ</b><span>${esc(line)}</span><span class="hand">"${esc(lessons[0].head)}"</span></div></div>
-     <button class="btn sub" id="copyRecord" type="button"><i class="ti ti-copy" aria-hidden="true"></i>기록 복사</button>`
+    `<div class="share-wrap"><canvas id="shareCanvas" width="1080" height="1350"></canvas></div>
+     <div class="row"><button class="btn grow" id="shareBtn" type="button">공유하기</button><button class="btn sub fit" id="dogamBtn" type="button"><img src="assets/potato/lv4_gold.png" alt="">도감</button></div>`
   ];
   // 성찰 장(퀴즈 + 배운 것 3장 + 진짜 할 일)을 다 넘겨야 다시 하기·로비 버튼이 열린다
-  memoGate = (quiz ? 1 : 0) + 3 + 1;
+  memoGate = 1 + (quiz ? 1 : 0) + 3 + 1;
   memoSeen = 0;
   quizDone = !quiz;
   memoI = 0;
@@ -613,8 +669,8 @@ function renderMemo() {
   $("memoNext").style.visibility = memoI === memoPages.length - 1 ? "hidden" : "";
   memoSeen = Math.max(memoSeen, memoI + 1);
   const locked = memoSeen < memoGate || !quizDone;
-  $("memoNext").disabled = !quizDone;
-  $("memoNext").classList.toggle("nudge", quizDone && memoI < memoPages.length - 1);
+  $("memoNext").disabled = !quizDone && memoI === 1;
+  $("memoNext").classList.toggle("nudge", (quizDone || memoI !== 1) && memoI < memoPages.length - 1);
   ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; $(id).classList.toggle("locked", locked); });
   $("memoGateNote").hidden = true;
   page.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
@@ -645,6 +701,9 @@ function renderMemo() {
     $("termWhy").hidden = !open;
     if (open) $("termWhy").textContent = `${t.term} · ${t.desc}`;
   });
+  if ($("shareCanvas")) drawShare($("shareCanvas"));
+  if ($("shareBtn")) $("shareBtn").onclick = shareCard;
+  if ($("dogamBtn")) $("dogamBtn").onclick = openDogam;
   const copy = $("copyRecord");
   if (copy) copy.onclick = async () => {
     try { await navigator.clipboard.writeText(window.__shareText || ""); copy.lastChild.textContent = "복사했어요"; }
@@ -654,13 +713,13 @@ function renderMemo() {
 // 퀴즈를 푼 뒤 버튼 상태만 다시 그린다 (장 내용은 그대로)
 function renderMemoChrome() {
   const locked = memoSeen < memoGate || !quizDone;
-  $("memoNext").disabled = !quizDone;
-  $("memoNext").classList.toggle("nudge", quizDone && memoI < memoPages.length - 1);
+  $("memoNext").disabled = !quizDone && memoI === 1;
+  $("memoNext").classList.toggle("nudge", (quizDone || memoI !== 1) && memoI < memoPages.length - 1);
   ["retry", "toSelect2"].forEach(id => { $(id).disabled = locked; $(id).classList.toggle("locked", locked); });
   $("memoGateNote").hidden = true;
 }
 $("memoPrev").onclick = () => { if (memoI > 0) { memoI--; renderMemo(); } };
-$("memoNext").onclick = () => { if (quizDone && memoI < memoPages.length - 1) { memoI++; renderMemo(); } };
+$("memoNext").onclick = () => { if ((quizDone || memoI !== 1) && memoI < memoPages.length - 1) { memoI++; renderMemo(); } };
 // 회고록 넘기기: 좌우로 밀기
 let swipeX = null;
 $("memo").addEventListener("pointerdown", e => { swipeX = e.clientX; });
@@ -671,7 +730,38 @@ $("memo").addEventListener("pointerup", e => {
 });
 
 // ---------- 버튼 ----------
-$("toStart").onclick = () => { if (getFlag("intro")) openLobby(); else openIntro(); };
+$("toStart").onclick = () => { goFull(); if (getFlag("intro")) openLobby(); else openIntro(); };
+
+// ---------- 꽉 찬 화면: 안드로이드는 전체화면, 홈 화면에 추가하면 아이폰도 주소창 없이 ----------
+const STANDALONE = matchMedia("(display-mode: standalone), (display-mode: fullscreen)").matches || navigator.standalone;
+function goFull() {
+  if (STANDALONE || !TOUCH.matches || document.fullscreenElement) return;
+  document.documentElement.requestFullscreen?.({ navigationUI: "hide" }).catch(() => {});
+}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; $("toInstall").hidden = false; });
+$("toInstall").onclick = async () => { if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice; installEvt = null; $("toInstall").hidden = true; };
+const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+if (IOS && !STANDALONE && !getFlag("iosTip")) $("iosTip").hidden = false;
+$("iosTipX").onclick = () => { $("iosTip").hidden = true; setFlag("iosTip"); };
+
+// ---------- 감자도감: 공고마다 받은 최고 감자 ----------
+function openDogam() {
+  const rec = loadRecords();
+  const ps = (INDEX?.fields || []).flatMap(f => f.jobs.flatMap(j => j.postings.map(p => ({ ...p, job: j.name }))));
+  const got = ps.filter(p => rec[p.id]?.level >= 0).length;
+  $("dogamCount").textContent = `${got} / ${ps.length}`;
+  $("dogamGrid").innerHTML = ps.map(p => {
+    const lv = rec[p.id]?.level ?? -1, L = T.LEVELS[lv];
+    return `<button type="button" class="dg ${lv < 0 ? "empty" : ""}" data-id="${esc(p.id)}">
+      <img src="${L ? L.img : "assets/potato/lv4_gold_sil.png"}" alt="">
+      <b>${esc(p.job)}</b>${L ? `<span>${esc(L.name)}${rec[p.id].bestCpm ? ` · ${rec[p.id].bestCpm}타` : ""}</span>` : "<span>?</span>"}</button>`;
+  }).join("");
+  $("dogamGrid").querySelectorAll("[data-id]").forEach(b => b.onclick = () => { $("dogam").close(); openBrief(b.dataset.id); });
+  $("dogam").showModal();
+}
+$("toDogam").onclick = openDogam;
 $("toIntro").onclick = openIntro;
 $("toWorksheet").onclick = () => window.open("worksheet/", "_blank", "noopener");
 $("toCredits").onclick = () => $("credits").showModal();

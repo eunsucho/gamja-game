@@ -10,8 +10,9 @@ export function saveRecord(postingId, rec) {
   const all = loadRecords();
   const prev = all[postingId];
   const better = !prev || rec.reached > prev.reached || (rec.reached === prev.reached && rec.score > prev.score);
-  if (better) {
-    all[postingId] = rec;
+  const keep = { level: Math.max(prev?.level ?? -1, rec.level ?? -1), bestCpm: Math.max(prev?.bestCpm ?? 0, rec.cpm ?? 0) };
+  all[postingId] = better ? { ...rec, ...keep } : { ...prev, ...keep };
+  {
     try { localStorage.setItem(KEY, JSON.stringify(all)); } catch { /* 저장 불가 환경 */ }
   }
   return better;

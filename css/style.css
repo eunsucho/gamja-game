@@ -572,3 +572,32 @@ body { font-family: var(--ui); }
 #quizWhy { text-align: center; font-family: var(--title); font-size: 18px; }
 .task-chips button { font-family: var(--title); font-weight: 400; }
 .ws-link { justify-self: start; }
+
+/* ---------- 설치 안내 · 감자도감 · 행복도 · 공유 카드 ---------- */
+.ios-tip { position: fixed; z-index: 30; left: 50%; bottom: 16px; translate: -50% 0; width: min(92%, 420px); display: flex; align-items: center; gap: 8px;
+  background: var(--cream); border-radius: 999px; padding: 8px 10px 8px 8px; box-shadow: var(--soft); font-family: var(--title); font-size: 16px; }
+.ios-tip img { width: 34px; height: 34px; border-radius: 10px; }
+.ios-tip button { margin-left: auto; border: 0; background: var(--cream-2); width: 30px; height: 30px; border-radius: 50%; font-size: 18px; }
+.dogam { width: min(94vw, 460px); max-height: 86dvh; border: 0; border-radius: 32px; background: var(--cream); padding: 16px; box-shadow: var(--soft); }
+.dogam::backdrop { background: rgba(60, 40, 20, .35); }
+.dogam[open] { display: grid; gap: 12px; }
+.dogam-top { display: flex; align-items: center; gap: 8px; }
+.dogam-top img { width: 44px; } .dogam-top span { margin-left: auto; font-family: var(--title); color: var(--ink-2); }
+.dogam-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; overflow-y: auto; }
+.dg { border: 0; background: #fff; border-radius: 20px; padding: 8px 4px 10px; display: grid; justify-items: center; gap: 2px; box-shadow: 0 4px 0 var(--cream-2); }
+.dg img { width: 72px; height: 72px; object-fit: contain; }
+.dg b { font-family: var(--title); font-weight: 400; font-size: 14px; }
+.dg span { font-size: 11px; font-weight: 700; color: var(--ink-2); }
+.dg.empty { background: var(--cream-2); }
+.btn-sm img { width: 22px; height: 22px; object-fit: contain; }
+.result-hero.mini .who.me.big img { width: 100%; }
+.pg-level { display: grid; justify-items: center; gap: 2px; text-align: center; }
+.pg-level > img { width: 150px; height: 150px; object-fit: contain; animation: popIn .5s cubic-bezier(.2, .8, .3, 1.4); }
+.lv-name { font-family: var(--title); font-size: 26px; color: #C98A00; }
+.cpm { font-family: var(--title); font-size: 26px; line-height: 1; } .cpm b { font-size: 64px; font-weight: 400; }
+.cpm-avg { font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.lv-bar { display: flex; gap: 4px; margin-top: 8px; }
+.lv-bar img { width: 40px; height: 40px; object-fit: contain; filter: grayscale(1) opacity(.3); }
+.lv-bar img.on { filter: none; }
+.share-wrap { display: grid; place-items: center; }
+.share-wrap canvas { width: min(100%, 230px); height: auto; border-radius: 18px; box-shadow: var(--soft); }

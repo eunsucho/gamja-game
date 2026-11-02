@@ -153,3 +153,22 @@ export function pctPhrase(w) {
     ? "AI 사용 기록에서 거의 확인되지 않은 일이에요. 못 한다는 뜻이 아니라 아직 잘 안 시키는 일이에요."
     : `사람들이 이 일을 AI에게 시킨 대화 중 ${w.pct}%에서 AI가 끝까지 처리했어요.`;
 }
+
+// ---------- 감자 행복도 (결과 · 도감 · 공유 카드) ----------
+export const LEVELS = [
+  { img: "assets/potato/lv0_dirt.png", name: "흙감자", say: "흙으로 돌아갈래…" },
+  { img: "assets/potato/lv1_steam.png", name: "찐감자", say: "그래도 좀 익었다" },
+  { img: "assets/potato/lv2_pancake.png", name: "감자전", say: "노릇노릇 자신감!" },
+  { img: "assets/potato/lv3_fries.png", name: "감자튀김", say: "바삭하게 거의 다 왔다!" },
+  { img: "assets/potato/lv4_gold.png", name: "황금감자", say: "최종합격! 사원증 GET" }
+];
+// 합격 = 4. 아니면 통과한 전형 비율로 0~3, 사람 몫을 80% 넘게 지켰으면 한 단계 위(최대 3)
+export function levelOf(r, stages) {
+  if (r.passed) return 4;
+  const normal = stages.filter(s => s.type !== "bonus").length || 1;
+  let lv = Math.min(3, Math.floor((r.reached / normal) * 4));
+  if ((r.guard ?? 0) >= 80) lv = Math.min(3, lv + 1);
+  return lv;
+}
+// 기기별 평균 타수(한글, 분당 자모). 대략값: PC 300타 · 폰 200타 (모바일은 PC의 약 0.7배)
+export const AVG_CPM = { pc: 300, phone: 200 };
