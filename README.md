@@ -126,3 +126,7 @@ py pipeline/build.py                                               # 4 게임 �
 - [ ] 문구 확정 (`js/copy.js`)
 - [ ] 난이도 조정 (`js/config.js`)
 - [ ] 코드·콘텐츠 라이선스 정하기
+
+## 배포할 때 버전 올리기
+
+`index.html`의 `style.css?v=…`, `main.js?v=…`와 `js/*.js` 안의 `import … ?v=…`를 같은 새 값으로 바꿔요. 안 바꾸면 브라우저에 남은 예전 CSS·JS가 새 HTML과 섞여 화면이 깨질 수 있어요.
