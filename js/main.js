@@ -266,7 +266,7 @@ function renderLobby() {
   $("postingList").innerHTML = ps.length ? `<div class="plist">` + ps.map(p => {
     const r = rec[p.id];
     const mark = r ? `<i class="ti ti-${r.passed ? "trophy" : "rotate"}" aria-label="${r.passed ? "합격 기록 있음" : "지원한 적 있음"}"></i>` : "";
-    return `<button class="prow" data-id="${esc(p.id)}"><span><p class="co">${esc(p.company)}${mark}</p><p class="pos">${esc(p.position)}</p></span><span class="go">›</span></button>`;
+    return `<button class="prow" data-id="${esc(p.id)}"><span class="co">${esc(p.company)}</span><span class="pos">${esc(p.position)}${mark}</span><span class="go">›</span></button>`;
   }).join("") + `</div>` : `<div class="card soon"><p class="pos">${esc(T.LOBBY.empty)}</p></div>`;
   $("postingList").querySelectorAll("[data-id]").forEach(b => b.onclick = () => openBrief(b.dataset.id));
   $("postingList").scrollTop = 0;
@@ -281,8 +281,7 @@ async function openBrief(id) {
   // 전형 = 스테이지. 한 줄로 이어진 길: 1 서류(START) → 2 → … → 최종합격
   const rows = fl.map((f, i) => `<li class="st ${f.bonus ? "bonus" : ""} ${i === 0 ? "first" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span>${i === 0 ? `<em>START</em>` : ""}</li>`)
     .concat(`<li class="st roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
-  $("brief").innerHTML = `<span class="eyebrow"><i class="ti ti-building-skyscraper" aria-hidden="true"></i>${esc(current.company)}</span>
-    <h2>${esc(current.position)}</h2>
+  $("brief").innerHTML = `<div class="brief-head"><span class="co">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
     
     <ol class="stages">${rows.join("")}</ol>`;
   show("v-brief");

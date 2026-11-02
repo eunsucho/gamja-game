@@ -29,9 +29,9 @@ export const INTRO = [
 ];
 // 규칙 카드: 그림 + 한 단어. (인트로 마지막 장 · 연습 전 · 일시정지)
 export const RULES = [
-  { who: "me", item: "key", word: "투자자 설명", label: "쳐!" },
-  { who: "ai", item: "grab", word: "동향 모니터링", label: "두기" },
-  { who: "no", item: "ban", word: "보도자료 배포", label: "패스" }
+  { who: "me", item: "key", word: "투자자 설명", label: "내가 입력" },
+  { who: "ai", item: "grab", word: "동향 모니터링", label: "AI가 가져감" },
+  { who: "no", item: "ban", word: "보도자료 배포", label: "치지 마" }
 ];
 
 // ---------- 연습 라운드 ----------

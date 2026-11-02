@@ -682,3 +682,13 @@ body { font-family: var(--ui); }
   #v-title .col { gap: 8px; }
   .btn#toStart { min-height: 66px; }
 }
+/* 회사 | 직무 를 왼쪽·오른쪽으로 나눈다 */
+.prow { gap: 0; padding: 0; min-height: 60px; align-items: stretch; }
+.prow .co { flex: 0 0 34%; display: flex; align-items: center; padding: 10px 10px 10px 16px; font-size: 14px; font-weight: 800; color: var(--ink-2); background: rgba(246, 236, 211, .55); line-height: 1.3; }
+.prow .pos { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 4px 10px 14px; font-family: var(--title); font-size: 19px; line-height: 1.25; }
+.prow .pos i { color: var(--yolk-d); font-size: 16px; }
+.prow .go { display: flex; align-items: center; padding-right: 14px; }
+.brief-head { display: flex; align-items: stretch; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 3px 0 var(--cream-2); }
+.brief-head .co { flex: 0 0 36%; display: flex; align-items: center; padding: 10px 12px; font-family: var(--title); font-size: 17px; color: #6A4410; background: var(--yolk); }
+.brief-head h2 { flex: 1; display: flex; align-items: center; padding: 10px 14px; font-size: 24px; line-height: 1.2; }
+.how-tile b { font-size: 19px; white-space: nowrap; }
