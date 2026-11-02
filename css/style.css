@@ -887,3 +887,8 @@ body { font-family: var(--ui); }
 @media (max-height: 680px) {
   .lobby-hero { height: 164px; } .lobby-hero #lobbyHero { width: 116px; height: 116px; bottom: 52px; }
   .lobby-hero .pedestal { width: 132px; bottom: 22px; } }
+/* 이야기·규칙 장: 아래 자막 띠 없이 그림을 화면 전체에, 카드는 그 가운데 */
+#v-intro.spot #docuBg { bottom: 0; }
+#v-intro.spot .rules { top: 46%; translate: 0 -50%; }
+/* 공고(스테이지) 화면에는 감자 없이 */
+.brief-pot { display: none; }

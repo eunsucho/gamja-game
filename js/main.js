@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103k";
-import { Game, MINE } from "./game.js?v=20261103k";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103k";
-import { esc } from "./util.js?v=20261103k";
-import { CONFIG } from "./config.js?v=20261103k";
-import { floors } from "./scene.js?v=20261103k";
-import * as T from "./copy.js?v=20261103k";
+import { loadIndex, loadPosting } from "./data.js?v=20261103l";
+import { Game, MINE } from "./game.js?v=20261103l";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103l";
+import { esc } from "./util.js?v=20261103l";
+import { CONFIG } from "./config.js?v=20261103l";
+import { floors } from "./scene.js?v=20261103l";
+import * as T from "./copy.js?v=20261103l";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -309,7 +309,7 @@ async function openBrief(id) {
   const rows = fl.map((f, i) => `<li class="st ${f.bonus ? "bonus" : ""} ${i === 0 ? "first" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span>${i === 0 ? `<em>START</em>` : ""}</li>`)
     .concat(`<li class="st roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
   $("hero").querySelector("img").src = T.outfitOf(current.field);
-  $("brief").innerHTML = `<img class="brief-pot" src="${T.outfitOf(current.field)}" alt=""><div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
+  $("brief").innerHTML = `<div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
     
     <ol class="stages">${rows.join("")}</ol>`;
   show("v-brief");
