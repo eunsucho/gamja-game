@@ -838,3 +838,21 @@ body { font-family: var(--ui); }
   background: rgba(255, 248, 231, .88); box-shadow: var(--soft); }
 .lobby-hero img { z-index: 1; }
 .lobby-hero span { z-index: 2; }
+/* 로비: 판 없애고 분야 이름은 그림 아래 밖으로 */
+.lobby-hero::before { display: none; }
+.lobby-hero { height: 256px; }
+.lobby-hero img { top: 0; }
+.lobby-hero span { bottom: 0; background: none; color: #5B3A1A; font-size: 26px; padding: 0; text-shadow: 0 2px 0 #fff, 0 0 12px rgba(255, 255, 255, .9); }
+@media (max-height: 760px) { .lobby-hero { height: 204px; } }
+@media (max-height: 680px) { .lobby-hero { height: 160px; } }
+
+/* 연습 안내: 세 줄로 크게 (그림 + 한 단어) */
+#dHow .how, #pauseHow .how { grid-template-columns: 1fr; gap: 10px; }
+#dHow .how-tile, #pauseHow .how-tile { display: flex; align-items: center; gap: 16px; padding: 10px 16px; border-radius: 22px; text-align: left; }
+#dHow .how-word, #pauseHow .how-word { display: none; }
+#dHow .how-pic { width: 70px; height: 70px; }
+#dHow .how-pic .face { width: 70px; height: 70px; }
+#dHow .how-pic .badge-it { width: 38px; height: 38px; right: -12px; }
+#dHow .how-tile.no .badge-it { width: 60px; height: 60px; }
+#dHow .how-tile b, #pauseHow .how-tile b { font-size: 28px; white-space: nowrap; }
+.card-pop:has(#dHow:not([hidden])) { background: #FFFDF6; }
