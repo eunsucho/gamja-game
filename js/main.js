@@ -195,14 +195,12 @@ function doorOpen() { $("doors").classList.add("open"); $("typeInput").value = "
 async function init() {
   $("creditsText").textContent = T.CREDITS;
   $("pauseHow").innerHTML = rulesHTML();
-  $("lobbyEyebrow").textContent = T.LOBBY.eyebrow;
   $("lobbyTitle").textContent = T.LOBBY.title;
-  $("lobbySay").textContent = T.LOBBY.say;
   $("tutLabel").textContent = T.BRIEF.tutorial;
   $("goLabel").textContent = T.BRIEF.go;
   $("docuTag").textContent = T.DOCU_TITLE;
   INDEX = await loadIndex();
-  if (INDEX.season) { $("season").textContent = INDEX.season; $("season2").textContent = INDEX.season; }
+  if (INDEX.season) $("season").textContent = INDEX.season;
   const first = INDEX.fields.find(f => f.jobs.some(j => j.postings.length)) || INDEX.fields[0];
   wingId = first?.id;
   // 배경 그림을 미리 받아 둔다

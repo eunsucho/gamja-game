@@ -602,3 +602,9 @@ body { font-family: var(--ui); }
 .share-wrap { display: grid; place-items: center; }
 .share-wrap canvas { width: min(100%, 230px); height: auto; border-radius: 18px; box-shadow: var(--soft); }
 .logo img { display: block; width: min(92%, 380px); margin: 0 auto; filter: drop-shadow(0 8px 14px rgba(120, 80, 30, .28)); animation: bob 2.4s ease-in-out infinite; }
+.title-top { margin-top: 64px; }
+.app.compact .title-top { margin-top: 28px; }
+/* 로비: 큰 감자·안내판 대신 한 줄 머리, 나머지는 전부 공고 목록 */
+.lobby-top { display: flex; align-items: center; gap: 10px; }
+.lobby-top h1 { flex: 1; font-size: 28px; color: #fff; text-shadow: 0 2px 6px rgba(90, 60, 30, .45); }
+.lobby-pot { width: 64px; margin: -8px -6px -10px 0; animation: sway 2.6s ease-in-out infinite; transform-origin: 50% 100%; }

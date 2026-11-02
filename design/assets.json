@@ -89,7 +89,7 @@
   "logo": {
     "files": "assets/logo.png",
     "tool": "Figma generate_image (gpt-image-2.5-flare)",
-    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 3:2)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 4:2, 글씨만)",
     "prompt": "Cute casual mobile game title logo, Korean text '감자 취업시켜줘!!', chunky rounded golden letters, potato peeking, glossy 3D clay"
   }
 }
