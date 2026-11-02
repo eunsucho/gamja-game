@@ -1,12 +1,12 @@
 // 화면 전환과 연출. 규칙은 game.js, 숫자는 config.js, 문구는 copy.js, 층 이름은 scene.js, 데이터 읽기는 data.js.
 // 화면 = 본사 안의 장소: 거리(타이틀) → 감자극장(인트로) → 로비 → 엘리베이터 홀 → 엘리베이터 안 → 옥상 또는 출구
-import { loadIndex, loadPosting } from "./data.js?v=20261103c";
-import { Game, MINE } from "./game.js?v=20261103c";
-import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103c";
-import { esc } from "./util.js?v=20261103c";
-import { CONFIG } from "./config.js?v=20261103c";
-import { floors } from "./scene.js?v=20261103c";
-import * as T from "./copy.js?v=20261103c";
+import { loadIndex, loadPosting } from "./data.js?v=20261103d";
+import { Game, MINE } from "./game.js?v=20261103d";
+import { loadRecords, saveRecord, getFlag, setFlag } from "./storage.js?v=20261103d";
+import { esc } from "./util.js?v=20261103d";
+import { CONFIG } from "./config.js?v=20261103d";
+import { floors } from "./scene.js?v=20261103d";
+import * as T from "./copy.js?v=20261103d";
 
 const $ = id => document.getElementById(id);
 const VIEWS = ["v-title", "v-intro", "v-select", "v-brief", "v-play", "v-result"];
@@ -185,7 +185,13 @@ function doorShow({ floor, msg, tip, terms = [], html = "", icon = "" }, { butto
   $("dHow").hidden = !html;
   $("dHow").innerHTML = html;
   $("dTerms").hidden = !terms.length;
-  $("dTerms").innerHTML = terms.length ? `<span>${esc(T.DOOR.termsLabel)}</span>` + terms.map(t => `<p><b>${esc(t.term)}</b> · ${esc(t.desc)}</p>`).join("") : "";
+  // 새로 나온 단어: 단어만 크게, 누르면 풀이
+  $("dTerms").innerHTML = terms.length ? `<span>${esc(T.DOOR.termsLabel)}</span><div class="term-chips">` + terms.map((t, i) => `<button type="button" data-ti="${i}">${esc(t.term)}</button>`).join("") + `</div><p class="term-desc" hidden></p>` : "";
+  $("dTerms").querySelectorAll("[data-ti]").forEach(b => b.onclick = () => {
+    const d = $("dTerms").querySelector(".term-desc"), t = terms[b.dataset.ti];
+    $("dTerms").querySelectorAll("[data-ti]").forEach(o => o.classList.toggle("on", o === b));
+    d.hidden = false; d.textContent = t.desc;
+  });
   $("dFloor").textContent = floor || "";
   $("dMsg").textContent = msg || "";
   $("dTip").textContent = tip || "";
@@ -236,10 +242,12 @@ function renderIntro() {
   sub.textContent = c.nar || "";
   sub.hidden = !c.nar;
   retrigger(sub, "docu-sub");
-  $("rulesCard").hidden = !c.rules && !c.info;
+  $("rulesCard").hidden = !c.rules && !c.story;
+  $("v-intro").classList.toggle("spot", !!(c.rules || c.story));
   requestAnimationFrame(() => placeBubbles(c));
   if (c.rules) $("rulesCard").innerHTML = rulesHTML() + goalHTML();
-  if (c.info) $("rulesCard").innerHTML = `<div class="info">` + c.info.map(x => `<div class="info-row">${item(x.item)}<div><b>${esc(x.head)}</b>${x.sub ? `<small>${esc(x.sub)}</small>` : ""}</div></div>`).join("") + `</div>`;
+  if (c.story) $("rulesCard").innerHTML = `<div class="story ${c.story.who}"><img class="story-face" src="${c.story.who === "ai" ? "assets/ai_cut.png" : "assets/potato_cut.png"}" alt="">
+    <p class="story-say">${esc(c.story.text).replace(/\n/g, "<br>")}</p>${c.story.sub ? `<p class="story-sub">${esc(c.story.sub)}</p>` : ""}</div>`;
   placeBubbles(c);
   $("introDots").innerHTML = T.INTRO.map((_, i) => `<i class="${i === introI ? "on" : ""}"></i>`).join("");
   $("introNext").textContent = introI === T.INTRO.length - 1 ? "로비로" : "다음";
@@ -278,6 +286,9 @@ function renderLobby() {
 
   const rec = loadRecords();
   const f = INDEX.fields.find(x => x.id === wingId) || INDEX.fields[0];
+  $("lobbyHero").src = T.outfitOf(f.id);
+  retrigger($("lobbyHero"), "pop");
+  $("lobbyField").textContent = f.name;
   const ps = (f?.jobs || []).flatMap(j => j.postings);
   $("postingList").innerHTML = ps.length ? `<div class="plist">` + ps.map(p => {
     const r = rec[p.id];
@@ -297,7 +308,8 @@ async function openBrief(id) {
   // 전형 = 스테이지. 한 줄로 이어진 길: 1 서류(START) → 2 → … → 최종합격
   const rows = fl.map((f, i) => `<li class="st ${f.bonus ? "bonus" : ""} ${i === 0 ? "first" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span>${i === 0 ? `<em>START</em>` : ""}</li>`)
     .concat(`<li class="st roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
-  $("brief").innerHTML = `<div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
+  $("hero").querySelector("img").src = T.outfitOf(current.field);
+  $("brief").innerHTML = `<img class="brief-pot" src="${T.outfitOf(current.field)}" alt=""><div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
     
     <ol class="stages">${rows.join("")}</ol>`;
   show("v-brief");
@@ -465,12 +477,11 @@ function stageClear(doneIdx, nextIdx) {
   setAltitude(nextIdx / current.stages.length);
   setMood("fire");
   say(`${done.name} 붙었다…! 믿기지 않아.`);
-  const card = T.DOOR.clear(done, FLOORS[nextIdx], next);
-  const stageTerm = (current.terms || []).find(t => t.term === next.name || next.name.includes(t.term));
-  if (stageTerm) card.tip = stageTerm.desc;              // 다음 전형 이름이 낯선 말이면 그 풀이를 보여 준다
+  const lv = T.LEVELS[Math.min(3, nextIdx)];   // 전형을 넘을수록 감자가 익어 간다
+  const card = T.DOOR.clear(done, FLOORS[nextIdx], next, lv);
   card.terms = termsSeen();
   seen = new Set();
-  card.icon = T.LEVELS[Math.min(3, nextIdx)].img;   // 전형을 넘을수록 감자가 익어 간다
+  card.icon = lv.img;
   doorShow(card, { button: "GO!" }).then(() => { doorOpen(); game.startStage(nextIdx); splash(next.type === "bonus" ? "" : "speedup"); });
 }
 
@@ -553,23 +564,23 @@ async function drawShare(cv) {
   const s = lastShare; if (!s) return;
   await document.fonts?.load?.("80px Jua").catch(() => {});
   const g = cv.getContext("2d"), W = cv.width, H = cv.height, L = T.LEVELS[s.lv];
-  const grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#FFF4D6"); grad.addColorStop(1, "#FFE0B8");
-  g.fillStyle = grad; g.fillRect(0, 0, W, H);
-  g.fillStyle = "#FFFFFF"; g.globalAlpha = .6; g.beginPath(); g.arc(W / 2, 470, 330, 0, Math.PI * 2); g.fill(); g.globalAlpha = 1;
-  const pot = await loadImg(L.img); if (pot) g.drawImage(pot, W / 2 - 300, 170, 600, 600);
-  g.textAlign = "center"; g.fillStyle = "#3E2F27";
-  g.font = "64px Jua"; g.fillText("감자도감", W / 2, 110);
-  g.font = "84px Jua"; g.fillStyle = "#C98A00"; g.fillText(L.name, W / 2, 860);
+  // 카드 프레임(Figma) 위에: 감자 · 리본에 이름 · 아래 판에 타수
+  g.clearRect(0, 0, W, H);
+  const frame = await loadImg("assets/ui/card_frame.png");
+  if (frame) g.drawImage(frame, 0, 0, W, H);
+  const pot = await loadImg(L.img); if (pot) g.drawImage(pot, W / 2 - 330, 220, 660, 660);
+  const outfit = await loadImg(s.outfit); if (outfit) g.drawImage(outfit, 110, 780, 250, 250);
+  g.textAlign = "center";
+  g.font = "84px Jua"; g.fillStyle = "#8A4B00"; g.fillText(L.name, W / 2, 1200);
   // 큰 타수 + 작은 '타'를 한 덩어리로 가운데
   g.fillStyle = "#3E2F27"; g.textAlign = "left";
-  g.font = "210px Jua"; const w1 = g.measureText(String(s.cpm)).width;
-  g.font = "80px Jua"; const w2 = g.measureText("타").width;
-  const x0 = W / 2 - (w1 + 12 + w2) / 2;
-  g.font = "210px Jua"; g.fillText(String(s.cpm), x0, 1080);
-  g.font = "80px Jua"; g.fillText("타", x0 + w1 + 12, 1080);
-  g.textAlign = "center"; g.font = "46px Jua"; g.fillStyle = "#6B5A4E"; g.fillText(`${s.job} · ${s.result}`, W / 2, 1170, W - 120);
-  g.font = "50px Jua"; g.fillStyle = "#3E2F27"; g.fillText(`"${s.lesson}"`, W / 2, 1250, W - 120);
-  g.font = "34px Jua"; g.fillStyle = "#A08C7C"; g.fillText("감자 취업시켜줘!! · eunsucho.github.io/gamja-game", W / 2, 1320);
+  g.font = "110px Jua"; const w1 = g.measureText(String(s.cpm)).width;
+  g.font = "48px Jua"; const w2 = g.measureText("타").width;
+  const x0 = W / 2 - (w1 + 10 + w2) / 2;
+  g.font = "110px Jua"; g.fillText(String(s.cpm), x0, 1440);
+  g.font = "48px Jua"; g.fillText("타", x0 + w1 + 10, 1440);
+  g.textAlign = "center"; g.font = "34px Jua"; g.fillStyle = "#6B5A4E"; g.fillText(`${s.job} · ${s.result}`, W / 2, 1500, W - 260);
+  g.font = "30px Jua"; g.fillStyle = "#A07A50"; g.fillText("감자 취업시켜줘!!", W / 2, 150);
 }
 async function shareCard() {
   const cv = $("shareCanvas"); if (!cv) return;
@@ -612,7 +623,7 @@ function renderResult(r) {
   saveRecord(current.id, { passed: r.passed, failedStage: r.failedStage, reached: r.reached, score: r.score, cpm: r.cpm, guard: r.guard, level: lv });
   $("resultHero").querySelector("img").src = L.img;
   $("resultSay").textContent = L.say;
-  lastShare = { lv, cpm: r.cpm, job: `${current.company} ${current.position}`, result, lesson: "", guard: r.guard };
+  lastShare = { lv, cpm: r.cpm, job: `${current.company} ${current.position}`, result, lesson: "", guard: r.guard, outfit: T.outfitOf(current.field) };
 
   // 오늘 배운 것 3가지
   const missedMine = current.words.filter(w => w.judge !== "O" && r.missed[w.text]).sort((a, b) => r.missed[b.text] - r.missed[a.text]);
@@ -630,19 +641,14 @@ function renderResult(r) {
       <p class="cpm"><b>${r.cpm}</b>타</p><p class="cpm-avg">${TOUCH.matches ? "폰" : "PC"} 평균 ${avg}타 ${r.cpm >= avg ? "보다 빨라요!" : ""}</p>
       <div class="lv-bar">${T.LEVELS.map((x, i) => `<img src="${x.img}" class="${i <= lv ? "on" : ""}" alt="${esc(x.name)}">`).join("")}</div></div>`,
     ...(quiz ? [quiz] : []),
-    ...lessons.slice(0, 3).map(l => `<div class="pg-lesson">${item("idea", "big")}<b>${esc(l.short || l.head)}</b></div>`),
-    tasksPage(r),
-    ...(missedMine.length ? [`<p class="pg-h">놓친 일</p><p class="pg-sub">이게 이 자리의 핵심이었어요</p><ul class="plain">${missedMine.slice(0, 3).map(w => `<li><i class="ti ti-alert-circle"></i>${esc(w.text)}</li>`).join("")}</ul>`] : []),
-    `<p class="pg-sub">이번 공채 결과</p><p class="pg-record">${esc(title)}<br>${esc(result)}</p>
-     <div class="pg-stats">${stat("keyboard", `${r.cpm}타`)}${r.guard == null ? "" : stat("shield-check", `사람 몫 ${r.guard}% 지킴`)}${stat("robot", `AI 동기가 가져간 일 ${grabbed}개`)}${stat("flame", `최고 콤보 ${r.maxCombo}`)}${r.passed ? stat("coin", `초봉 ${r.salary.toLocaleString()}만`) : ""}</div>`,
-    ...(current.terms?.length ? [termsPage()] : []),
-    `<p class="pg-h">다음 지원 전에</p><ul class="plain">${T.TODO_DEFAULT.concat((current.skills || []).slice(0, 2).map(s => `역량 점검: ${s}`)).map(t => `<li><i class="ti ti-square-check"></i>${esc(t)}</li>`).join("")}</ul>
-     <a class="btn-sm glass ws-link" href="worksheet/" target="_blank" rel="noopener"><i class="ti ti-file-text" aria-hidden="true"></i>수업 학습지로 더 해 보기</a>`,
-    `<div class="share-wrap"><canvas id="shareCanvas" width="1080" height="1350"></canvas></div>
+    // 배운 것은 가장 중요한 하나만, 놓친 일이 있으면 그 이름만
+    `<div class="pg-lesson">${item("idea", "big")}<b>${esc(lessons[0].short || lessons[0].head)}</b></div>`,
+    ...(missedMine.length ? [`<div class="pg-lesson">${item("letter", "big")}<b>놓친 사람 몫</b><div class="miss-chips">${missedMine.slice(0, 3).map(w => `<span>${esc(w.text)}</span>`).join("")}</div></div>`] : []),
+    `<div class="share-wrap"><canvas id="shareCanvas" width="1080" height="1626"></canvas></div>
      <div class="row"><button class="btn grow" id="shareBtn" type="button">공유하기</button><button class="btn sub fit" id="dogamBtn" type="button"><img src="assets/potato/lv4_gold.png" alt="">도감</button></div>`
   ];
   // 성찰 장(퀴즈 + 배운 것 3장 + 진짜 할 일)을 다 넘겨야 다시 하기·로비 버튼이 열린다
-  memoGate = 1 + (quiz ? 1 : 0) + 3 + 1;
+  memoGate = memoPages.length - 1;   // 공유 카드 전 장까지 다 보면 버튼이 열린다
   memoSeen = 0;
   quizDone = !quiz;
   memoI = 0;
@@ -768,8 +774,9 @@ function openDogam() {
   $("dogamGrid").innerHTML = ps.map(p => {
     const lv = rec[p.id]?.level ?? -1, L = T.LEVELS[lv];
     return `<button type="button" class="dg ${lv < 0 ? "empty" : ""}" data-id="${esc(p.id)}">
-      <img src="${L ? L.img : "assets/potato/lv4_gold_sil.png"}" alt="">
-      <b>${esc(p.job)}</b>${L ? `<span>${esc(L.name)}${rec[p.id].bestCpm ? ` · ${rec[p.id].bestCpm}타` : ""}</span>` : "<span>?</span>"}</button>`;
+      <img class="dg-pot" src="${L ? L.img : "assets/potato/lv4_gold_sil.png"}" alt="">
+      <b class="dg-name">${L ? esc(L.name) : "???"}</b>
+      <span class="dg-cpm">${L && rec[p.id].bestCpm ? `${rec[p.id].bestCpm}타` : "-"}</span><span class="dg-job">${esc(p.job)}</span></button>`;
   }).join("");
   $("dogamGrid").querySelectorAll("[data-id]").forEach(b => b.onclick = () => { $("dogam").close(); openBrief(b.dataset.id); });
   $("dogam").showModal();

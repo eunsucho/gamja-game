@@ -1,5 +1,5 @@
 // 게임 속 문구 모음. 대사·인트로·회고록 문장은 여기서만 고친다. (자리만 잡아 둔 예시 문구)
-import { CONFIG } from "./config.js?v=20261103c";
+import { CONFIG } from "./config.js?v=20261103d";
 
 // ---------- 세계관 인트로: 코미디 다큐 '감자극장' ----------
 // img: assets/intro/ 그림, nar: 내레이션 자막(다큐 성우 톤), say: 감자 속마음, ai: AI 동기 한마디
@@ -25,15 +25,11 @@ export const INTRO = [
   { img: "assets/intro/7_rain.jpg", at: [0.5, 0.7], nar: `공채 날, 공고 속 '할 일'이 비처럼 쏟아진다.
 사람 몫은 감자가, AI 몫은 AI 동기가.
 감자는 최종합격할 수 있을까.` },
-  { img: "assets/bg/street.jpg", info: [
-    { item: "key", head: "공고 속 업무를 받아치는 타자 게임" },
-    { item: "grab", head: "AI가 많이 하는 일은 AI 동기 몫", sub: "Anthropic Economic Index · 사람들이 실제로 AI에게 시킨 일 기록" },
-    { item: "trophy", head: "사람 몫을 지켜 최종합격까지" }
-  ] },
-  { img: "assets/bg/street.jpg", info: [
-    { item: "timer", head: "타수 = 1분에 친 자모 수", sub: "감자 = ㄱ ㅏ ㅁ ㅈ ㅏ 5타" },
-    { item: "check", head: "맞게 친 단어만 세요", sub: "첫 글자부터 Enter까지 · 오타·기다린 시간 빼고" }
-  ] },
+  // 게임 설명: 화면 가운데에서 감자와 AI 동기가 번갈아 이야기한다
+  { img: "assets/bg/street.jpg", story: { who: "me", text: "여기는 감자그룹 공채장.\n공고 속 진짜 업무가\n비처럼 쏟아진대!" } },
+  { img: "assets/bg/street.jpg", story: { who: "ai", text: "난 AI 동기.\n사람들이 실제로 AI에게\n많이 맡기는 일은 내가 가져갈게.", sub: "근거: Anthropic Economic Index" } },
+  { img: "assets/bg/street.jpg", story: { who: "me", text: "그럼 난 사람이 할 일을\n똑같이 쳐서 지킬게.\n이건 타자 게임이야!" } },
+  { img: "assets/bg/street.jpg", story: { who: "ai", text: "타수는 맞게 친 단어로만 재.\n오타는 안 쳐줘!", sub: "1분에 친 자모 수 · 감자 = 5타" } },
   { img: "assets/bg/street.jpg", rules: true }
 ];
 // 규칙 카드: 그림 + 한 단어. (인트로 마지막 장 · 연습 전 · 일시정지)
@@ -89,10 +85,10 @@ export const FLOAT = {
 // ---------- 층 도착 카드 ----------
 export const DOOR = {
   start: (f) => ({ floor: f.room, msg: `${f.step}단계`, tip: "" }),
-  clear: (done, f, next) => ({
+  clear: (done, f, next, lv) => ({
     floor: `${done.name} 합격!`,
-    msg: `다음 → ${f.room}`,
-    tip: next.type === "bonus" ? "빨리 칠수록 초봉 UP" : ""
+    msg: `${lv.name}${/[가-힣]$/.test(lv.name) && (lv.name.charCodeAt(lv.name.length - 1) - 44032) % 28 ? "으로" : "로"} 진화!`,
+    tip: ""
   }),
   roof: { floor: "최종합격!", msg: "", tip: "" },
   termsLabel: "새 단어"
@@ -191,3 +187,7 @@ export const COMPANY_LOGO = {
   "감자스튜디오": "studio", "감자페이": "pay", "감자대학교병원": "hospital", "감자과학수사연구원": "forensic"
 };
 export const logoOf = name => `assets/logos/${COMPANY_LOGO[name] || "sprout"}.png`;
+
+// 분야별 감자 옷 (assets/outfit, Figma 생성)
+export const OUTFIT = { biz: "biz", finance: "finance", sales: "sales", it: "it", design: "design", health: "health", science: "science" };
+export const outfitOf = field => `assets/outfit/${OUTFIT[field] || "default"}.png`;
