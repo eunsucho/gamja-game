@@ -33,6 +33,7 @@ export const CONFIG = {
     aiOwned: 30,              // O 단어를 직접 받아침 (해도 되지만 AI 동기 몫)
     trap: -150,               // 함정 단어를 받아침
     spec: 40,                 // 스펙 아이템을 받아침
+    pass: 30,                 // 옆 팀 일을 '넘기기'로 돌려보냄 (메신저 모드)
     claimOk: 150,             // 면접 질문에 '내 몫'을 제대로 주장
     claimWrong: -100,         // AI 몫인데 내 몫이라고 우김
     aiMissed: -20,            // AI 동기도 놓친 O 단어가 바닥에 닿음

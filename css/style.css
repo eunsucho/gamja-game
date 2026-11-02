@@ -692,3 +692,52 @@ body { font-family: var(--ui); }
 .brief-head .co { flex: 0 0 36%; display: flex; align-items: center; padding: 10px 12px; font-family: var(--title); font-size: 17px; color: #6A4410; background: var(--yolk); }
 .brief-head h2 { flex: 1; display: flex; align-items: center; padding: 10px 14px; font-size: 24px; line-height: 1.2; }
 .how-tile b { font-size: 19px; white-space: nowrap; }
+.prow .co { flex-direction: column; justify-content: center; align-items: center; gap: 2px; text-align: center; padding: 8px 6px; font-size: 12px; }
+.prow .co img, .brief-head .co img { width: 40px; height: 40px; object-fit: contain; }
+.brief-head .co { gap: 8px; }
+.brief-head .co img { width: 44px; height: 44px; }
+/* 타이틀: 감자 크게, 로고 아래로 */
+.title-top { margin-top: 96px; }
+.hero-center .pot-xl { width: 250px; margin-top: -10px; }
+@media (max-height: 760px) { .title-top { margin-top: 44px; } .hero-center .pot-xl { width: 190px; } }
+
+/* =====================================================================
+   폰 플레이: 메신저 업무톡 (#v-play.chat)
+   업무가 팀장님 메시지로 쌓이고, 남은 시간은 말풍선 옆 원(--p)이 줄어든다.
+   ===================================================================== */
+#v-play.chat .bg { filter: saturate(.6) brightness(1.12); }
+#v-play.chat .sky::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(226, 239, 252, .82), rgba(240, 247, 255, .9)); }
+#v-play.chat .chars, #v-play.chat .stage { display: none; }
+#v-play.chat .drops { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; top: var(--drop-top, 132px); bottom: calc(118px + env(safe-area-inset-bottom, 0px)); padding: 0 12px; overflow: hidden; pointer-events: auto; }
+.app.kb #v-play.chat .drops { bottom: 64px; }
+#v-play.chat .msg { display: flex; align-items: flex-end; gap: 8px; flex: none; animation: msgIn .25s ease-out; transition: opacity .3s; }
+@keyframes msgIn { from { opacity: 0; translate: 0 16px; } }
+#v-play.chat .msg .av { width: 38px; height: 38px; flex: none; object-fit: contain; background: #fff; border-radius: 14px; padding: 3px; box-shadow: 0 2px 0 var(--cream-2); }
+#v-play.chat .msg .body { display: grid; gap: 2px; min-width: 0; }
+#v-play.chat .msg .from { font-size: 12px; font-weight: 800; color: #7A8796; padding-left: 4px; }
+#v-play.chat .msg .bub { position: relative; display: inline-block; justify-self: start; background: #fff; border-radius: 18px 18px 18px 6px; padding: 9px 40px 9px 14px;
+  font-family: var(--title); font-size: 19px; line-height: 1.25; box-shadow: 0 3px 0 rgba(0, 0, 0, .05); }
+#v-play.chat .msg .ring { position: absolute; right: 9px; top: 50%; translate: 0 -50%; width: 22px; height: 22px; border-radius: 50%;
+  background: conic-gradient(#EAEAEA calc(var(--p, 0) * 360deg), var(--rose) 0); }
+#v-play.chat .msg .ring::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #fff; }
+#v-play.chat .msg.kind-trap .bub { background: #FFF0F2; }
+#v-play.chat .msg.kind-spec .bub { background: #FFF6D8; }
+#v-play.chat .msg.spotlight .bub { box-shadow: 0 0 0 3px var(--yolk), 0 3px 0 rgba(0, 0, 0, .05); }
+#v-play.chat .msg.spotlight .body::before { content: attr(data-q); }
+#v-play.chat .msg .pass { align-self: center; flex: none; display: flex; align-items: center; gap: 4px; border: 0; border-radius: 12px; padding: 6px 10px;
+  background: var(--rose); color: #fff; font-family: var(--title); font-size: 15px; box-shadow: 0 3px 0 var(--rose-d); }
+#v-play.chat .msg .pass img { width: 20px; height: 20px; }
+/* 처리된 메시지: 내가 함 / AI가 가져감 / 놓침 / 넘김 */
+#v-play.chat .msg:is(.pop, .grabbed, .splash, .passed, .gone) .ring { display: none; }
+#v-play.chat .msg:is(.pop, .grabbed, .splash, .passed) .bub { padding-right: 14px; }
+#v-play.chat .msg.pop .bub { background: var(--yolk); }
+#v-play.chat .msg.pop .bub::after { content: " ✓"; }
+#v-play.chat .msg.grabbed .bub { background: #DCEBFF; color: #2B5EA8; text-decoration: line-through; }
+#v-play.chat .msg.grabbed .body::after { content: ""; justify-self: start; width: 120px; height: 34px; margin-top: 2px;
+  background: url(../assets/ai_cut.png) left center / 30px no-repeat, url(../assets/items/grab.png) 34px center / 28px no-repeat; }
+#v-play.chat .msg.splash .bub { background: #F0E6E6; color: #A88; text-decoration: line-through; }
+#v-play.chat .msg.splash .av { filter: grayscale(1); }
+#v-play.chat .msg.passed { opacity: .5; }
+#v-play.chat .msg:is(.pop, .grabbed, .splash, .passed) { opacity: .75; }
+#v-play.chat .tut-tip { top: auto; bottom: calc(100% - var(--drop-top, 132px) - 70px); }
+#v-play.chat .msg.grabbed .body::after { width: 150px; height: 42px; background: url(../assets/ai_cut.png) left center / 40px no-repeat, url(../assets/items/grab.png) 44px center / 36px no-repeat; }

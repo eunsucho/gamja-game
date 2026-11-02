@@ -39,6 +39,7 @@ export const TUT = {
   spawn: ["치지 말고 보기!", "똑같이 치고 Enter!", "이건 치지 마!"],
   ok: ["AI 동기가 가져갔죠?", "게이지 +1!", "준비 끝!"],
   okTypedAi: "AI 몫은 반 칸만!",
+  chatTrap: "넘기기 누르기!",
   retry: ["", "한 번 더!", "옆 팀 일이에요!"],
   done: { floor: "연습 끝!", msg: "", tip: "" }
 };
@@ -53,6 +54,7 @@ export const LINES = {
   fail: (w, p) => p.fails >= CONFIG.failLimit - 1 ? "문자 또 왔다… 폰 보기 무섭다…" : `앗, '${w.text}' 놓쳤다…`,
   trap: (w, p) => p.owner ? `면접관: 그건 ${p.owner} 일인데요…` : "면접관: 그건 우리 일이 아닌데요…",
   spec: () => "스펙 장착! 잠깐 비가 느려진다.",
+  pass: () => "옆 팀 일은 돌려보냈다.",
   "claim-ok": () => "내 몫이라고 설득 성공! 면접관 끄덕.",
   "claim-wrong": () => "면접관: 그건 AI가 더 잘하던데요?",
   salary: (w, p) => `초봉 ${p.salary.toLocaleString()}만 원! 더 올려!`
@@ -172,3 +174,11 @@ export function levelOf(r, stages) {
 }
 // 기기별 평균 타수(한글, 분당 자모). 대략값: PC 300타 · 폰 200타 (모바일은 PC의 약 0.7배)
 export const AVG_CPM = { pc: 300, phone: 200 };
+
+// ---------- 회사 로고 (assets/logos, Figma 생성) ----------
+export const COMPANY_LOGO = {
+  "감자바이오": "bio", "감자홀딩스": "holdings", "감자케미칼": "chem", "한국감자공사": "energy", "감자은행": "bank",
+  "팀감자": "team", "감자식품": "food", "감자전자": "electronics", "감자몰": "mall", "감자텔레콤": "telecom",
+  "감자스튜디오": "studio", "감자페이": "pay", "감자대학교병원": "hospital", "감자과학수사연구원": "forensic"
+};
+export const logoOf = name => `assets/logos/${COMPANY_LOGO[name] || "sprout"}.png`;

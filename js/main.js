@@ -56,6 +56,9 @@ fit();
 
 // ---------- 폰이면 모바일 평균 타자 속도에 맞춘다 (마우스 없이 터치만 되는 기기) ----------
 const pace = () => TOUCH.matches ? CONFIG.mobilePace : 1;
+// 플레이 방식: 폰은 메신저 업무톡(chat), PC는 산성비(rain). 주소에 ?mode=chat 이나 ?mode=rain 으로 바꿔 볼 수 있다
+const MODE = new URLSearchParams(location.search).get("mode") || (TOUCH.matches ? "chat" : "rain");
+document.getElementById("v-play").classList.toggle("chat", MODE === "chat");
 
 // ---------- 무대 밖 배경과 키 안내 (데스크탑) ----------
 function syncBackdrop(img) {
@@ -266,7 +269,7 @@ function renderLobby() {
   $("postingList").innerHTML = ps.length ? `<div class="plist">` + ps.map(p => {
     const r = rec[p.id];
     const mark = r ? `<i class="ti ti-${r.passed ? "trophy" : "rotate"}" aria-label="${r.passed ? "합격 기록 있음" : "지원한 적 있음"}"></i>` : "";
-    return `<button class="prow" data-id="${esc(p.id)}"><span class="co">${esc(p.company)}</span><span class="pos">${esc(p.position)}${mark}</span><span class="go">›</span></button>`;
+    return `<button class="prow" data-id="${esc(p.id)}"><span class="co"><img src="${T.logoOf(p.company)}" alt="">${esc(p.company)}</span><span class="pos">${esc(p.position)}${mark}</span><span class="go">›</span></button>`;
   }).join("") + `</div>` : `<div class="card soon"><p class="pos">${esc(T.LOBBY.empty)}</p></div>`;
   $("postingList").querySelectorAll("[data-id]").forEach(b => b.onclick = () => openBrief(b.dataset.id));
   $("postingList").scrollTop = 0;
@@ -281,7 +284,7 @@ async function openBrief(id) {
   // 전형 = 스테이지. 한 줄로 이어진 길: 1 서류(START) → 2 → … → 최종합격
   const rows = fl.map((f, i) => `<li class="st ${f.bonus ? "bonus" : ""} ${i === 0 ? "first" : ""}"><b>${f.step}</b><span>${esc(f.name)}</span>${i === 0 ? `<em>START</em>` : ""}</li>`)
     .concat(`<li class="st roof"><img src="assets/items/trophy.png" alt=""><span>최종합격</span></li>`);
-  $("brief").innerHTML = `<div class="brief-head"><span class="co">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
+  $("brief").innerHTML = `<div class="brief-head"><span class="co"><img src="${T.logoOf(current.company)}" alt="">${esc(current.company)}</span><h2>${esc(current.position)}</h2></div>
     
     <ol class="stages">${rows.join("")}</ol>`;
   show("v-brief");
@@ -305,7 +308,7 @@ function startTutorial() {
   const trap = t0 ? (typeof t0 === "string" ? t0 : t0.text) : "보도자료 배포";
   const script = [{ kind: "job", w: o, text: o.text }, { kind: "job", w: mine, text: mine.text }, { kind: "trap", text: trap }];
   const pseudo = { stages: [{ name: "연습" }], words: [o, mine] };
-  game = new Game(pseudo, $("sky"), { hud, event: onEvent, stageClear() {}, end() {}, tutorialDone }, { tutorial: script, pace: pace() });
+  game = new Game(pseudo, $("sky"), { hud, event: onEvent, stageClear() {}, end() {}, tutorialDone }, { tutorial: script, pace: pace(), mode: MODE });
   FLOORS = floors(current.stages);
   setAltitude(0, true);
   setMood("idle");
@@ -349,7 +352,7 @@ function startGame() {
   tip("");
   FLOORS = floors(current.stages);
   setAltitude(0, true);
-  game = new Game(current, $("sky"), { hud, event: onEvent, stageClear, end }, { pace: pace() });
+  game = new Game(current, $("sky"), { hud, event: onEvent, stageClear, end }, { pace: pace(), mode: MODE });
   seen = new Set(); shownTerms = new Set();
   grabbed = 0;
   mood.oopsUntil = 0;
@@ -404,7 +407,7 @@ function onEvent(type, p) {
     grabbed++;
     floatAt(p.el, "AI 동기가 가져감!", "ai");
     p.el.classList.add("seized");
-    flyToBuddy(p.el);
+    if (MODE !== "chat") flyToBuddy(p.el);
     buddy("grab", T.BUDDY.grab);
     retrigger($("hAiWrap"), "buzz");
   }
@@ -423,7 +426,7 @@ function onEvent(type, p) {
 
 function onTut(p) {
   if (p.phase === "spawn") {
-    tip(T.TUT.spawn[p.i], ["grab", "key", "ban"][p.i]);
+    tip(MODE === "chat" && p.i === 2 ? T.TUT.chatTrap : T.TUT.spawn[p.i], ["grab", "key", "ban"][p.i]);
     $("buddy").classList.toggle("spot", p.i === 0);
     $("v-play").dataset.tut = p.i;
     $("typeForm").classList.toggle("glow", p.i === 1);

@@ -98,5 +98,12 @@
     "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 5:2)",
     "prompt": "Cookie Run Kingdom style blank jelly buttons, soft rounded rectangle (not pill), glossy top highlight, bottom bevel lip, 6 colors",
     "use": "CSS border-image 9분할 (44 48 54 48)"
+  },
+  "company_logos": {
+    "files": "assets/logos/*.png",
+    "tool": "Figma generate_image (gpt-image-2.5-flare)",
+    "figma": "https://www.figma.com/design/yqdlIbwbLHgQ9qMlG5kv1U (node 6:2)",
+    "prompt": "16 cute fictional potato company emblem app icons, 4x4, no text",
+    "map": "js/copy.js COMPANY_LOGO"
   }
 }

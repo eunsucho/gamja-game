@@ -14,6 +14,7 @@ export class Game {
     this.hooks = hooks;              // { hud, event, stageClear, end, tutorialDone }
     this.script = opts.tutorial || null;
     this.pace = opts.pace || 1;      // 1 = 데스크탑 기준, 폰은 CONFIG.mobilePace
+    this.chat = opts.mode === "chat"; // 폰: 메신저 업무톡. 단어가 떨어지는 대신 메시지로 쌓이고 남은 시간은 원으로 줄어든다
     this.si = 0;
     this.uid = 0;
     this.drops = [];
@@ -92,7 +93,8 @@ export class Game {
     const fallPx = Math.max(60, this.sky.clientHeight - this.floorH - this.dropTop - 34);
     for (const d of this.drops.slice()) {
       d.y += step * d.speed;
-      d.el.style.transform = `translateY(${d.y * fallPx}px)`;
+      if (this.chat) d.el.style.setProperty("--p", Math.min(1, d.y).toFixed(3));
+      else d.el.style.transform = `translateY(${d.y * fallPx}px)`;
       if (d.kind === "job" && d.w.judge === "O" && !d.tried && d.y >= d.grabAt) this.tryGrab(d);
       if (d.y >= 1) this.hitBottom(d);
     }
@@ -173,7 +175,7 @@ export class Game {
     if (!this.isBonus && this.has("trap") && this.p.traps?.length && r < CONFIG.trapRate) kind = "trap";
     else if (!this.isBonus && this.has("spec") && this.p.specs?.length && r < CONFIG.trapRate + CONFIG.specRate) kind = "spec";
     let trap = null;
-    if (kind === "trap") { trap = pick(this.p.traps); text = typeof trap === "string" ? trap : trap.text; }
+    if (kind === "trap") { trap = pick(this.p.traps); text = typeof trap === "string" ? trap : trap.text; this.trapOwner = trap?.owner ? `${trap.owner}` : "옆 팀"; }
     else if (kind === "spec") text = pick(this.p.specs);
     else { w = this.nextJobWord(); if (!w) return; text = w.text; }
     if (this.onScreen(text)) return;
@@ -184,6 +186,7 @@ export class Game {
   }
 
   addDrop(kind, text, w, { spotlight = false, x = null, grabAt = null } = {}) {
+    if (this.chat) return this.addMsg(kind, text, w, { spotlight, grabAt });
     const el = document.createElement("div");
     el.className = `drop kind-${kind}` + (w ? ` j-${{ "O": "o", "△": "p", "X": "x", "□": "n" }[w.judge]}` : "");
     el.textContent = text;
@@ -199,12 +202,48 @@ export class Game {
     return d;
   }
 
+  // ---------- 메신저 모드: 메시지 한 줄 ----------
+  addMsg(kind, text, w, { spotlight = false, grabAt = null } = {}) {
+    const el = document.createElement("div");
+    el.className = `msg kind-${kind}` + (spotlight ? " spotlight" : "");
+    const who = kind === "trap" ? (this.trapOwner || "옆 팀") : kind === "spec" ? "스펙" : "팀장님";
+    const av = kind === "trap" ? "assets/items/coins.png" : kind === "spec" ? "assets/items/star.png" : "assets/items/badge.png";
+    el.innerHTML = `<img class="av" src="${av}" alt=""><div class="body"><span class="from"></span><span class="bub"><span class="t"></span><i class="ring"></i></span></div>`;
+    el.querySelector(".from").textContent = who;
+    el.querySelector(".t").textContent = text;
+    if (spotlight) el.dataset.q = this.p.questions?.length ? pick(this.p.questions) : "이건 AI가 하면 안 돼요?";
+    if (kind === "trap") {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "pass"; b.innerHTML = `<img src="assets/items/ban.png" alt="">넘기기`;
+      b.onclick = () => { const d = this.drops.find(x => x.el === el); if (d) this.pass(d); };
+      el.appendChild(b);
+    }
+    this.layer.appendChild(el);
+    while (this.layer.children.length > 14) this.layer.firstElementChild.remove();
+    this.hooks.event("spawn", { text, kind });
+    const [g0, g1] = CONFIG.aiGrabWindow;
+    const d = { id: ++this.uid, el, kind, w, text, y: 0, speed: this.script ? 1 : 0.85 + Math.random() * 0.3, spotlight,
+      grabAt: grabAt ?? g0 + Math.random() * (g1 - g0), tried: false };
+    this.drops.push(d);
+    return d;
+  }
+
+  // 옆 팀 일을 '넘기기' 버튼으로 돌려보냄 (메신저 모드)
+  pass(d) {
+    if (!this.running || this.paused) return;
+    this.remove(d, "passed");
+    if (this.script) return this.tutResolve(d, "fell");
+    this.stats.score += CONFIG.score.pass;
+    this.hooks.event("pass", { el: d.el, points: CONFIG.score.pass });
+  }
+
   remove(d, cls) {
+    if (this.chat) { this.drops = this.drops.filter(x => x !== d); d.el.classList.add(cls || "gone"); d.el.querySelector(".pass")?.remove(); return; }
     this.drops = this.drops.filter(x => x !== d);
     if (cls) { d.el.classList.add(cls); setTimeout(() => d.el.remove(), 520); } else d.el.remove();
   }
 
-  clearDrops() { this.drops.forEach(d => d.el.remove()); this.drops = []; }
+  clearDrops() { if (this.chat) this.layer.innerHTML = ""; else this.drops.forEach(d => d.el.remove()); this.drops = []; }
 
   // ---------- 연습 라운드 ----------
   spawnScripted() {
