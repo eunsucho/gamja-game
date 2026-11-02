@@ -892,3 +892,7 @@ body { font-family: var(--ui); }
 #v-intro.spot .rules { top: 46%; translate: 0 -50%; }
 /* 공고(스테이지) 화면에는 감자 없이 */
 .brief-pot { display: none; }
+/* 원판 윗면 한가운데에 감자 발이 오도록 (원판 그림 윗면 중심 = 위에서 33%) */
+.lobby-hero .pedestal { bottom: 1px; z-index: 0; }
+@media (max-height: 760px) { .lobby-hero .pedestal { bottom: 3px; } }
+@media (max-height: 680px) { .lobby-hero .pedestal { bottom: 6px; } }
