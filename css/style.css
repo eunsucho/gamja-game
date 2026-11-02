@@ -637,3 +637,48 @@ body { font-family: var(--ui); }
 #v-title .btn-sm { font-size: 14px; padding: 0 2px; gap: 3px; height: 44px; }
 #v-title .btn-sm img { width: 18px; height: 18px; }
 #v-title .btn-sm i { display: none; }
+
+/* 타이틀: 감자를 가운데, 말풍선은 머리 위 */
+.hero-center { display: grid; justify-items: center; }
+.hero-center .bubble { font-size: 22px; margin-bottom: -4px; z-index: 1; }
+.hero-center .bubble::after { left: 50%; translate: -50% 0; bottom: -7px; border: 8px solid transparent; border-top-color: #fff; border-bottom: 0; }
+.hero-center .pot-xl { width: 200px; margin: 0; }
+
+/* 로비: 분야 탭을 크게, 공고는 한 패널 안의 줄 목록 */
+#v-select .chip { min-width: 92px; min-height: 66px; }
+#v-select .chip span { font-size: 16px; color: var(--ink); }
+#v-select .chip i { font-size: 24px; }
+.list { gap: 0; }
+.plist { background: var(--cream); border-radius: 28px; box-shadow: var(--soft); overflow: hidden; }
+.prow { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; background: none; padding: 14px 18px; cursor: pointer; }
+.prow + .prow { border-top: 2px dashed var(--cream-2); }
+.prow:active { background: #FFF1C2; }
+.prow .co { font-size: 13px; font-weight: 700; color: var(--ink-2); display: flex; gap: 6px; align-items: center; }
+.prow .pos { font-family: var(--title); font-size: 21px; line-height: 1.25; }
+.prow .go { margin-left: auto; font-family: var(--title); font-size: 30px; color: var(--yolk-d); }
+
+/* 공고 화면: 전형을 세로 한 줄 스테이지 길로 */
+.stages { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0; }
+.stages .st { position: relative; display: flex; align-items: center; gap: 12px; padding: 7px 0 7px 4px; font-family: var(--title); font-size: 20px; }
+.stages .st:not(:last-child)::after { content: ""; position: absolute; left: 23px; top: 44px; bottom: -10px; width: 4px; border-radius: 2px; background: repeating-linear-gradient(var(--cream-2) 0 6px, transparent 6px 11px); }
+.stages .st b { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--ink-2); font-weight: 400; font-size: 20px; box-shadow: 0 3px 0 var(--cream-2); z-index: 1; }
+.stages .st.first b { background: var(--mint); color: #fff; box-shadow: 0 3px 0 var(--mint-d); width: 46px; height: 46px; margin-left: -3px; }
+.stages .st.first span { font-size: 24px; }
+.stages .st em { font-style: normal; font-size: 13px; color: #fff; background: var(--mint); border-radius: 8px; padding: 2px 8px; }
+.stages .st.bonus b { background: #FFF1C2; }
+.stages .st.roof img { width: 40px; height: 40px; object-fit: contain; }
+.stages .st.roof span { color: #C98A00; }
+#v-select .chip { overflow: visible; }
+#v-select .chip em { top: -10px; right: -10px; }
+.app.compact .hero-center .pot-xl { width: 140px; }
+.app.compact .logo img { width: min(80%, 300px); }
+.app.compact .title-top { margin-top: 12px; gap: 6px; }
+.app.compact #v-title .col { gap: 8px; }
+.stages .st:not(:last-child)::after { background: repeating-linear-gradient(#E3C98F 0 6px, transparent 6px 11px); }
+@media (max-height: 760px) {
+  .hero-center .pot-xl { width: 140px; }
+  .logo img { width: min(78%, 290px); }
+  .title-top { margin-top: 20px; gap: 6px; }
+  #v-title .col { gap: 8px; }
+  .btn#toStart { min-height: 66px; }
+}

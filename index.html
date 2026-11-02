@@ -41,9 +41,9 @@
         <h1 class="logo"><img src="assets/logo.png" alt="감자 취업시켜줘!!"></h1>
       </div>
       <div class="grow"></div>
-      <div class="hero-row">
+      <div class="hero-center">
+        <p class="bubble hand">나도 이제 취업한다…!</p>
         <img class="pot pot-xl" src="assets/potato_cut.png" alt="넥타이를 비뚤게 매고 지원서를 든 멍한 감자">
-        <p class="bubble hand">나도 이제<br>취업한다…!</p>
       </div>
       <button class="btn" id="toStart">시작!</button>
       <div class="row center">
@@ -95,11 +95,12 @@
   <section id="v-brief" class="scene" hidden>
     <div class="bg" style="background-image:url(assets/bg/hall.jpg)"></div>
     <div class="col">
-      <div class="grow"></div>
+      <div class="lobby-top">
+        <button class="ibtn sub" id="backSelect" type="button" aria-label="다른 공고"><i class="ti ti-arrow-left"></i></button>
+      </div>
       <div class="sheet glass" id="brief"></div>
-      <label class="toggle glass" id="tutWrap"><input type="checkbox" id="tutCheck"><span class="knob"></span><span id="tutLabel">연습 라운드부터</span></label>
-      <button class="btn" id="startGame"><i class="ti ti-arrow-big-up-lines" aria-hidden="true"></i><span id="goLabel">지원서 제출</span></button>
-      <button class="btn sub" id="backSelect">다른 공고</button>
+      <div class="grow"></div>
+      <button class="btn" id="startGame"><span id="goLabel">지원서 제출</span></button>
     </div>
   </section>
 
